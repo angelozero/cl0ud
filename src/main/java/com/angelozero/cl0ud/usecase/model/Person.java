@@ -1,10 +1,10 @@
 package com.angelozero.cl0ud.usecase.model;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
 @Builder
-@Getter
+@Data
 public class Person {
 
     private String name;
