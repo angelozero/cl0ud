@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud;
+package com.angelozero.cl0ud.entrypoint;
 
 import com.angelozero.cl0ud.exception.BadRequestException;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
-public class TestController {
+public class ExceptionController {
 
 
     @GetMapping("/test")
