@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 @Slf4j
@@ -24,19 +26,19 @@ public class PersonGatewayPostgresSql implements Cl0udGateway {
                 .build());
     }
 
-//    @Override
-//    public void deletePersonEntityById(Long id) {
-//
-//    }
-//
-//    @Override
-//    public PersonEntity findPersonEntityById(Long id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<PersonEntity> getAllPersonsEntity() {
-//        log.info("[CLOUD-APP][GATEWAY] - Getting all persons entity");
-//        return repository.findAll();
-//    }
+    @Override
+    public void deletePersonEntityById(Long id) {
+
+    }
+
+    @Override
+    public PersonEntity findPersonEntityById(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<PersonEntity> getAllPersonsEntity() {
+        log.info("[CLOUD-APP][GATEWAY] - Getting all persons entity");
+        return repository.findAll();
+    }
 }
