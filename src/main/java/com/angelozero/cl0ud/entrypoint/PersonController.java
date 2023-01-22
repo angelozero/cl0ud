@@ -26,7 +26,7 @@ public class PersonController {
 
     @GetMapping("/person/{id}")
     public Person getPersonById(@PathVariable("id") int id) {
-        return getPersonById.execute(id);
+        return getPersonById.execute((long) id);
     }
 
     @PostMapping("/person")
@@ -37,7 +37,7 @@ public class PersonController {
 
     @DeleteMapping("/person/{id}")
     public String deletePersonById(@PathVariable("id") int id) {
-        deletePersonById.execute(id);
+        deletePersonById.execute((long) id);
         return "Person deleted with success";
     }
 }
