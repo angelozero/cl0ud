@@ -1,17 +1,17 @@
 package com.angelozero.cl0ud.gateway;
 
-import com.angelozero.cl0ud.usecase.model.Person;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface Cl0udGateway {
+public interface DataBaseGateway {
 
-    PersonEntity savePerson(Person person);
+    PersonEntity savePerson(PersonEntity personEntity);
 
     void deletePersonEntityById(Long id);
 
-    PersonEntity findPersonEntityById(Long id);
+    Optional<PersonEntity> findPersonEntityById(Long id);
 
     List<PersonEntity> getAllPersonsEntity();
 }
