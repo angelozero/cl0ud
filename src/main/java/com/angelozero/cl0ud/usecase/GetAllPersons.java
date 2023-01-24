@@ -1,12 +1,12 @@
 package com.angelozero.cl0ud.usecase;
 
-import com.angelozero.cl0ud.gateway.Cl0udGateway;
+import com.angelozero.cl0ud.gateway.DataBaseGateway;
+import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,20 +15,20 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class GetAllPersons {
 
-    private final Cl0udGateway dataBaseGateway;
+    private final DataBaseGateway dataBaseGateway;
+    private final PersonMapper personMapper;
 
     public List<Person> execute() {
         log.info("[CLOUD-APP] - Get a list of persons");
-
         try {
-            return dataBaseGateway.getAllPersonsEntity().stream().map(entity -> Person.builder()
-                            .id(entity.getId())
-                            .name(entity.getName())
-                            .age(entity.getAge())
-                            .build())
+            return dataBaseGateway.getAllPersonsEntity()
+                    .stream()
+                    .map(personMapper::toModel)
                     .collect(Collectors.toList());
+
         } catch (Exception ex) {
-            return Collections.singletonList(Person.builder().name("Wrong person sorry :/").build());
+            log.error("\n[ERROR] - Error to get all persons\n");
+            throw new RuntimeException("[ERROR] - Error to get all persons");
         }
     }
 }

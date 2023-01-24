@@ -1,5 +1,7 @@
 package com.angelozero.cl0ud.usecase;
 
+import com.angelozero.cl0ud.gateway.DataBaseGateway;
+import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,16 +12,18 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class GetPersonById {
 
-    public Person execute(int id) {
-        log.info("[CLOUD-APP] - Get a person by id: {}", id);
-        return id == 32 ? generatePerson(32, "Angelo") : generatePerson(12, "Jake");
-    }
+    private final DataBaseGateway dataBaseGateway;
+    private final PersonMapper personMapper;
 
-    private Person generatePerson(int age, String Angelo) {
-        return Person.builder()
-                .age(age)
-                .name(Angelo)
-                .build();
+    public Person execute(Long id) {
+        log.info("[CLOUD-APP] - Getting a person by id: {}", id);
+        try {
+            return dataBaseGateway.findPersonEntityById(id).map(personMapper::toModel).orElse(null);
+
+        } catch (Exception ex) {
+            log.error("\n[ERROR] - Error to find a person by ID\n");
+            throw new RuntimeException("[ERROR] - Error to find a person by ID");
+        }
     }
 }
 
