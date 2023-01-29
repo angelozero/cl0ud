@@ -1,16 +1,14 @@
 package com.angelozero.cl0ud.gateway.postgressql.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "person")
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonEntity {
@@ -24,4 +22,5 @@ public class PersonEntity {
 
     @Column(name = "age")
     private int age;
+
 }

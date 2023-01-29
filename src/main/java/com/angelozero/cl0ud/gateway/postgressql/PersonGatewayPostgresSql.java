@@ -1,44 +1,37 @@
 package com.angelozero.cl0ud.gateway.postgressql;
 
-import com.angelozero.cl0ud.gateway.Cl0udGateway;
+import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.gateway.repository.Cl0udDataBaseRepository;
-import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-@Slf4j
-public class PersonGatewayPostgresSql implements Cl0udGateway {
+public class PersonGatewayPostgresSql implements DataBaseGateway {
 
     private final Cl0udDataBaseRepository repository;
 
     @Override
-    public PersonEntity savePerson(Person person) {
-        log.info("[CLOUD-APP][GATEWAY] - Creating a person: {}", person);
-        return repository.saveAndFlush(PersonEntity.builder()
-                .name(person.getName())
-                .age(person.getAge())
-                .build());
+    public PersonEntity savePerson(PersonEntity personEntity) {
+        return repository.saveAndFlush(personEntity);
     }
 
     @Override
     public void deletePersonEntityById(Long id) {
-
+        repository.deleteById(id);
     }
 
     @Override
-    public PersonEntity findPersonEntityById(Long id) {
-        return null;
+    public Optional<PersonEntity> findPersonEntityById(Long id) {
+        return repository.findById(id);
     }
 
     @Override
     public List<PersonEntity> getAllPersonsEntity() {
-        log.info("[CLOUD-APP][GATEWAY] - Getting all persons entity");
         return repository.findAll();
     }
 }
