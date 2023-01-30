@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class CreatePerson {
+public class UpdatePerson {
 
     private final DataBaseGateway dataBaseGateway;
     private final PersonMapper personMapper;
