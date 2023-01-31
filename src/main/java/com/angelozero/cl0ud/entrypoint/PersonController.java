@@ -11,12 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 public class PersonController {
 
+    public static final String ID = "ID";
     private final CreatePerson createPerson;
     private final GetAllPersons getAllPersons;
     private final GetPersonById getPersonById;
@@ -24,7 +27,6 @@ public class PersonController {
 
     @GetMapping(value = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Person>> getPersons() {
-
         return new ResponseEntity<>(getAllPersons.execute(), HttpStatus.OK);
     }
 
@@ -33,13 +35,15 @@ public class PersonController {
         return new ResponseEntity<>(getPersonById.execute((long) id), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createPerson(@RequestBody Person person) {
-        createPerson.execute(person);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Long>> createPerson(@RequestBody Person person) {
+        return new ResponseEntity<>(
+                Collections.singletonMap(ID, createPerson.execute(person).getId()),
+                HttpStatus.CREATED
+        );
     }
 
-    @DeleteMapping(value = "/person/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/person/{id}")
     public ResponseEntity<Void> deletePersonById(@PathVariable("id") int id) {
         deletePersonById.execute((long) id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
