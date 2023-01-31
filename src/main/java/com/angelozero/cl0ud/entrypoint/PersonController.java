@@ -6,6 +6,9 @@ import com.angelozero.cl0ud.usecase.GetAllPersons;
 import com.angelozero.cl0ud.usecase.GetPersonById;
 import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,25 +22,26 @@ public class PersonController {
     private final GetPersonById getPersonById;
     private final DeletePersonById deletePersonById;
 
-    @GetMapping("/person")
-    public List<Person> getPersons() {
-        return getAllPersons.execute();
+    @GetMapping(value = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Person>> getPersons() {
+
+        return new ResponseEntity<>(getAllPersons.execute(), HttpStatus.OK);
     }
 
-    @GetMapping("/person/{id}")
-    public Person getPersonById(@PathVariable("id") int id) {
-        return getPersonById.execute((long) id);
+    @GetMapping(value = "/person/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Person> getPersonById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(getPersonById.execute((long) id), HttpStatus.OK);
     }
 
-    @PostMapping("/person")
-    public String createPerson(@RequestBody Person person) {
+    @PostMapping(value = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> createPerson(@RequestBody Person person) {
         createPerson.execute(person);
-        return "Person created with success";
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/person/{id}")
-    public String deletePersonById(@PathVariable("id") int id) {
+    @DeleteMapping(value = "/person/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> deletePersonById(@PathVariable("id") int id) {
         deletePersonById.execute((long) id);
-        return "Person deleted with success";
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
