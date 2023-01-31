@@ -28,27 +28,26 @@ public class PersonController {
 
     @GetMapping(value = "/person/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Person> getPersonById(@PathVariable("id") int id) {
-        return new ResponseEntity<>(getPersonById.execute((long) id), HttpStatus.OK);
+        return ResponseEntity.ok(getPersonById.execute((long) id));
     }
 
     @PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createPerson(@RequestBody Person person) {
-
         return ResponseEntity
-                .ok()
+                .noContent()
                 .header(ID, String.valueOf(createPerson.execute(person).getId()))
-                .body(null);
+                .build();
     }
 
     @PutMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updatePerson(@RequestBody Person person) {
         updatePerson.execute(person);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/person/{id}")
     public ResponseEntity<Void> deletePersonById(@PathVariable("id") int id) {
         deletePersonById.execute((long) id);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return ResponseEntity.accepted().build();
     }
 }
