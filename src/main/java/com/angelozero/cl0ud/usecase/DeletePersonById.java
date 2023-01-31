@@ -16,7 +16,7 @@ public class DeletePersonById {
 
 
     public void execute(Long id) {
-        log.info("[CLOUD-APP] - Deleting a person by id: {}", id);
+        log.info("[DELETE_PERSON_BY_ID] - Deleting a person by id: {}", id);
 
         try {
             if (getPersonById.execute(id) != null) {

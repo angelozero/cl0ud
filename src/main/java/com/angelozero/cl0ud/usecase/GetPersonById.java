@@ -17,7 +17,7 @@ public class GetPersonById {
     private final PersonMapper personMapper;
 
     public Person execute(Long id) {
-        log.info("[CLOUD-APP] - Getting a person by id: {}", id);
+        log.info("[GET_PERSON_BY_ID] - Getting a person by id: {}", id);
 
         try {
             return dataBaseGateway.findPersonEntityById(id).map(personMapper::toModel).orElse(null);

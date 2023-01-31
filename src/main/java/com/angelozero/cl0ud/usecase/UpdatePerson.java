@@ -21,11 +21,11 @@ public class UpdatePerson {
     private final PersonMapper personMapper;
 
     public void execute(Person person) {
-        log.info("[CLOUD-APP] - Updating a person: {}", person);
+        log.info("[UPDATE_PERSON] - Updating a person: {}", person);
 
         Optional.ofNullable(person)
                 .map(Person::getId)
-                .orElseThrow(() -> new UpdatePersonException("Person Data and/or ID is null"));
+                .orElseThrow(() -> new UpdatePersonException("Person Data and/or Person ID is null"));
 
         try {
             if (getPersonById.execute(person.getId()) != null) {

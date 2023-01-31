@@ -20,7 +20,7 @@ public class GetAllPersons {
     private final PersonMapper personMapper;
 
     public List<Person> execute() {
-        log.info("[CLOUD-APP] - Get a list of persons");
+        log.info("[GET_ALL_PERSONS] - Get a list of persons");
 
         try {
             return dataBaseGateway.getAllPersonsEntity()
