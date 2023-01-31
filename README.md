@@ -61,4 +61,5 @@
 </plugin>
 ```
 
-- 5 - 
+- 5 - Testes unitarios
+- 6 - Redis
