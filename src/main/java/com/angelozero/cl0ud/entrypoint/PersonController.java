@@ -1,9 +1,6 @@
 package com.angelozero.cl0ud.entrypoint;
 
-import com.angelozero.cl0ud.usecase.CreatePerson;
-import com.angelozero.cl0ud.usecase.DeletePersonById;
-import com.angelozero.cl0ud.usecase.GetAllPersons;
-import com.angelozero.cl0ud.usecase.GetPersonById;
+import com.angelozero.cl0ud.usecase.*;
 import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,16 +8,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 public class PersonController {
 
-    public static final String ID = "ID";
+    public static final String ID = "person_id";
     private final CreatePerson createPerson;
+    private final UpdatePerson updatePerson;
     private final GetAllPersons getAllPersons;
     private final GetPersonById getPersonById;
     private final DeletePersonById deletePersonById;
@@ -36,11 +32,18 @@ public class PersonController {
     }
 
     @PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Long>> createPerson(@RequestBody Person person) {
-        return new ResponseEntity<>(
-                Collections.singletonMap(ID, createPerson.execute(person).getId()),
-                HttpStatus.CREATED
-        );
+    public ResponseEntity<Void> createPerson(@RequestBody Person person) {
+
+        return ResponseEntity
+                .ok()
+                .header(ID, String.valueOf(createPerson.execute(person).getId()))
+                .body(null);
+    }
+
+    @PutMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updatePerson(@RequestBody Person person) {
+        updatePerson.execute(person);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/person/{id}")

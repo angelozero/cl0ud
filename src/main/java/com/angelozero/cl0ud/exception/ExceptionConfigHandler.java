@@ -1,5 +1,7 @@
 package com.angelozero.cl0ud.exception;
 
+import com.angelozero.cl0ud.exception.exs.PersonException;
+import com.angelozero.cl0ud.exception.exs.UpdatePersonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,8 +28,8 @@ public class ExceptionConfigHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(BadRequestException.class)
-    public final ResponseEntity<ExceptionResponse> handleBadRequestException(Exception ex, WebRequest request) {
+    @ExceptionHandler(PersonException.class)
+    public final ResponseEntity<ExceptionResponse> handlePersonExceptionException(Exception ex, WebRequest request) {
 
         ExceptionResponse exceptionResponse = ExceptionResponse.builder()
                 .date(LocalDateTime.now())

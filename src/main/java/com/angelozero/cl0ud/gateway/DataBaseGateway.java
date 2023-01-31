@@ -9,6 +9,8 @@ public interface DataBaseGateway {
 
     PersonEntity savePerson(PersonEntity personEntity);
 
+    PersonEntity updatePerson(PersonEntity personEntity);
+
     void deletePersonEntityById(Long id);
 
     Optional<PersonEntity> findPersonEntityById(Long id);

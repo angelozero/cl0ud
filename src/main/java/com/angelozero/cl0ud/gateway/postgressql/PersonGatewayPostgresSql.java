@@ -21,6 +21,11 @@ public class PersonGatewayPostgresSql implements DataBaseGateway {
     }
 
     @Override
+    public PersonEntity updatePerson(PersonEntity personEntity) {
+        return repository.saveAndFlush(personEntity);
+    }
+
+    @Override
     public void deletePersonEntityById(Long id) {
         repository.deleteById(id);
     }
