@@ -1,5 +1,6 @@
 package com.angelozero.cl0ud.usecase;
 
+import com.angelozero.cl0ud.exception.exs.DeletePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,10 @@ public class DeletePersonById {
             if (getPersonById.execute(id) != null) {
                 dataBaseGateway.deletePersonEntityById(id);
             }
+
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to delete a person\n");
-            throw new RuntimeException("[ERROR] - Error to delete a person");
+            throw new DeletePersonException("[ERROR] - Error to delete a person");
         }
     }
 }

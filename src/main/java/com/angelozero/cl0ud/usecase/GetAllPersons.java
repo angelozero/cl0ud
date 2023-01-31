@@ -1,5 +1,6 @@
 package com.angelozero.cl0ud.usecase;
 
+import com.angelozero.cl0ud.exception.exs.GetAllPersonsException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
@@ -20,6 +21,7 @@ public class GetAllPersons {
 
     public List<Person> execute() {
         log.info("[CLOUD-APP] - Get a list of persons");
+
         try {
             return dataBaseGateway.getAllPersonsEntity()
                     .stream()
@@ -28,7 +30,7 @@ public class GetAllPersons {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to get all persons\n");
-            throw new RuntimeException("[ERROR] - Error to get all persons");
+            throw new GetAllPersonsException("[ERROR] - Error to get all persons");
         }
     }
 }

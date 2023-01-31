@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UpdatePersonException extends ZPersonException {
-    public UpdatePersonException(String message) {
-        super("[Update Person Service] - ".concat(message));
+public class DeletePersonException extends ZPersonException {
+    public DeletePersonException(String message) {
+        super("[Delete Person Service] - ".concat(message));
     }
 }

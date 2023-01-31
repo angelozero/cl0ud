@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Getter
-public class ExceptionResponse {
+public class ExceptionModelResponse {
 
     private LocalDateTime date;
     private String message;

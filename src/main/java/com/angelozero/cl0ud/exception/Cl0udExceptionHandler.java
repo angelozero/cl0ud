@@ -1,7 +1,6 @@
 package com.angelozero.cl0ud.exception;
 
-import com.angelozero.cl0ud.exception.exs.PersonException;
-import com.angelozero.cl0ud.exception.exs.UpdatePersonException;
+import com.angelozero.cl0ud.exception.exs.ZPersonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,29 +13,27 @@ import java.time.LocalDateTime;
 
 @ControllerAdvice
 @RestController
-public class ExceptionConfigHandler extends ResponseEntityExceptionHandler {
+public class Cl0udExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ExceptionResponse> handleGenericException(Exception ex, WebRequest request) {
-
-        ExceptionResponse exceptionResponse = ExceptionResponse.builder()
+    public final ResponseEntity<ExceptionModelResponse> handleGenericException(Exception ex, WebRequest request) {
+        ExceptionModelResponse exceptionModelResponse = ExceptionModelResponse.builder()
                 .date(LocalDateTime.now())
                 .message(ex.getMessage())
                 .details(request.getDescription(false))
                 .build();
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(exceptionModelResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(PersonException.class)
-    public final ResponseEntity<ExceptionResponse> handlePersonExceptionException(Exception ex, WebRequest request) {
-
-        ExceptionResponse exceptionResponse = ExceptionResponse.builder()
+    @ExceptionHandler(ZPersonException.class)
+    public final ResponseEntity<ExceptionModelResponse> handlePersonExceptionException(Exception ex, WebRequest request) {
+        ExceptionModelResponse exceptionModelResponse = ExceptionModelResponse.builder()
                 .date(LocalDateTime.now())
                 .message(ex.getMessage())
                 .details(request.getDescription(false))
                 .build();
 
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(exceptionModelResponse, HttpStatus.BAD_REQUEST);
     }
 }

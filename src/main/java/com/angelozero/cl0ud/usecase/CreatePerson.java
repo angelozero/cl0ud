@@ -1,5 +1,6 @@
 package com.angelozero.cl0ud.usecase;
 
+import com.angelozero.cl0ud.exception.exs.CreatePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
@@ -18,13 +19,14 @@ public class CreatePerson {
 
     public Person execute(Person person) {
         log.info("[CLOUD-APP] - Creating a person: {}", person);
+
         try {
             PersonEntity personEntity = dataBaseGateway.savePerson(personMapper.toEntity(person));
             return personMapper.toModel(personEntity);
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to create a person\n");
-            throw new RuntimeException("[ERROR] - Error to create a person");
+            throw new CreatePersonException("[ERROR] - Error to create a person");
         }
     }
 }

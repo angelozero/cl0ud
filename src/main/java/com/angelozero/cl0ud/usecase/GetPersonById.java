@@ -1,5 +1,6 @@
 package com.angelozero.cl0ud.usecase;
 
+import com.angelozero.cl0ud.exception.exs.GetPersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
@@ -17,12 +18,13 @@ public class GetPersonById {
 
     public Person execute(Long id) {
         log.info("[CLOUD-APP] - Getting a person by id: {}", id);
+
         try {
             return dataBaseGateway.findPersonEntityById(id).map(personMapper::toModel).orElse(null);
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to find a person by ID\n");
-            throw new RuntimeException("[ERROR] - Error to find a person by ID");
+            throw new GetPersonException("[ERROR] - Error to find a person by ID");
         }
     }
 }

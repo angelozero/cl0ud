@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.entrypoint;
 
-import com.angelozero.cl0ud.exception.exs.PersonException;
+import com.angelozero.cl0ud.exception.exs.ZPersonException;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class ExceptionController {
 
     @GetMapping("/bad-request")
     public Obj getBadRequest() {
-        throw new PersonException("Bad Request Exception Test");
+        throw new ZPersonException("Bad Request Exception Test");
     }
 
     /**

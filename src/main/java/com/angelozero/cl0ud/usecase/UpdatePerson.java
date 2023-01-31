@@ -25,7 +25,7 @@ public class UpdatePerson {
 
         Optional.ofNullable(person)
                 .map(Person::getId)
-                .orElseThrow(() -> new UpdatePersonException("[Update Person Service] - Person Data and/or ID is null"));
+                .orElseThrow(() -> new UpdatePersonException("Person Data and/or ID is null"));
 
         try {
             if (getPersonById.execute(person.getId()) != null) {
