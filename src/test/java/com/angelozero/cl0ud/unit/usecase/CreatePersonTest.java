@@ -38,6 +38,20 @@ public class CreatePersonTest {
         FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
     }
 
+    @DisplayName("Should fail to create a person - send null person")
+    @Test
+    void testCreatePersonWithNullPersonException() {
+
+        CreatePersonException exception = assertThrows(CreatePersonException.class, () -> createPerson.execute(null));
+
+        verify(personMapper, times(0)).toEntity(any(Person.class));
+        verify(dataBaseGateway, times(0)).savePerson(any(PersonEntity.class));
+        verify(personMapper, times(0)).toModel(any(PersonEntity.class));
+
+        assertFalse(isNull(exception));
+        assertEquals("[Create Person Service] - Person Data is null", exception.getMessage());
+    }
+
     @DisplayName("Should fail to create a person")
     @Test
     void testCreatePersonWithException() {

@@ -15,6 +15,12 @@ public class PersonTemplate implements TemplateLoader {
                         add("name", firstName());
                         add("age", random(12, 2, 32));
                     }
+                })
+                .addTemplate("valid Person without id", new Rule() {
+                    {
+                        add("name", firstName());
+                        add("age", random(12, 2, 32));
+                    }
                 });
     }
 }

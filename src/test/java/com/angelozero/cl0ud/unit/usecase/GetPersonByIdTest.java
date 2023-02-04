@@ -2,6 +2,7 @@ package com.angelozero.cl0ud.unit.usecase;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import com.angelozero.cl0ud.exception.exs.DeletePersonException;
 import com.angelozero.cl0ud.exception.exs.GetPersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
@@ -43,7 +44,7 @@ public class GetPersonByIdTest {
 
     @DisplayName("Should fail to get a person by id")
     @Test
-    void testGetAllPersonsWithException() {
+    void testGetPersonByIdWithException() {
 
         when(dataBaseGateway.findPersonEntityById(anyLong())).thenThrow(new RuntimeException("Test Error"));
 
@@ -54,6 +55,19 @@ public class GetPersonByIdTest {
 
         assertFalse(isNull(exception));
         assertEquals("[Get Person Service] - Error to find a person by ID: Test Error", exception.getMessage());
+    }
+
+    @DisplayName("Should fail to get a person by with null id")
+    @Test
+    void testDeletePersonWithNullIdException() {
+
+        GetPersonException exception = assertThrows(GetPersonException.class, () -> getPersonById.execute(null));
+
+        verify(personMapper, times(0)).toModel(any(PersonEntity.class));
+        verify(dataBaseGateway, times(0)).findPersonEntityById(anyLong());
+
+        assertFalse(isNull(exception));
+        assertEquals("[Get Person Service] - ID is null", exception.getMessage());
     }
 
     @DisplayName("Should get a person by id with success")

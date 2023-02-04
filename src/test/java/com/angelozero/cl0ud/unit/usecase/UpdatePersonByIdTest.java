@@ -60,31 +60,37 @@ public class UpdatePersonByIdTest {
         assertEquals("[Update Person Service] - Person Data and/or Person ID is null", exception.getMessage());
     }
 
+    @DisplayName("Should fail to update a person - sending a null person id")
+    @Test
+    void testDeletePersonWithANullPersonIdException() {
+
+        UpdatePersonException exception = assertThrows(UpdatePersonException.class, () -> updatePerson.execute(null));
+
+        verify(getPersonById, times(0)).execute(anyLong());
+        verify(dataBaseGateway, times(0)).updatePerson(any(PersonEntity.class));
+        verify(personMapper, times(0)).toModel(any(PersonEntity.class));
+
+        assertFalse(isNull(exception));
+        assertEquals("[Update Person Service] - Person Data and/or Person ID is null", exception.getMessage());
+    }
+
     @DisplayName("Should fail to update a person")
     @Test
     void testDeletePersonWithException() {
 
         Person personFixture = Fixture
                 .from(Person.class)
-                .gimme("valid Person");
-
-        PersonEntity personEntityFixture = Fixture
-                .from(PersonEntity.class)
-                .gimme("valid PersonEntity");
-
-        when(personMapper.toEntity(any(Person.class))).thenReturn(personEntityFixture);
-        when(getPersonById.execute(anyLong())).thenReturn(personFixture);
-        doThrow(new RuntimeException("Test Error")).when(dataBaseGateway).updatePerson(any(PersonEntity.class));
+                .gimme("valid Person without id");
 
         UpdatePersonException exception = assertThrows(UpdatePersonException.class, () -> updatePerson.execute(personFixture));
 
-        verify(getPersonById, times(1)).execute(anyLong());
-        verify(dataBaseGateway, times(1)).updatePerson(any(PersonEntity.class));
-        verify(personMapper, times(1)).toEntity(any(Person.class));
+        verify(getPersonById, times(0)).execute(anyLong());
+        verify(dataBaseGateway, times(0)).updatePerson(any(PersonEntity.class));
+        verify(personMapper, times(0)).toEntity(any(Person.class));
         verify(personMapper, times(0)).toModel(any(PersonEntity.class));
 
         assertFalse(isNull(exception));
-        assertEquals("[Update Person Service] - Error to update a person: Test Error", exception.getMessage());
+        assertEquals("[Update Person Service] - Person Data and/or Person ID is null", exception.getMessage());
     }
 
     @DisplayName("Should update a person with success")

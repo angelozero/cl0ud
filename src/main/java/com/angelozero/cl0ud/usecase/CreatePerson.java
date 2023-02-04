@@ -1,6 +1,7 @@
 package com.angelozero.cl0ud.usecase;
 
 import com.angelozero.cl0ud.exception.exs.CreatePersonException;
+import com.angelozero.cl0ud.exception.exs.UpdatePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
@@ -8,6 +9,8 @@ import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -19,6 +22,9 @@ public class CreatePerson {
 
     public Person execute(Person person) {
         log.info("\n[CREATING_PERSON] - Creating a person: {}\n", person);
+        Optional.ofNullable(person)
+                .orElseThrow(()
+                        -> new CreatePersonException("Person Data is null"));
 
         try {
             PersonEntity personEntity = dataBaseGateway.savePerson(personMapper.toEntity(person));

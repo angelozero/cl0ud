@@ -57,6 +57,19 @@ public class DeletePersonByIdTest {
         assertEquals("[Delete Person Service] - Error to delete a person: Test Error", exception.getMessage());
     }
 
+    @DisplayName("Should fail to delete a person - null Id")
+    @Test
+    void testDeletePersonWithNullIdException() {
+
+        DeletePersonException exception = assertThrows(DeletePersonException.class, () -> deletePersonById.execute(null));
+
+        verify(getPersonById, times(0)).execute(anyLong());
+        verify(dataBaseGateway, times(0)).deletePersonEntityById(anyLong());
+
+        assertFalse(isNull(exception));
+        assertEquals("[Delete Person Service] - ID is null", exception.getMessage());
+    }
+
     @DisplayName("Should delete a person with success")
     @Test
     void testDeletePersonWithSuccess() {
