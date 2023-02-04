@@ -26,7 +26,7 @@ public class CreatePerson {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to create a person\n");
-            throw new CreatePersonException("[ERROR] - Error to create a person");
+            throw new CreatePersonException("Error to create a person: " + ex.getMessage());
         }
     }
 }
