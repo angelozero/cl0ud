@@ -3,7 +3,7 @@
 - 2 - Simple CRUD
 - 3 - DataBase connection - Did not work yet :)
   - How to resolve this issue *[Spring boot - Not a managed type](https://stackoverflow.com/questions/28664064/spring-boot-not-a-managed-type)* ?
-  - Solution: *With Spring Version 6 and JDK 17 i got this problem i was using javax.persistent.Entity when i used [jakarta.persistent.Entity](https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api/3.1.0) this problem was resolved*
+  - Solution: *With Spring Version 6 and JDK 17 I got this problem when I was using javax.persistent.Entity. When I used [jakarta.persistent.Entity](https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api/3.1.0) this problem was resolved*
 - 4 - Using MapStruct with Lombok
   - [Mapstruc Documentation](https://mapstruct.org/documentation/installation/)
   - [Baeldung - Quick Guide to MapStruct](https://www.baeldung.com/mapstruct)
@@ -62,4 +62,5 @@
 ```
 
 - 5 - Testes unitarios
+  - [Fixture Factory](https://github.com/six2six/fixture-factory)
 - 6 - Redis
