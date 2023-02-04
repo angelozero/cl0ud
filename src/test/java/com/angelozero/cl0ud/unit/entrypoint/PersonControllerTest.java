@@ -55,10 +55,10 @@ public class PersonControllerTest {
 
     @BeforeAll
     public static void setup() {
-        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.template");
+        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
     }
 
-    @DisplayName("Should exist a GET url /person")
+    @DisplayName("Should get all persons")
     @Test
     void testGetAllPersons() {
 
@@ -76,7 +76,7 @@ public class PersonControllerTest {
         assertTrue(response.getBody().size() > 0);
     }
 
-    @DisplayName("Should exist a GET url /person/{id}")
+    @DisplayName("Should get a person by id")
     @Test
     void testGetPersonById() {
 
@@ -92,7 +92,7 @@ public class PersonControllerTest {
         assertFalse(Objects.isNull(response.getBody()));
     }
 
-    @DisplayName("Should exist POST url /person")
+    @DisplayName("Should create a person")
     @Test
     void testPostPerson() {
 
@@ -111,7 +111,7 @@ public class PersonControllerTest {
         assertTrue(Objects.requireNonNull(response.getHeaders().get(ID)).size() > 0);
     }
 
-    @DisplayName("Should exist PUT url /person")
+    @DisplayName("Should update a person")
     @Test
     void testPutPerson() {
 
@@ -127,7 +127,7 @@ public class PersonControllerTest {
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
-    @DisplayName("Should exist DELETE url /person")
+    @DisplayName("Should delete a person")
     @Test
     void testDeletePerson() {
 

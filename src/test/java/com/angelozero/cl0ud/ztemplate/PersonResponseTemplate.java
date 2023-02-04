@@ -1,16 +1,17 @@
-package com.angelozero.cl0ud.template;
+package com.angelozero.cl0ud.ztemplate;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
-import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
+import com.angelozero.cl0ud.entrypoint.rest.response.PersonResponse;
 
-public class PersonRequestTemplate implements TemplateLoader {
+public class PersonResponseTemplate implements TemplateLoader {
     @Override
     public void load() {
-        Fixture.of(PersonRequest.class)
-                .addTemplate("valid PersonRequest", new Rule() {
+        Fixture.of(PersonResponse.class)
+                .addTemplate("valid PersonResponse", new Rule() {
                     {
+                        add("id", random(Long.class, range(1L, 200L)));
                         add("name", firstName());
                         add("age", random(12, 2, 32));
                     }
