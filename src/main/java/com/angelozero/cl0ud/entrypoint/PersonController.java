@@ -1,7 +1,9 @@
 package com.angelozero.cl0ud.entrypoint;
 
+import com.angelozero.cl0ud.entrypoint.mapper.PersonRestMapper;
+import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
+import com.angelozero.cl0ud.entrypoint.rest.response.PersonResponse;
 import com.angelozero.cl0ud.usecase.*;
-import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,40 +16,46 @@ import java.util.List;
 @AllArgsConstructor
 public class PersonController {
 
-    public static final String ID = "person_id";
-    private final CreatePerson createPerson;
-    private final UpdatePerson updatePerson;
-    private final GetAllPersons getAllPersons;
-    private final GetPersonById getPersonById;
-    private final DeletePersonById deletePersonById;
+    private static final String ID = "person_id";
+
+    private PersonRestMapper personRestMapper;
+
+    private final CreatePerson createPersonUseCase;
+    private final UpdatePerson updatePersonUseCase;
+    private final GetAllPersons getAllPersonsUseCase;
+    private final GetPersonById getPersonByIdUseCase;
+    private final DeletePersonById deletePersonByIdUseCase;
 
     @GetMapping(value = "/person", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Person>> getPersons() {
-        return new ResponseEntity<>(getAllPersons.execute(), HttpStatus.OK);
+    public ResponseEntity<List<PersonResponse>> getPersons() {
+        return new ResponseEntity<>(personRestMapper.toResponseList(getAllPersonsUseCase.execute()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/person/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Person> getPersonById(@PathVariable("id") int id) {
-        return ResponseEntity.ok(getPersonById.execute((long) id));
+    public ResponseEntity<PersonResponse> getPersonById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(personRestMapper.toResponse(getPersonByIdUseCase.execute(id)));
     }
 
     @PostMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createPerson(@RequestBody Person person) {
+    public ResponseEntity<Void> createPerson(@RequestBody PersonRequest personRequest) {
+        PersonResponse personResponse = personRestMapper
+                .toResponse(createPersonUseCase.execute(personRestMapper.toModel(personRequest)));
+
         return ResponseEntity
                 .noContent()
-                .header(ID, String.valueOf(createPerson.execute(person).getId()))
+                .header(ID, String.valueOf(personResponse.getId()))
                 .build();
     }
 
     @PutMapping(value = "/person", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updatePerson(@RequestBody Person person) {
-        updatePerson.execute(person);
+    public ResponseEntity<Void> updatePerson(@RequestBody PersonRequest personRequest) {
+        updatePersonUseCase.execute(personRestMapper.toModel(personRequest));
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/person/{id}")
-    public ResponseEntity<Void> deletePersonById(@PathVariable("id") int id) {
-        deletePersonById.execute((long) id);
+    public ResponseEntity<Void> deletePersonById(@PathVariable("id") Long id) {
+        deletePersonByIdUseCase.execute(id);
         return ResponseEntity.accepted().build();
     }
 }
