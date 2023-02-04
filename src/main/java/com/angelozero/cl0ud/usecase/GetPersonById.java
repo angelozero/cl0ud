@@ -24,7 +24,7 @@ public class GetPersonById {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to find a person by ID\n");
-            throw new GetPersonException("[ERROR] - Error to find a person by ID");
+            throw new GetPersonException("Error to find a person by ID: " + ex.getMessage());
         }
     }
 }

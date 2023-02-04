@@ -16,8 +16,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UpdatePerson {
 
-    private final GetPersonById getPersonById;
     private final DataBaseGateway dataBaseGateway;
+    private final GetPersonById getPersonById;
     private final PersonMapper personMapper;
 
     public void execute(Person person) {
@@ -25,7 +25,8 @@ public class UpdatePerson {
 
         Optional.ofNullable(person)
                 .map(Person::getId)
-                .orElseThrow(() -> new UpdatePersonException("Person Data and/or Person ID is null"));
+                .orElseThrow(()
+                        -> new UpdatePersonException("Person Data and/or Person ID is null"));
 
         try {
             if (getPersonById.execute(person.getId()) != null) {
@@ -35,7 +36,7 @@ public class UpdatePerson {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to update a person\n");
-            throw new UpdatePersonException("[ERROR] - Error to update a person: ");
+            throw new UpdatePersonException("Error to update a person: " + ex.getMessage());
         }
 
     }

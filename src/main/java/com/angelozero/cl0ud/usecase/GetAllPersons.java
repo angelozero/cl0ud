@@ -23,14 +23,15 @@ public class GetAllPersons {
         log.info("[GET_ALL_PERSONS] - Get a list of persons");
 
         try {
-            return dataBaseGateway.getAllPersonsEntity()
-                    .stream()
-                    .map(personMapper::toModel)
-                    .collect(Collectors.toList());
+//            return dataBaseGateway.getAllPersonsEntity()
+//                    .stream()
+//                    .map(personMapper::toModel)
+//                    .collect(Collectors.toList());
+            return personMapper.toModelList(dataBaseGateway.getAllPersonsEntity());
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to get all persons\n");
-            throw new GetAllPersonsException("[ERROR] - Error to get all persons");
+            throw new GetAllPersonsException("Error to get all persons: " + ex.getMessage());
         }
     }
 }
