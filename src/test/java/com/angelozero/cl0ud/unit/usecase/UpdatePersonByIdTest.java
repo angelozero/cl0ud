@@ -2,11 +2,9 @@ package com.angelozero.cl0ud.unit.usecase;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.exception.exs.DeletePersonException;
 import com.angelozero.cl0ud.exception.exs.UpdatePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
-import com.angelozero.cl0ud.usecase.DeletePersonById;
 import com.angelozero.cl0ud.usecase.GetPersonById;
 import com.angelozero.cl0ud.usecase.UpdatePerson;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
@@ -18,8 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Random;
 
 import static java.util.Objects.isNull;
 import static org.junit.jupiter.api.Assertions.*;

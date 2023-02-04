@@ -1,6 +1,5 @@
 package com.angelozero.cl0ud.usecase;
 
-import com.angelozero.cl0ud.exception.exs.CreatePersonException;
 import com.angelozero.cl0ud.exception.exs.DeletePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import lombok.AllArgsConstructor;

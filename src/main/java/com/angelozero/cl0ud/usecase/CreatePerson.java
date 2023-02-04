@@ -1,7 +1,6 @@
 package com.angelozero.cl0ud.usecase;
 
 import com.angelozero.cl0ud.exception.exs.CreatePersonException;
-import com.angelozero.cl0ud.exception.exs.UpdatePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;

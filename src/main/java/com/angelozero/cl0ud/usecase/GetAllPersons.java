@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -23,10 +22,6 @@ public class GetAllPersons {
         log.info("[GET_ALL_PERSONS] - Get a list of persons");
 
         try {
-//            return dataBaseGateway.getAllPersonsEntity()
-//                    .stream()
-//                    .map(personMapper::toModel)
-//                    .collect(Collectors.toList());
             return personMapper.toModelList(dataBaseGateway.getAllPersonsEntity());
 
         } catch (Exception ex) {
