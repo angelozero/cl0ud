@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class DeletePersonById {
 
-    private final GetPersonById getPersonById;
     private final DataBaseGateway dataBaseGateway;
+    private final GetPersonById getPersonById;
 
 
     public void execute(Long id) {
-        log.info("[DELETE_PERSON_BY_ID] - Deleting a person by id: {}", id);
+        log.info("\n[DELETE_PERSON_BY_ID] - Deleting a person by id: {}\n", id);
 
         try {
             if (getPersonById.execute(id) != null) {
@@ -25,7 +25,7 @@ public class DeletePersonById {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to delete a person\n");
-            throw new DeletePersonException("[ERROR] - Error to delete a person");
+            throw new DeletePersonException("Error to delete a person: " + ex.getMessage());
         }
     }
 }

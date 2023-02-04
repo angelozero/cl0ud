@@ -18,7 +18,7 @@ public class CreatePerson {
     private final PersonMapper personMapper;
 
     public Person execute(Person person) {
-        log.info("[CREATING_PERSON] - Creating a person: {}", person);
+        log.info("\n[CREATING_PERSON] - Creating a person: {}\n", person);
 
         try {
             PersonEntity personEntity = dataBaseGateway.savePerson(personMapper.toEntity(person));
