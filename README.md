@@ -1,4 +1,6 @@
 # cl0ud
+- *Obs: First time running the app ? Don't forget to run first `mvn flyway:migrate`*
+---
 - 1 - Creating the application
 - 2 - Simple CRUD
 - 3 - DataBase connection
@@ -65,31 +67,32 @@
   - [Fixture Factory](https://github.com/six2six/fixture-factory)
 
 - 6 - FlyWay
+  - Are you running for the first time the app ? -> Command to create and populate the tables `mvn flyway:migrate`
   - Things that I have to do 
-    - Update my postegsql version to 14
-      - [Pt.01 - Removing all the posgres using brew](https://stackoverflow.com/questions/51992362/completely-remove-postgres-after-brew-uninstall-osx)
-      - [Pt.02 - Go to -> /Library/PostgreSQL/POSTGRES_VERSION/uninstall-postgresql.app](https://nektony.com/how-to/uninstall-postgresql-on-mac)
-      - [Installing PostgreSQL 14 0 using brew](https://formulae.brew.sh/formula/postgresql@14)
-      - [Download PgAdmin 4 - pgAdmin 4 v6.15 (released Oct. 20, 2022)](https://www.pgadmin.org/download/pgadmin-4-macos/)
-    - [Configure the brew Postgresql](https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/)
-      - on terminal type to enter into posgres terminal
-        ```shell
-        psql postgres
-        ```
-      - [create a database](https://pgdocptbr.sourceforge.io/pg80/sql-createdatabase.html) with the command
-        ```shell
-        CREATE DATABASE your_data_base_name;
-        ```
-    - [Configuring Flyway using flyway.conf file](https://www.baeldung.com/database-migrations-with-flyway)
-      - Create in the $PROJECT_ROOT the flyway.conf file
-      ```yml
-      flyway.user=databaseUser
-      flyway.password=databasePassword
-      flyway.schemas=app-db
-      flyway.url=jdbc:h2:mem:DATABASE
-      flyway.locations=filesystem:db/migration
+  - Update my postegsql version to 14
+    - [Pt.01 - Removing all the posgres using brew](https://stackoverflow.com/questions/51992362/completely-remove-postgres-after-brew-uninstall-osx)
+    - [Pt.02 - Go to -> /Library/PostgreSQL/POSTGRES_VERSION/uninstall-postgresql.app](https://nektony.com/how-to/uninstall-postgresql-on-mac)
+    - [Installing PostgreSQL 14 0 using brew](https://formulae.brew.sh/formula/postgresql@14)
+    - [Download PgAdmin 4 - pgAdmin 4 v6.15 (released Oct. 20, 2022)](https://www.pgadmin.org/download/pgadmin-4-macos/)
+  - [Configure the brew Postgresql](https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/)
+    - on terminal type to enter into posgres terminal
+      ```shell
+      psql postgres
       ```
-    - *IMPORTANT! Here are the supported versions from Flyway to PostgresSQL ( this project use version 14 )*
-      ![versions](https://i.postimg.cc/m2cFk21b/Screen-Shot-2023-02-04-at-20-54-37.png)
+    - [create a database](https://pgdocptbr.sourceforge.io/pg80/sql-createdatabase.html) with the command
+      ```shell
+      CREATE DATABASE your_data_base_name;
+      ```
+  - [Configuring Flyway using flyway.conf file](https://www.baeldung.com/database-migrations-with-flyway)
+    - Create in the $PROJECT_ROOT the flyway.conf file
+    ```yml
+    flyway.user=databaseUser
+    flyway.password=databasePassword
+    flyway.schemas=app-db
+    flyway.url=jdbc:h2:mem:DATABASE
+    flyway.locations=filesystem:db/migration
+    ```
+  - *IMPORTANT! Here are the supported versions from Flyway to PostgresSQL ( this project use version 14 )*
+    ![versions](https://i.postimg.cc/m2cFk21b/Screen-Shot-2023-02-04-at-20-54-37.png)
 
 - XX - Redis
