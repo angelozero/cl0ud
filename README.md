@@ -92,7 +92,29 @@
     flyway.url=jdbc:h2:mem:DATABASE
     flyway.locations=filesystem:db/migration
     ```
-  - *IMPORTANT! Here are the supported versions from Flyway to PostgresSQL ( this project use version 14 )*
+    - Don't forget it to add this configs into your application.yml
+    ```yml
+    jpa:
+    hibernate:
+      ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      javax:
+        persistence:
+          schema-generation:
+            scripts:
+              action: create
+              create-target: create.sql
+              create-source: metadata
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        globally_quoted_identifiers: true
+    open-in-view: false
+    generate-ddl: true
+    ```
+  - *IMPORTANT! Here are the supported versions from Flyway to PostgresSQL ( [this project use version 14](https://flywaydb.org/documentation/database/postgresql) )*
     ![versions](https://i.postimg.cc/m2cFk21b/Screen-Shot-2023-02-04-at-20-54-37.png)
 
 - XX - Redis
