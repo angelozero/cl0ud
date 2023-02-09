@@ -120,47 +120,39 @@
 ---
 
 - 7 - Swagger
-  - To test access: `http://localhost:8080/swagger-ui/index.html`
-
+  - To access: `http://localhost:8080/swagger-ui/index.html`
 
   - Some documentations to see how to fix some issues and configure swagger
     - https://springdoc.org/v2/
     - https://github.com/springdoc/springdoc-openapi/issues/1284
     - https://stackoverflow.com/questions/71549614/springfox-type-javax-servlet-http-httpservletrequest-not-present
 
-```xml
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        <version>2.0.2</version>
-    </dependency>
-```
+
 ```xml
 <!-- Swagger to Spring 3-->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>2.0.2</version>
-        </dependency>
-        <!--Fix the error after put the swagger dependency -->
-        <!-- Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. -->
-        <!-- Add a provider like Hibernate Validator (RI) to your classpath. -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.0.2</version>
+</dependency>
+<!--Fix the error after put the swagger dependency -->
+<!-- Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. -->
+<!-- Add a provider like Hibernate Validator (RI) to your classpath. -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
 ```
+
 - **ERROR**: `Type javax.servlet.http.HttpServletRequest not present`
     - If you are using springfox dependency just remove it.
+
 ```xml
+<!-- REMOVE THIS DEPENDENCY !!! -->
 <dependency>
     <groupId>io.springfox</groupId>
     <artifactId>springfox-boot-starter</artifactId>
-    <version>3.0.0</version>
+    <version>ANY_VERSION</version>
 </dependency>
 ```
 
