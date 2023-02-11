@@ -195,7 +195,8 @@ public class SwaggerOpenAPIConfig {
 
 - 8 - Integration tests with
   - 8.1 - [Test Contaiener](https://www.testcontainers.org/)
-  
+  - 8.2 - [Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/examples/junit-platform.html)
+
 
 ---
 
