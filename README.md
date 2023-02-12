@@ -193,4 +193,11 @@ public class SwaggerOpenAPIConfig {
 
 ---
 
+- 8 - Integration tests with
+  - 8.1 - [Test Contaiener](https://www.testcontainers.org/)
+  - 8.1 - [Rest Assured](https://rest-assured.io/) ...[(more info)](https://github.com/rest-assured/rest-assured/wiki/GettingStarted)
+
+
+---
+
 - XX - Redis, when ?  I dont't know :)

@@ -1,0 +1,4 @@
+{
+  "pokemon": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png",
+  "description": "This is an object saved by Testcontainer using a database"
+}
