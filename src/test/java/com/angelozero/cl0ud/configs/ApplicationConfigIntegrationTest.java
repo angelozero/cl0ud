@@ -30,11 +30,6 @@ import java.io.IOException;
 @ContextConfiguration(initializers = ApplicationConfigIntegrationTest.Initializer.class)
 public class ApplicationConfigIntegrationTest {
 
-    protected static final String GET_DATA_POST_JSON = "/gibao-app/data/json";
-    protected static final String GET_DATA_POST = "/gibao-app/data";
-    protected static final String POKEMON_API_ID = "/pokemon-api/[0-9]+";
-    protected static final String POKEMON_API_MEWTWO_URL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png";
-
     @Autowired
     protected Cl0udDataBaseRepository repository;
 
@@ -91,7 +86,7 @@ public class ApplicationConfigIntegrationTest {
         }
     }
 
-    protected void clearRepository() {
+    public void clearDataRepository() {
         this.repository.deleteAll();
     }
 

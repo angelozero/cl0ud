@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PersonRequest {
 
+    private Long id;
     private String name;
     private int age;
 }
