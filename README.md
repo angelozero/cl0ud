@@ -1,5 +1,7 @@
 # cl0ud
-- *Obs: First time running the app ? Don't forget to run first `mvn flyway:migrate`*
+- *Obs: First time running the app ? Don't forget to run first*
+  - `mvn flyway:repair`
+  - `mvn flyway:migrate`
 ---
 - 1 - Creating the application
 - 2 - Simple CRUD
