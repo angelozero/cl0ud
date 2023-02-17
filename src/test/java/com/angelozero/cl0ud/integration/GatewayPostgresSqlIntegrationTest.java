@@ -2,18 +2,15 @@ package com.angelozero.cl0ud.integration;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.Cl0udApplication;
-import com.angelozero.cl0ud.configs.ApplicationConfigIntegrationTest;
+import com.angelozero.cl0ud.config.IntegrationTestConfiguration;
 import com.angelozero.cl0ud.gateway.postgressql.PersonGatewayPostgresSql;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
+import com.angelozero.cl0ud.gateway.repository.Cl0udDataBaseRepository;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,11 +18,11 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@RunWith(SpringRunner.class)
+public class GatewayPostgresSqlIntegrationTest extends IntegrationTestConfiguration {
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { Cl0udApplication.class })
-@WebAppConfiguration
-public class PersonGatewayPostgresSqlIntegrationTest extends ApplicationConfigIntegrationTest {
+    @Autowired
+    protected Cl0udDataBaseRepository repository;
 
     @Autowired
     private PersonGatewayPostgresSql gateway;
@@ -36,7 +33,6 @@ public class PersonGatewayPostgresSqlIntegrationTest extends ApplicationConfigIn
     }
 
 
-    @Ignore
     @Test
     public void shouldSaveAPerson() {
 
@@ -54,7 +50,7 @@ public class PersonGatewayPostgresSqlIntegrationTest extends ApplicationConfigIn
         clearDataRepository();
     }
 
-    @Ignore
+
     @Test
     public void shouldFindAllPersons() {
 
@@ -71,7 +67,7 @@ public class PersonGatewayPostgresSqlIntegrationTest extends ApplicationConfigIn
         clearDataRepository();
     }
 
-    @Ignore
+
     @Test
     public void shouldFindAPersonById() {
 
@@ -89,7 +85,7 @@ public class PersonGatewayPostgresSqlIntegrationTest extends ApplicationConfigIn
         clearDataRepository();
     }
 
-    @Ignore
+
     @Test
     public void shouldUpdateAPerson() {
 
@@ -109,7 +105,7 @@ public class PersonGatewayPostgresSqlIntegrationTest extends ApplicationConfigIn
         clearDataRepository();
     }
 
-    @Ignore
+
     @Test
     public void shouldDeleteAPerson() {
 
@@ -130,5 +126,9 @@ public class PersonGatewayPostgresSqlIntegrationTest extends ApplicationConfigIn
 
     private List<PersonEntity> findAllPersons() {
         return repository.findAll();
+    }
+
+    private void clearDataRepository() {
+        this.repository.deleteAll();
     }
 }

@@ -2,7 +2,7 @@ package com.angelozero.cl0ud.component;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.configs.ApplicationConfigIntegrationTest;
+import com.angelozero.cl0ud.config.ComponentTestConfiguration;
 import com.angelozero.cl0ud.entrypoint.PersonController;
 import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-public class PersonControllerComponentTest extends ApplicationConfigIntegrationTest {
+public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
     private static final String PERSON_URL = "/person";
     private static final String PERSON_ID_URL = "/person/{id}";

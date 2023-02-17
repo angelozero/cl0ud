@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.configs;
+package com.angelozero.cl0ud.config;
 
 
 import com.angelozero.cl0ud.gateway.repository.Cl0udDataBaseRepository;
@@ -27,8 +27,8 @@ import java.io.IOException;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableConfigurationProperties
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(initializers = ApplicationConfigIntegrationTest.Initializer.class)
-public class ApplicationConfigIntegrationTest {
+@ContextConfiguration(initializers = ComponentTestConfiguration.Initializer.class)
+public class ComponentTestConfiguration {
 
     @Autowired
     protected Cl0udDataBaseRepository repository;
