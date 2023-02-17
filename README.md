@@ -200,7 +200,7 @@ public class SwaggerOpenAPIConfig {
   - 8.2 - [Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/examples/junit-platform.html)
 
 - 9 - JWT
-
+  - [How to convert a SQL file to a PostgreSQL ?](http://www.sqlines.com/online) 
 
 ---
 

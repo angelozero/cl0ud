@@ -303,8 +303,6 @@ $RECYCLE.BIN/
 *.ipr
 mvnw
 mvnw.cmd
-pom.xml
-src/main/resources/*
 
 
 ### NetBeans ###
