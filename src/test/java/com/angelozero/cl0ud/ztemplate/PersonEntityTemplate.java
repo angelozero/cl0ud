@@ -3,8 +3,7 @@ package com.angelozero.cl0ud.ztemplate;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
-import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
-import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.gateway.postgressql.entity.dao.PersonEntity;
 
 public class PersonEntityTemplate implements TemplateLoader {
     @Override

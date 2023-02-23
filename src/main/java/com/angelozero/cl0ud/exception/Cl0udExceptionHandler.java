@@ -1,6 +1,7 @@
 package com.angelozero.cl0ud.exception;
 
-import com.angelozero.cl0ud.exception.exs.ZPersonException;
+import com.angelozero.cl0ud.exception.jwt.ZJwtException;
+import com.angelozero.cl0ud.exception.person.ZPersonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -15,25 +16,35 @@ import java.time.LocalDateTime;
 @RestController
 public class Cl0udExceptionHandler extends ResponseEntityExceptionHandler {
 
+    public static final boolean DONT_INCLUDE_CLIENT_INFO = false;
+    public static final boolean INCLUDE_CLIENT_INFO = true;
+
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionModelResponse> handleGenericException(Exception ex, WebRequest request) {
-        ExceptionModelResponse exceptionModelResponse = ExceptionModelResponse.builder()
-                .date(LocalDateTime.now())
-                .message(ex.getMessage())
-                .details(request.getDescription(false))
-                .build();
+        ExceptionModelResponse exceptionModelResponse = generateExceptionModelResponse(ex, request.getDescription(DONT_INCLUDE_CLIENT_INFO));
 
         return new ResponseEntity<>(exceptionModelResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(ZPersonException.class)
     public final ResponseEntity<ExceptionModelResponse> handlePersonExceptionException(Exception ex, WebRequest request) {
-        ExceptionModelResponse exceptionModelResponse = ExceptionModelResponse.builder()
-                .date(LocalDateTime.now())
-                .message(ex.getMessage())
-                .details(request.getDescription(false))
-                .build();
+        ExceptionModelResponse exceptionModelResponse = generateExceptionModelResponse(ex, request.getDescription(DONT_INCLUDE_CLIENT_INFO));
 
         return new ResponseEntity<>(exceptionModelResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ZJwtException.class)
+    public final ResponseEntity<ExceptionModelResponse> handleJwtExceptionException(Exception ex, WebRequest request) {
+        ExceptionModelResponse exceptionModelResponse = generateExceptionModelResponse(ex, request.getDescription(DONT_INCLUDE_CLIENT_INFO));
+
+        return new ResponseEntity<>(exceptionModelResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    private ExceptionModelResponse generateExceptionModelResponse(Exception ex, String description) {
+        return ExceptionModelResponse.builder()
+                .date(LocalDateTime.now())
+                .message(ex.getMessage())
+                .details(description)
+                .build();
     }
 }

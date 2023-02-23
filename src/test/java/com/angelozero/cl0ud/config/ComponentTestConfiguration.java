@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.config;
 
 
-import com.angelozero.cl0ud.gateway.repository.Cl0udDataBaseRepository;
+import com.angelozero.cl0ud.gateway.repository.dao.PersonRepository;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -31,7 +31,7 @@ import java.io.IOException;
 public class ComponentTestConfiguration {
 
     @Autowired
-    protected Cl0udDataBaseRepository repository;
+    protected PersonRepository repository;
 
 
     /**

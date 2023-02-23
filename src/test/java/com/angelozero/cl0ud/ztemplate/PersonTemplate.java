@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.ztemplate;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
-import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.usecase.person.model.Person;
 
 public class PersonTemplate implements TemplateLoader {
     @Override

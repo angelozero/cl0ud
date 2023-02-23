@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.ztemplate;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
-import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
+import com.angelozero.cl0ud.entrypoint.person.rest.request.PersonRequest;
 
 public class PersonRequestTemplate implements TemplateLoader {
     @Override

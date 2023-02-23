@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.gateway;
 
-import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
+import com.angelozero.cl0ud.gateway.postgressql.entity.dao.PersonEntity;
 
 import java.util.List;
 import java.util.Optional;
