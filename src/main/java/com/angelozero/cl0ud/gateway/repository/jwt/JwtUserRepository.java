@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface JwtUserRepository extends JpaRepository<UserEntity, Long> {
 
-    @Query("SELECT u FROM UserEntity WHERE u.userName =:userName")
-    UserEntity findByUserName(@Param("userName") String userName);
+
+    @Query("SELECT u FROM UserEntity u WHERE u.userName =:name")
+    UserEntity findByUserName(@Param("name") String name);
 }

@@ -24,13 +24,9 @@ public class CreateAccessToken {
 
     private final JwtPropertiesConfig jwtProps;
 
-    @Autowired
-    private Algorithm algorithm;
-
     @PostConstruct
     private void init() {
         jwtProps.setSecretKey(Base64.getEncoder().encodeToString(jwtProps.getSecretKey().getBytes()));
-        algorithm = Algorithm.HMAC256(jwtProps.getSecretKey().getBytes());
     }
 
     public Token execute(String userName, List<String> roles) {
@@ -61,7 +57,7 @@ public class CreateAccessToken {
                 .withExpiresAt(validity.atZone(ZoneId.systemDefault()).toInstant())
                 .withSubject(userName)
                 .withIssuer(issuerUrl)
-                .sign(algorithm)
+                .sign(Algorithm.HMAC256(jwtProps.getSecretKey().getBytes()))
                 .strip();
     }
 
@@ -75,7 +71,7 @@ public class CreateAccessToken {
                 .withIssuedAt(now.atZone(ZoneId.systemDefault()).toInstant())
                 .withExpiresAt(validityRefreshToken.atZone(ZoneId.systemDefault()).toInstant())
                 .withSubject(userName)
-                .sign(algorithm)
+                .sign(Algorithm.HMAC256(jwtProps.getSecretKey().getBytes()))
                 .strip();
     }
 }
