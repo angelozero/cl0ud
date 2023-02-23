@@ -18,7 +18,7 @@ public class AuthController {
     private final FindUserByUserName findUserByUserName;
 
     @GetMapping(value = "/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserResponse> getPersons() {
+    public ResponseEntity<UserResponse> getUserByName() {
         return new ResponseEntity<>(userRestMapper.toResponse(findUserByUserName.execute("Angelo")), HttpStatus.OK);
     }
 

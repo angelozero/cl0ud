@@ -21,3 +21,11 @@ spring:
 redis:
   port: ${redis.port.value}
   host: localhost
+
+# JWT
+security:
+  jwt:
+    token:
+      secret-key: 10scrt20
+      milliseconds: 3600000
+      hours: 10800000 # 3Hs

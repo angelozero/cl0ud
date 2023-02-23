@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.entrypoint.jwt.rest.response;
+package com.angelozero.cl0ud.usecase.jwt.model;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class TokenResponse {
+public class Token {
     private String userName;
     private Boolean authenticated;
     private LocalDateTime created;

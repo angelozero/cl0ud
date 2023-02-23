@@ -21,7 +21,7 @@ public class FindUserByUserName {
     private final UserMapper mapper;
 
     public User execute(String userName) throws UsernameNotFoundException {
-//        log.info("Encontrando um USUARIO ---> " + userName);
+        log.info("Encontrando um USUARIO ---> " + userName);
         UserEntity userFinded = jwtSecurityGateway.findByUserName(userName);
         log.info("USUARIO encontrado ---> " + userFinded.getFullName());
         return Optional.of(mapper.toModel(userFinded))

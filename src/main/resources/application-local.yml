@@ -42,3 +42,11 @@ logging:
 # Server configuration
 server:
   port: 8080 #set your port
+
+# JWT
+security:
+  jwt:
+    token:
+      secret-key: 10scrt20
+      milliseconds: 3600000
+      hours: 10800000 # 3Hs
