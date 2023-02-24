@@ -22,6 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CreateAccessToken {
 
+    public static final String ROLES = "roles";
     private final JwtPropertiesConfig jwtProps;
 
     @PostConstruct
@@ -52,7 +53,7 @@ public class CreateAccessToken {
 
         return JWT
                 .create()
-                .withClaim("roles", roles)
+                .withClaim(ROLES, roles)
                 .withIssuedAt(now.atZone(ZoneId.systemDefault()).toInstant())
                 .withExpiresAt(validity.atZone(ZoneId.systemDefault()).toInstant())
                 .withSubject(userName)
@@ -67,7 +68,7 @@ public class CreateAccessToken {
 
         return JWT
                 .create()
-                .withClaim("roles", roles)
+                .withClaim(ROLES, roles)
                 .withIssuedAt(now.atZone(ZoneId.systemDefault()).toInstant())
                 .withExpiresAt(validityRefreshToken.atZone(ZoneId.systemDefault()).toInstant())
                 .withSubject(userName)

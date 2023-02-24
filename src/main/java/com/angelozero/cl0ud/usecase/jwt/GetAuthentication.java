@@ -1,10 +1,6 @@
 package com.angelozero.cl0ud.usecase.jwt;
 
-import com.angelozero.cl0ud.config.JwtPropertiesConfig;
 import com.angelozero.cl0ud.usecase.jwt.model.Token;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
