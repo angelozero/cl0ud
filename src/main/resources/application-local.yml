@@ -19,14 +19,6 @@ spring:
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-#    properties:
-#      javax:
-#        persistence:
-#          schema-generation:
-#            scripts:
-#              action: create
-#              create-target: create.sql
-#              create-source: metadata
     open-in-view: false
     generate-ddl: true
 main:
