@@ -32,7 +32,7 @@ public class AuthenticateService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password));
 
-        UserEntity userEntity = repository.findUserByEmail(email).orElseThrow(() -> new RuntimeException("ERRO JWT"));
+        UserEntity userEntity = repository.findUserByEmail(email);
 
         return getAuthenticationResponse(userEntity);
     }

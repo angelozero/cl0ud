@@ -33,16 +33,16 @@ public class UserEntity implements UserDetails {
     private String password;
 
     @Column(name = "account_non_expired")
-    private Boolean accountNonExpired;
+    private boolean accountNonExpired;
 
     @Column(name = "account_non_locked")
-    private Boolean accountNonLocked;
+    private boolean accountNonLocked;
 
     @Column(name = "credentials_non_expired")
-    private Boolean credentialsNonExpired;
+    private boolean credentialsNonExpired;
 
     @Column(name = "enabled")
-    private Boolean enable;
+    private boolean enable;
 
     @Column(name = "role")
     private String roleEnum;

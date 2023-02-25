@@ -21,6 +21,9 @@ public enum RoleEnum {
     }
 
     public static RoleEnum getRoleInfo(String role) {
+        if (role == null) {
+            return ADMIN;
+        }
         return Arrays.stream(RoleEnum.values())
                 .map(roleEnum -> RoleEnum.valueOf(role))
                 .findAny().orElse(NO_USER);

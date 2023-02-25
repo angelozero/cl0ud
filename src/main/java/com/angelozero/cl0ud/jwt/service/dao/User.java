@@ -15,10 +15,10 @@ public class User {
     private String email;
     private String fullname;
     private String password;
-    private Boolean accountNonExpired;
-    private Boolean accountNonLocked;
-    private Boolean credentialsNonExpired;
-    private Boolean enable;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enable;
     private String role;
 
 }

@@ -26,7 +26,7 @@ public class JwtConfiguration {
             @Override
             public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
                 try {
-                    return repository.findUserByEmail(email).get();
+                    return repository.findUserByEmail(email);
 
                 } catch (Exception ex) {
                     throw new RuntimeException("ERRO JWT " + ex.getMessage());
