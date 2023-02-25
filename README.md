@@ -65,7 +65,7 @@
 </pom.xml>
 ```
 
-- 5 - Testes unitarios
+- 5 - Unity Tests
   - [Fixture Factory](https://github.com/six2six/fixture-factory)
 
 - 6 - FlyWay
@@ -206,3 +206,5 @@ public class SwaggerOpenAPIConfig {
 ---
 
 - XX - Redis, when ?  I dont't know :)
+
+-- Follow the [Trello](https://trello.com/invite/b/wIilDAIF/ATTI2a1001727d2ee9f8bd0f5495d34f05588107B7E7/cl0ud-app) from this projetc.
