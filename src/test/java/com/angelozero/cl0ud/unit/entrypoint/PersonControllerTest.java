@@ -2,12 +2,12 @@ package com.angelozero.cl0ud.unit.entrypoint;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.entrypoint.person.PersonController;
-import com.angelozero.cl0ud.entrypoint.person.mapper.PersonRestMapper;
-import com.angelozero.cl0ud.entrypoint.person.rest.request.PersonRequest;
-import com.angelozero.cl0ud.entrypoint.person.rest.response.PersonResponse;
-import com.angelozero.cl0ud.usecase.person.model.Person;
-import com.angelozero.cl0ud.usecase.person.*;
+import com.angelozero.cl0ud.entrypoint.PersonController;
+import com.angelozero.cl0ud.entrypoint.mapper.PersonRestMapper;
+import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
+import com.angelozero.cl0ud.entrypoint.rest.response.PersonResponse;
+import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.usecase.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

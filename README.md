@@ -201,6 +201,7 @@ public class SwaggerOpenAPIConfig {
 
 - 9 - JWT
   - [How to convert a SQL file to a PostgreSQL ?](http://www.sqlines.com/online) 
+  - [Generating a KEY](https://www.allkeysgenerator.com/)
 
 ---
 

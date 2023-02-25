@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.config;
 
 
-import com.angelozero.cl0ud.gateway.repository.dao.PersonRepository;
+import com.angelozero.cl0ud.gateway.repository.PersonRepository;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
