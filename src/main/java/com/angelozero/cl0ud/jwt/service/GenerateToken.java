@@ -17,11 +17,11 @@ public class GenerateToken {
 
     private final JwtPropertiesConfig jwtPropsConfig;
 
-    public String generateToken(UserDetails userDetails) {
+    protected String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
+    protected String generateToken(Map<String, Object> claims, UserDetails userDetails) {
         return Jwts
                 .builder()
                 .setClaims(claims)

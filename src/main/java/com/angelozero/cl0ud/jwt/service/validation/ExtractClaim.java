@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.jwt.service;
+package com.angelozero.cl0ud.jwt.service.validation;
 
 import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfig;
 import io.jsonwebtoken.Claims;

@@ -1,18 +1,16 @@
-package com.angelozero.cl0ud.jwt.service;
+package com.angelozero.cl0ud.jwt.service.validation;
 
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-
 @Service
 @RequiredArgsConstructor
-public class ExtractExpiration {
+public class ExtractUserNameByToken {
 
     private final ExtractClaim extractClaim;
 
-    public Date execute(String token) {
-        return extractClaim.execute(token, Claims::getExpiration);
+    public String execute(String jwtToken) {
+        return extractClaim.execute(jwtToken, Claims::getSubject);
     }
 }
