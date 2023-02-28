@@ -19,14 +19,6 @@ spring:
     show-sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    properties:
-      javax:
-        persistence:
-          schema-generation:
-            scripts:
-              action: create
-              create-target: create.sql
-              create-source: metadata
     open-in-view: false
     generate-ddl: true
 main:
@@ -47,6 +39,7 @@ server:
 security:
   jwt:
     token:
-      secret-key: 10scrt20
+      # // https://www.allkeysgenerator.com/ --> Encryption key --> 256-bit --> Hex ? yes (cheked)
+      secret-key: 4D6251655468566D597133743677397A24432646294A404E635266556A586E5A
       milliseconds: 3600000
       hours: 10800000 # 3Hs

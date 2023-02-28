@@ -1,8 +1,8 @@
 package com.angelozero.cl0ud.gateway.postgressql.impl;
 
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
-import com.angelozero.cl0ud.gateway.postgressql.entity.dao.PersonEntity;
-import com.angelozero.cl0ud.gateway.repository.dao.PersonRepository;
+import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
+import com.angelozero.cl0ud.gateway.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

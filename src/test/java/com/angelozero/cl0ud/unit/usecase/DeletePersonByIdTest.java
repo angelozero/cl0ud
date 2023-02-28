@@ -2,11 +2,11 @@ package com.angelozero.cl0ud.unit.usecase;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.exception.person.DeletePersonException;
+import com.angelozero.cl0ud.exception.DeletePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
-import com.angelozero.cl0ud.usecase.person.DeletePersonById;
-import com.angelozero.cl0ud.usecase.person.GetPersonById;
-import com.angelozero.cl0ud.usecase.person.model.Person;
+import com.angelozero.cl0ud.usecase.DeletePersonById;
+import com.angelozero.cl0ud.usecase.GetPersonById;
+import com.angelozero.cl0ud.usecase.model.Person;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

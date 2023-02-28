@@ -2,12 +2,12 @@ package com.angelozero.cl0ud.unit.usecase;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.exception.person.CreatePersonException;
+import com.angelozero.cl0ud.exception.CreatePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
-import com.angelozero.cl0ud.gateway.postgressql.entity.dao.PersonEntity;
-import com.angelozero.cl0ud.usecase.person.CreatePerson;
-import com.angelozero.cl0ud.usecase.person.mapper.PersonMapper;
-import com.angelozero.cl0ud.usecase.person.model.Person;
+import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
+import com.angelozero.cl0ud.usecase.CreatePerson;
+import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
+import com.angelozero.cl0ud.usecase.model.Person;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
