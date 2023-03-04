@@ -22,7 +22,7 @@ spring:
     open-in-view: false
     generate-ddl: true
 main:
-  banner-mode=off:
+  banner-mode: off
 # Logger configuration
 logging:
   pattern:
