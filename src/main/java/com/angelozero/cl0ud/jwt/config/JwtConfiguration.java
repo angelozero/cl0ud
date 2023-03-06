@@ -1,19 +1,20 @@
 package com.angelozero.cl0ud.jwt.config;
 
+import com.angelozero.cl0ud.exception.jwt.JwtConfigurationException;
 import com.angelozero.cl0ud.jwt.gateway.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+@Slf4j
 @Configuration
 @RequiredArgsConstructor
 public class JwtConfiguration {
@@ -22,15 +23,14 @@ public class JwtConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-                try {
-                    return repository.findUserByEmail(email);
+        log.info("\n[JWT_CREATING_USER_DETAILS_SERVICE] - Creating UserDetailsService\n");
+        return email -> {
+            try {
+                return repository.findUserByEmail(email);
 
-                } catch (Exception ex) {
-                    throw new RuntimeException("ERRO JWT " + ex.getMessage());
-                }
+            } catch (Exception ex) {
+                log.error("\n[ERROR] - Error to create Jwt UserDetailsService\n");
+                throw new JwtConfigurationException("Error to find the user by email and generate the UserDetailsService " + ex.getMessage());
             }
         };
     }

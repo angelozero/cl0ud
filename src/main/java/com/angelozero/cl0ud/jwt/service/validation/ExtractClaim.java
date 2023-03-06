@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.jwt.service.validation;
 
-import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfig;
+import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfiguration;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class ExtractClaim {
 
-    private final JwtPropertiesConfig jwtPropsConfig;
+    private final JwtPropertiesConfiguration jwtPropsConfig;
 
     public <T> T execute(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);

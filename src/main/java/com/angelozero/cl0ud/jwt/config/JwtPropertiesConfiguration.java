@@ -10,7 +10,7 @@ import java.security.Key;
 
 @Data
 @Configuration
-public class JwtPropertiesConfig {
+public class JwtPropertiesConfiguration {
     @Value("${security.jwt.token.secret-key}")
     private String secretKey;
 

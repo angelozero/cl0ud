@@ -1,6 +1,5 @@
-package com.angelozero.cl0ud.exception;
+package com.angelozero.cl0ud.exception.person;
 
-import com.angelozero.cl0ud.exception.ZPersonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

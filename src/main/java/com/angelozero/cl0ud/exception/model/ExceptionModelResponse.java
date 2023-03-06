@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.exception;
+package com.angelozero.cl0ud.exception.model;
 
 import lombok.Builder;
 import lombok.Getter;

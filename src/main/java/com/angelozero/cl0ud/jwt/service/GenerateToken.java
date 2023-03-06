@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.jwt.service;
 
-import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfig;
+import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfiguration;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class GenerateToken {
 
-    private final JwtPropertiesConfig jwtPropsConfig;
+    private final JwtPropertiesConfiguration jwtPropsConfig;
 
     protected String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);

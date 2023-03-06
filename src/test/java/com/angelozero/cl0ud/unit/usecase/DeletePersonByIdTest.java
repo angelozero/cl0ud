@@ -2,7 +2,7 @@ package com.angelozero.cl0ud.unit.usecase;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.exception.DeletePersonException;
+import com.angelozero.cl0ud.exception.person.DeletePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.DeletePersonById;
 import com.angelozero.cl0ud.usecase.GetPersonById;

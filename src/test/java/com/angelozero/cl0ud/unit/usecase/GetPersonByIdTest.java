@@ -2,7 +2,7 @@ package com.angelozero.cl0ud.unit.usecase;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.exception.GetPersonException;
+import com.angelozero.cl0ud.exception.person.GetPersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.GetPersonById;

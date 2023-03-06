@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.usecase;
 
-import com.angelozero.cl0ud.exception.GetPersonException;
+import com.angelozero.cl0ud.exception.person.GetPersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;

@@ -1,7 +1,9 @@
 package com.angelozero.cl0ud.exception;
 
 
-import com.angelozero.cl0ud.exception.ZPersonException;
+import com.angelozero.cl0ud.exception.jwt.ZJwtException;
+import com.angelozero.cl0ud.exception.model.ExceptionModelResponse;
+import com.angelozero.cl0ud.exception.person.ZPersonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,12 +29,18 @@ public class Cl0udExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ZPersonException.class)
-    public final ResponseEntity<ExceptionModelResponse> handlePersonExceptionException(Exception ex, WebRequest request) {
+    public final ResponseEntity<ExceptionModelResponse> handlePersonException(Exception ex, WebRequest request) {
         ExceptionModelResponse exceptionModelResponse = generateExceptionModelResponse(ex, request.getDescription(DONT_INCLUDE_CLIENT_INFO));
 
         return new ResponseEntity<>(exceptionModelResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ZJwtException.class)
+    public final ResponseEntity<ExceptionModelResponse> handleJwtException(Exception ex, WebRequest request) {
+        ExceptionModelResponse exceptionModelResponse = generateExceptionModelResponse(ex, request.getDescription(DONT_INCLUDE_CLIENT_INFO));
+
+        return new ResponseEntity<>(exceptionModelResponse, HttpStatus.UNAUTHORIZED);
+    }
 
 
     private ExceptionModelResponse generateExceptionModelResponse(Exception ex, String description) {
