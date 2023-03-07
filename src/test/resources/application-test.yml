@@ -26,6 +26,6 @@ redis:
 security:
   jwt:
     token:
-      secret-key: 10scrt20
-      milliseconds: 3600000
-      hours: 10800000 # 3Hs
+      secret-key: sexret-key-test
+      milliseconds: 60
+      hours: 24 # 3Hs
