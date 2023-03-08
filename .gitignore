@@ -338,6 +338,3 @@ README.html
 *.iml
 .idea
 .exercism
-
-## SQL
-*.sql
