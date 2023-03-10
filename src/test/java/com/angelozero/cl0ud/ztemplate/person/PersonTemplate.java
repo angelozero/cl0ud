@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.ztemplate;
+package com.angelozero.cl0ud.ztemplate.person;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;

@@ -31,7 +31,7 @@ public class JwtConfigurationTest {
     private AuthenticationConfiguration authenticationConfiguration;
 
     @InjectMocks
-    JwtConfiguration jwtConfiguration;
+    private JwtConfiguration jwtConfiguration;
 
     @DisplayName("Should create UserDetailsService Bean with success")
     @Test
