@@ -23,7 +23,7 @@ public class UserAuthenticate {
 
         UserEntity userEntity = repository.findUserByEmail(email);
 
-        String jwtToken = generateToken.generateToken(userEntity);
+        String jwtToken = generateToken.execute(userEntity);
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)

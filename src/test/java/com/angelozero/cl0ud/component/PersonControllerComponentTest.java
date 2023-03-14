@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
-    private static final String PERSON_URL = "/person";
+    private static final String PERSON_URL = "/person/";
     private static final String PERSON_ID_URL = "/person/{id}";
     private static final String ID = "id";
 
@@ -51,7 +51,6 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-    @DisplayName("Teste teste teste")
     @Test
     public void shouldDoARequestToSaveAPerson() throws Exception {
 
@@ -62,7 +61,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
         PersonRequest personRequestFixture = Fixture.from(PersonRequest.class).gimme("valid PersonRequest");
 
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                        .post(PERSON_URL)
+                        .post(API_URL + PERSON_URL)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(getJsonString(personRequestFixture)))
                 .andExpect(status().isNoContent())
@@ -84,7 +83,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
         PersonEntity personSaved = savePerson();
 
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                        .get(PERSON_URL)
+                        .get(API_URL + PERSON_URL)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -101,7 +100,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
         PersonEntity personSaved = savePerson();
 
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                        .get(PERSON_ID_URL, String.valueOf(personSaved.getId()))
+                        .get(API_URL + PERSON_ID_URL, String.valueOf(personSaved.getId()))
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -130,7 +129,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
                 .build();
 
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                        .put(PERSON_URL)
+                        .put(API_URL + PERSON_URL)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(getJsonString(personRequestFixture)))
                 .andExpect(status().isNoContent())
@@ -153,7 +152,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
         assertFalse(personsList.isEmpty());
 
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
-                        .delete(PERSON_ID_URL, personSaved.getId())
+                        .delete(API_URL + PERSON_ID_URL, personSaved.getId())
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isAccepted())
                 .andReturn();

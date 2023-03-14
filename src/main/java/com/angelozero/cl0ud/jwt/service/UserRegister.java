@@ -22,7 +22,7 @@ public class UserRegister {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         UserEntity userEntity = repository.save(mapper.toEntity(user));
 
-        String jwtToken = generateToken.generateToken(userEntity);
+        String jwtToken = generateToken.execute(userEntity);
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)

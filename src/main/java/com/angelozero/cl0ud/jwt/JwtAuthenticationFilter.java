@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.jwt;
 
 import com.angelozero.cl0ud.jwt.service.validation.ExtractUserNameByToken;
-import com.angelozero.cl0ud.jwt.service.validation.IsValidToken;
+import com.angelozero.cl0ud.jwt.service.validation.CheckValidToken;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final String BEARER = "Bearer ";
     private final UserDetailsService userDetailsService;
     private final ExtractUserNameByToken extractUserNameByToken;
-    private final IsValidToken isValidToken;
+    private final CheckValidToken checkValidToken;
 
     @Override
     protected void doFilterInternal(
@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-                if (isValidToken.execute(jwtToken, userDetails) && userDetails.isEnabled()) {
+                if (checkValidToken.execute(jwtToken, userDetails) && userDetails.isEnabled()) {
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,

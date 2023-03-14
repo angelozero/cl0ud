@@ -30,6 +30,8 @@ import java.io.IOException;
 @ContextConfiguration(initializers = ComponentTestConfiguration.Initializer.class)
 public class ComponentTestConfiguration {
 
+    protected static final String API_URL = "/api/v1";
+
     @Autowired
     protected PersonRepository repository;
 

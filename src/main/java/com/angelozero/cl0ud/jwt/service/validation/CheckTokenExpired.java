@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
-public class IsTokenExpired {
+public class CheckTokenExpired {
 
     private final ExtractClaim extractClaim;
 
