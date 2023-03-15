@@ -1,11 +1,9 @@
 package com.angelozero.cl0ud.unit.jwt.service;
 
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfiguration;
 import com.angelozero.cl0ud.jwt.service.GenerateToken;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
