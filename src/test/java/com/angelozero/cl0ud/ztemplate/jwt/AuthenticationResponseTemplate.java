@@ -9,10 +9,13 @@ import com.angelozero.cl0ud.jwt.entrypoint.rest.RegisterRequest;
 import java.util.UUID;
 
 public class AuthenticationResponseTemplate implements TemplateLoader {
+
+    public static final String VALID_AUTHENTICATION_RESPONSE = "valid AuthenticationResponse";
+
     @Override
     public void load() {
         Fixture.of(AuthenticationResponse.class)
-                .addTemplate("valid AuthenticationResponse", new Rule() {
+                .addTemplate(VALID_AUTHENTICATION_RESPONSE, new Rule() {
                     {
                         add("token", UUID.randomUUID().toString());
                     }

@@ -10,7 +10,10 @@ import com.angelozero.cl0ud.jwt.entrypoint.rest.RegisterRequest;
 import com.angelozero.cl0ud.jwt.service.UserAuthenticate;
 import com.angelozero.cl0ud.jwt.service.UserRegister;
 import com.angelozero.cl0ud.jwt.service.dao.User;
-import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.ztemplate.jwt.AuthenticationRequestTemplate;
+import com.angelozero.cl0ud.ztemplate.jwt.AuthenticationResponseTemplate;
+import com.angelozero.cl0ud.ztemplate.jwt.RegisterRequestTemplate;
+import com.angelozero.cl0ud.ztemplate.jwt.UserTemplate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +25,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -50,9 +54,9 @@ public class AuthControllerTest {
     @DisplayName("Should register with success")
     @Test
     void shouldRegisterWithSuccess() {
-        RegisterRequest registerRequestFixture = Fixture.from(RegisterRequest.class).gimme("valid RegisterRequest");
-        AuthenticationResponse authenticationResponseFixture = Fixture.from(AuthenticationResponse.class).gimme("valid AuthenticationResponse");
-        User userFixture = Fixture.from(User.class).gimme("valid User");
+        RegisterRequest registerRequestFixture = Fixture.from(RegisterRequest.class).gimme(RegisterRequestTemplate.VALID_REGISTER_REQUEST);
+        AuthenticationResponse authenticationResponseFixture = Fixture.from(AuthenticationResponse.class).gimme(AuthenticationResponseTemplate.VALID_AUTHENTICATION_RESPONSE);
+        User userFixture = Fixture.from(User.class).gimme(UserTemplate.VALID_USER);
 
         when(mapper.toUser(any(RegisterRequest.class))).thenReturn(userFixture);
         when(userRegister.execute(any(User.class))).thenReturn(authenticationResponseFixture);
@@ -67,8 +71,8 @@ public class AuthControllerTest {
     @DisplayName("Should authenticate with success")
     @Test
     void shouldAuthenticateWithSuccess() {
-        AuthenticationRequest authenticationRequestFixture = Fixture.from(AuthenticationRequest.class).gimme("valid AuthenticationRequest");
-        AuthenticationResponse authenticationResponseFixture = Fixture.from(AuthenticationResponse.class).gimme("valid AuthenticationResponse");
+        AuthenticationRequest authenticationRequestFixture = Fixture.from(AuthenticationRequest.class).gimme(AuthenticationRequestTemplate.VALID_AUTHENTICATION_REQUEST);
+        AuthenticationResponse authenticationResponseFixture = Fixture.from(AuthenticationResponse.class).gimme(AuthenticationResponseTemplate.VALID_AUTHENTICATION_RESPONSE);
 
         when(userAuthenticate.execute(anyString(), anyString())).thenReturn(authenticationResponseFixture);
 

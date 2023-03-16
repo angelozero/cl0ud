@@ -9,6 +9,8 @@ import com.angelozero.cl0ud.usecase.GetPersonById;
 import com.angelozero.cl0ud.usecase.UpdatePerson;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.ztemplate.person.PersonEntityTemplate;
+import com.angelozero.cl0ud.ztemplate.person.PersonTemplate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -95,11 +97,11 @@ public class UpdatePersonByIdTest {
 
         PersonEntity personEntityFixture = Fixture
                 .from(PersonEntity.class)
-                .gimme("valid PersonEntity");
+                .gimme(PersonEntityTemplate.VALID_PERSON_ENTITY);
 
         Person personFixture = Fixture
                 .from(Person.class)
-                .gimme("valid Person");
+                .gimme(PersonTemplate.VALID_PERSON);
 
         when(personMapper.toEntity(any(Person.class))).thenReturn(personEntityFixture);
         when(personMapper.toModel(any(PersonEntity.class))).thenReturn(personFixture);

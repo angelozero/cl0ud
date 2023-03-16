@@ -8,10 +8,13 @@ import com.angelozero.cl0ud.jwt.entrypoint.rest.RegisterRequest;
 import java.util.UUID;
 
 public class RegisterRequestTemplate implements TemplateLoader {
+
+    public static final String VALID_REGISTER_REQUEST = "valid RegisterRequest";
+
     @Override
     public void load() {
         Fixture.of(RegisterRequest.class)
-                .addTemplate("valid RegisterRequest", new Rule() {
+                .addTemplate(VALID_REGISTER_REQUEST, new Rule() {
                     {
                         add("email", UUID.randomUUID().toString());
                         add("fullname", firstName());

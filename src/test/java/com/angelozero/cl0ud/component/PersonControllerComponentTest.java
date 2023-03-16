@@ -6,12 +6,13 @@ import com.angelozero.cl0ud.config.ComponentTestConfiguration;
 import com.angelozero.cl0ud.entrypoint.PersonController;
 import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
+import com.angelozero.cl0ud.ztemplate.person.PersonEntityTemplate;
+import com.angelozero.cl0ud.ztemplate.person.PersonRequestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +34,6 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
     private static final String PERSON_URL = "/person/";
     private static final String PERSON_ID_URL = "/person/{id}";
-    private static final String ID = "id";
 
     @Autowired
     private PersonController controller;
@@ -47,7 +46,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
     }
 
     @Before
-    public void setUp() throws IOException {
+    public void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
@@ -58,7 +57,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
         List<PersonEntity> personsList = findAllPersons();
         assertTrue(personsList.isEmpty());
 
-        PersonRequest personRequestFixture = Fixture.from(PersonRequest.class).gimme("valid PersonRequest");
+        PersonRequest personRequestFixture = Fixture.from(PersonRequest.class).gimme(PersonRequestTemplate.VALID_PERSON_REQUEST);
 
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
                         .post(API_URL + PERSON_URL)
@@ -167,7 +166,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
     private PersonEntity savePerson() {
         clearDataRepository();
-        PersonEntity personEntityFixture = Fixture.from(PersonEntity.class).gimme("valid PersonEntity");
+        PersonEntity personEntityFixture = Fixture.from(PersonEntity.class).gimme(PersonEntityTemplate.VALID_PERSON_ENTITY);
         return repository.save(personEntityFixture);
     }
 

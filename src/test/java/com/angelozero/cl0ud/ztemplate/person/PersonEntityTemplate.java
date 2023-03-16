@@ -6,10 +6,13 @@ import br.com.six2six.fixturefactory.loader.TemplateLoader;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 
 public class PersonEntityTemplate implements TemplateLoader {
+
+    public static final String VALID_PERSON_ENTITY = "valid PersonEntity";
+
     @Override
     public void load() {
         Fixture.of(PersonEntity.class)
-                .addTemplate("valid PersonEntity", new Rule() {
+                .addTemplate(VALID_PERSON_ENTITY, new Rule() {
                     {
                         add("id", random(Long.class, range(1L, 200L)));
                         add("name", firstName());

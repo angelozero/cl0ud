@@ -9,10 +9,13 @@ import java.util.Random;
 import java.util.UUID;
 
 public class UserTemplate implements TemplateLoader {
+
+    public static final String VALID_USER = "valid User";
+
     @Override
     public void load() {
         Fixture.of(User.class)
-                .addTemplate("valid User", new Rule() {
+                .addTemplate(VALID_USER, new Rule() {
                     {
                         add("id", 10);
                         add("email", UUID.randomUUID().toString());

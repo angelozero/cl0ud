@@ -7,6 +7,7 @@ import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.DeletePersonById;
 import com.angelozero.cl0ud.usecase.GetPersonById;
 import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.ztemplate.person.PersonTemplate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ public class DeletePersonByIdTest {
     @Test
     void testDeletePersonWithException() {
 
-        Person personFixture = Fixture.from(Person.class).gimme("valid Person");
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
 
         when(getPersonById.execute(anyLong())).thenReturn(personFixture);
         doThrow(new RuntimeException("Test Error")).when(dataBaseGateway).deletePersonEntityById(anyLong());
@@ -74,7 +75,7 @@ public class DeletePersonByIdTest {
     @Test
     void testDeletePersonWithSuccess() {
 
-        Person personFixture = Fixture.from(Person.class).gimme("valid Person");
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
 
         when(getPersonById.execute(anyLong())).thenReturn(personFixture);
         doNothing().when(dataBaseGateway).deletePersonEntityById(anyLong());

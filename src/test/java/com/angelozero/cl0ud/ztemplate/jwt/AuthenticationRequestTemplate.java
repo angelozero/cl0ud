@@ -8,10 +8,13 @@ import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationRequest;
 import java.util.UUID;
 
 public class AuthenticationRequestTemplate implements TemplateLoader {
+
+    public static final String VALID_AUTHENTICATION_REQUEST = "valid AuthenticationRequest";
+
     @Override
     public void load() {
         Fixture.of(AuthenticationRequest.class)
-                .addTemplate("valid AuthenticationRequest", new Rule() {
+                .addTemplate(VALID_AUTHENTICATION_REQUEST, new Rule() {
                     {
                         add("email", UUID.randomUUID().toString());
                         add("password", UUID.randomUUID().toString());

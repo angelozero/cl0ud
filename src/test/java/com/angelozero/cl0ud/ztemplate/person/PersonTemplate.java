@@ -6,10 +6,13 @@ import br.com.six2six.fixturefactory.loader.TemplateLoader;
 import com.angelozero.cl0ud.usecase.model.Person;
 
 public class PersonTemplate implements TemplateLoader {
+
+    public static final String VALID_PERSON = "valid Person";
+
     @Override
     public void load() {
         Fixture.of(Person.class)
-                .addTemplate("valid Person", new Rule() {
+                .addTemplate(VALID_PERSON, new Rule() {
                     {
                         add("id", random(Long.class, range(1L, 200L)));
                         add("name", firstName());

@@ -8,6 +8,9 @@ import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
 import com.angelozero.cl0ud.entrypoint.rest.response.PersonResponse;
 import com.angelozero.cl0ud.usecase.model.Person;
 import com.angelozero.cl0ud.usecase.*;
+import com.angelozero.cl0ud.ztemplate.person.PersonRequestTemplate;
+import com.angelozero.cl0ud.ztemplate.person.PersonResponseTemplate;
+import com.angelozero.cl0ud.ztemplate.person.PersonTemplate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,9 +65,9 @@ public class PersonControllerTest {
     @Test
     void testGetAllPersons() {
 
-        Person personFixture = Fixture.from(Person.class).gimme("valid Person");
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
         List<PersonResponse> personResponseListFixture = Fixture.from(PersonResponse.class)
-                .gimme(1, "valid PersonResponse");
+                .gimme(1, PersonResponseTemplate.VALID_PERSON_RESPONSE);
 
         when(personRestMapper.toResponseList(anyList())).thenReturn(personResponseListFixture);
         when(getAllPersonsUseCase.execute()).thenReturn(Collections.singletonList(personFixture));
@@ -80,8 +83,8 @@ public class PersonControllerTest {
     @Test
     void testGetPersonById() {
 
-        Person personFixture = Fixture.from(Person.class).gimme("valid Person");
-        PersonResponse personResponseFixture = Fixture.from(PersonResponse.class).gimme("valid PersonResponse");
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
+        PersonResponse personResponseFixture = Fixture.from(PersonResponse.class).gimme(PersonResponseTemplate.VALID_PERSON_RESPONSE);
 
         when(personRestMapper.toResponse(any(Person.class))).thenReturn(personResponseFixture);
         when(getPersonByIdUseCase.execute(anyLong())).thenReturn(personFixture);
@@ -96,9 +99,9 @@ public class PersonControllerTest {
     @Test
     void testPostPerson() {
 
-        Person personFixture = Fixture.from(Person.class).gimme("valid Person");
-        PersonRequest personRequestFixture = Fixture.from(PersonRequest.class).gimme("valid PersonRequest");
-        PersonResponse personResponseFixture = Fixture.from(PersonResponse.class).gimme("valid PersonResponse");
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
+        PersonRequest personRequestFixture = Fixture.from(PersonRequest.class).gimme(PersonRequestTemplate.VALID_PERSON_REQUEST);
+        PersonResponse personResponseFixture = Fixture.from(PersonResponse.class).gimme(PersonResponseTemplate.VALID_PERSON_RESPONSE);
 
         when(personRestMapper.toModel(any(PersonRequest.class))).thenReturn(personFixture);
         when(personRestMapper.toResponse(any(Person.class))).thenReturn(personResponseFixture);
@@ -115,8 +118,8 @@ public class PersonControllerTest {
     @Test
     void testPutPerson() {
 
-        Person personFixture = Fixture.from(Person.class).gimme("valid Person");
-        PersonRequest personRequestFixture = Fixture.from(PersonRequest.class).gimme("valid PersonRequest");
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
+        PersonRequest personRequestFixture = Fixture.from(PersonRequest.class).gimme(PersonRequestTemplate.VALID_PERSON_REQUEST);
 
         when(personRestMapper.toModel(any(PersonRequest.class))).thenReturn(personFixture);
         doNothing().when(updatePersonUseCase).execute(any(Person.class));

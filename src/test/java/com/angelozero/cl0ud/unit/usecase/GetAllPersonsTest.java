@@ -8,6 +8,8 @@ import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.GetAllPersons;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.ztemplate.person.PersonEntityTemplate;
+import com.angelozero.cl0ud.ztemplate.person.PersonTemplate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,11 +63,11 @@ public class GetAllPersonsTest {
 
         List<PersonEntity> personEntityListFixture = Fixture
                 .from(PersonEntity.class)
-                .gimme(1, "valid PersonEntity");
+                .gimme(1, PersonEntityTemplate.VALID_PERSON_ENTITY);
 
         List<Person> personListFixture = Fixture
                 .from(Person.class)
-                .gimme(1, "valid Person");
+                .gimme(1, PersonTemplate.VALID_PERSON);
 
 
         when(dataBaseGateway.getAllPersonsEntity()).thenReturn(personEntityListFixture);
