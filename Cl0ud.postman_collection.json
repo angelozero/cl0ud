@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "jwt",
+			"name": "auth",
 			"item": [
 				{
 					"name": "Register User JWT",
@@ -42,6 +42,18 @@
 				},
 				{
 					"name": "Auth User JWT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"pm.environment.set(\"token_api\", data.token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -77,44 +89,49 @@
 			]
 		},
 		{
-			"name": "API Doc",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/v3/api-docs",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v3",
-						"api-docs"
-					]
+			"name": "swagger",
+			"item": [
+				{
+					"name": "API Doc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v3/api-docs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v3",
+								"api-docs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Swagger",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/swagger-ui/index.html",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"swagger-ui",
+								"index.html"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Swagger",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/swagger-ui/index.html",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"swagger-ui",
-						"index.html"
-					]
-				}
-			},
-			"response": []
+			]
 		},
 		{
 			"name": "Get Person",
@@ -124,7 +141,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmdlbG96ZXJvQHplcm8uY29tIiwiaWF0IjoxNjc3NDY3MjIyLCJleHAiOjE2Nzc0NzgwMjJ9.s9cO-RWhQYoAQXuHAQVru82DKGjgD3m4EuNAqbEGrKA",
+							"value": "{{token_api}}",
 							"type": "string"
 						}
 					]

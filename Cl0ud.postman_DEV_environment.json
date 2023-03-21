@@ -1,0 +1,15 @@
+{
+	"id": "fb85fdd6-c632-468d-a53c-2d0ed8d92e98",
+	"name": "DEV",
+	"values": [
+		{
+			"key": "token_api",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2023-03-21T01:04:41.466Z",
+	"_postman_exported_using": "Postman/10.11.2"
+}

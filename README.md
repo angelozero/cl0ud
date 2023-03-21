@@ -127,7 +127,8 @@
   - ![swagger_image](https://i.postimg.cc/fWVX1RSY/Screen-Shot-2023-03-20-at-21-41-17.png)
 
   - Some documentations to see how to fix some issues and configure swagger
-    - [How to configure Swagger info](https://stackoverflow.com/questions/72037222/springdoc-openapi-ui-swagger-3-change-api-description)
+    - [Video - How to update environment variables based on a response in Postman | Chaining Requests](https://www.youtube.com/watch?v=wHuSu_Mf6Hs)
+    - [Stackoverflow - How to configure Swagger info](https://stackoverflow.com/questions/72037222/springdoc-openapi-ui-swagger-3-change-api-description)
     - https://springdoc.org/v2/
     - https://github.com/springdoc/springdoc-openapi/issues/1284
     - https://stackoverflow.com/questions/71549614/springfox-type-javax-servlet-http-httpservletrequest-not-present
