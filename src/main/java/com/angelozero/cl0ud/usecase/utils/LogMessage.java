@@ -9,7 +9,7 @@ public class LogMessage {
      * CreatePerson
      */
 
-    public static final String INFO_CREATE_PERSON = "\n[CREATING_PERSON] - Creating a person: {}\n";
+    public static final String INFO_CREATE_PERSONs = "\n[CREATING_PERSON] - Creating a person: {}\n";
     public static final String ERROR_CREATE_PERSON = "\n[ERROR] - Error to create a person\n";
 
     /**
