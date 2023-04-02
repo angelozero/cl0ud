@@ -23,7 +23,7 @@ public class CreatePerson {
     private final PersonMapper personMapper;
 
     public Person execute(Person person) {
-        log.info(LogMessage.INFO_CREATE_PERSON, ToJson.execute(person));
+        log.info("\n[CREATING_PERSON] - Creating a person: {}\n", ToJson.execute(person));
         Optional.ofNullable(person)
                 .orElseThrow(()
                         -> new CreatePersonException(ExceptionMessage.PERSON_DATA_IS_NULL));
