@@ -9,7 +9,7 @@ public class LogMessage {
      * CreatePerson
      */
 
-    public static final String ERROR_CREATE_PERSON = "\n[ERROR] - Error to create a person\n";
+    public static final String ERROR_CREATE_PERSONs = "\n[ERROR] - Error to create a person\n";
 
     /**
      * DeletePersonById
