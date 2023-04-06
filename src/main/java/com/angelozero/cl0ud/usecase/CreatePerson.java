@@ -33,7 +33,7 @@ public class CreatePerson {
             return personMapper.toModel(personEntity);
 
         } catch (Exception ex) {
-            log.error(LogMessage.ERROR_CREATE_PERSON);
+            log.error("\n[ERROR] - Error to create a person\n");
             throw new CreatePersonException(ExceptionMessage.ERROR_CREATE_A_PERSON + ex.getMessage());
         }
     }
