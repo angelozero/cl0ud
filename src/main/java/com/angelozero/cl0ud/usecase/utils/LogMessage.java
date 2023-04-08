@@ -33,4 +33,5 @@ public class LogMessage {
      * UpdatePerson
      */
     public static final String INFO_UPDATE_PERSON = "\n[UPDATE_PERSON] - Updating a person: {}\n";
+    public static final String ERROR_UPDATE_PERSON = "\n[ERROR] - Error to update a person\n";
 }
