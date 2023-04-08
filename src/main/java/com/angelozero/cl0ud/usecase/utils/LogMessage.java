@@ -6,12 +6,6 @@ public class LogMessage {
     }
 
     /**
-     * CreatePerson
-     */
-
-
-
-    /**
      * DeletePersonById
      */
     public static final String INFO_DELETE_PERSON_BY_ID = "\n[DELETE_PERSON_BY_ID] - Deleting a person by id: {}\n";
