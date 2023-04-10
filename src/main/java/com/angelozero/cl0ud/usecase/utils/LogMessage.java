@@ -32,4 +32,5 @@ public class LogMessage {
     /**
      * UpdatePerson
      */
+    public static final String INFO_UPDATE_PERSON = "[UPDATE_PERSON] - Updating a person: {}";
 }

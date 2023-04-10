@@ -21,7 +21,7 @@ public class UpdatePerson {
     private final PersonMapper personMapper;
 
     public void execute(Person person) {
-        log.info("[UPDATE_PERSON] - Updating a person: {}", person);
+        log.info(, person);
 
         Optional.ofNullable(person)
                 .map(Person::getId)
