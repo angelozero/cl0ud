@@ -28,5 +28,9 @@ public class ExceptionMessage {
      */
     public static final String ERROR_FIND_A_PERSON_BY_ID = "Error to find a person by ID: ";
 
+    /**
+     * UpdatePerson
+     */
+    public static final String ERROR_PERSON_DATA_OR_ID = "Person Data and/or Person ID is null";
 
 }
