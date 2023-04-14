@@ -32,5 +32,6 @@ public class ExceptionMessage {
      * UpdatePerson
      */
     public static final String ERROR_PERSON_DATA_OR_ID = "Person Data and/or Person ID is null";
+    public static final String ERROR_UPDATE_PERSON = "Person Data and/or Person ID is null";
 
 }
