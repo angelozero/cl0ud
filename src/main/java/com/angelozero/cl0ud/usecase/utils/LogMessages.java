@@ -11,7 +11,6 @@ public class LogMessages {
      * LOG ERROR
      */
     public static final String LOG_ERROR_CREATE_PERSON = "\n[ERROR] - Error to create a person\n";
-
     /**
      * EXCEPTION
      */
