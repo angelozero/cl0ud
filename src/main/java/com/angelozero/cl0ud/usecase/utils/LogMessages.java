@@ -6,7 +6,6 @@ public class LogMessages {
      * LOG INFO
      */
     public static final String LOG_INFO_CREATE_PERSON = "\n[CREATING_PERSON] - Creating a person: {}\n";
-
     /**
      * LOG ERROR
      */
