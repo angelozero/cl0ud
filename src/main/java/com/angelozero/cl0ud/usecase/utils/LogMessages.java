@@ -2,6 +2,9 @@ package com.angelozero.cl0ud.usecase.utils;
 
 public class LogMessages {
 
+    private LogMessages() {
+    }
+
     /**
      * LOG INFO
      */

@@ -5,6 +5,7 @@ import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.usecase.utils.LogMessages;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class CreatePerson {
     private final PersonMapper personMapper;
 
     public Person execute(Person person) {
-        log.info("\n[CREATING_PERSON] - Creating a person: {}\n", person);
+        log.info(LogMessages.LOG_INFO_CREATE_PERSON, person);
         Optional.ofNullable(person)
                 .orElseThrow(()
                         -> new CreatePersonException("Person Data is null"));
