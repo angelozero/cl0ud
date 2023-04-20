@@ -19,5 +19,5 @@ public class LogMessages {
      * EXCEPTION
      */
     public static final String EXCEPTION_PERSON_DATA_IS_NULL = "Person Data is null";
-    public static final String EXCEPTION_TO_CREATE_A_PERSON = "Person Data is null";
+    public static final String EXCEPTION_TO_CREATE_A_PERSON = "Error to create a person: ";
 }
