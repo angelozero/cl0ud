@@ -24,7 +24,7 @@ public class CreatePerson {
         log.info(LogMessages.LOG_INFO_CREATE_PERSON, person);
         Optional.ofNullable(person)
                 .orElseThrow(()
-                        -> new CreatePersonException("Person Data is null"));
+                        -> new CreatePersonException(LogMessages.EXCEPTION_PERSON_DATA_IS_NULL));
 
         try {
             PersonEntity personEntity = dataBaseGateway.savePerson(personMapper.toEntity(person));
