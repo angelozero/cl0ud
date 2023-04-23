@@ -1,8 +1,8 @@
 package com.angelozero.cl0ud.usecase.utils;
 
-public class LogMessages {
+public class LogMessage {
 
-    private LogMessages() {
+    private LogMessage() {
     }
 
     /**
