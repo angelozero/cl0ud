@@ -11,11 +11,15 @@ public class LogMessage {
     // CreatePerson
     public static final String LOG_INFO_CREATE_PERSON = "\n[CREATING_PERSON] - Creating a person: {}\n";
 
+    //DeletePersonById
+
     /**
      * LOG ERROR
      */
     // CreatePerson
     public static final String LOG_ERROR_CREATE_PERSON = "\n[ERROR] - Error to create a person\n";
+
+    //DeletePersonById
 
 
 }
