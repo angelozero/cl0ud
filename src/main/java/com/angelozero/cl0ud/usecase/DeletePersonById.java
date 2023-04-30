@@ -2,6 +2,7 @@ package com.angelozero.cl0ud.usecase;
 
 import com.angelozero.cl0ud.exception.person.DeletePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
+import com.angelozero.cl0ud.usecase.utils.LogMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class DeletePersonById {
 
 
     public void execute(Long id) {
-        log.info("\n[DELETE_PERSON_BY_ID] - Deleting a person by id: {}\n", id);
+        log.info(LogMessage.LOG_INFO_DELETE_PERSON_BY_ID, id);
         Optional.ofNullable(id)
                 .orElseThrow(()
                         -> new DeletePersonException("ID is null"));

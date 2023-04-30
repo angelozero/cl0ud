@@ -12,6 +12,7 @@ public class LogMessage {
     public static final String LOG_INFO_CREATE_PERSON = "\n[CREATING_PERSON] - Creating a person: {}\n";
 
     //DeletePersonById
+    public static final String LOG_INFO_DELETE_PERSON_BY_ID = "\n[DELETE_PERSON_BY_ID] - Deleting a person by id: {}\n";
 
     /**
      * LOG ERROR
