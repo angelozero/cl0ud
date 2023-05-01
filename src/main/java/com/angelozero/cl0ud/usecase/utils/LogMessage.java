@@ -21,6 +21,7 @@ public class LogMessage {
     public static final String LOG_ERROR_CREATE_PERSON = "\n[ERROR] - Error to create a person\n";
 
     //DeletePersonById
+    public static final String LOG_ERROR_DELETE_PERSON = "\n[ERROR] - Error to delete a person\n";
 
 
 }
