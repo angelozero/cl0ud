@@ -14,4 +14,6 @@ public class ExceptionMessage {
     /**
      * DeletePersonById
      */
+    public static final String PERSON_ID_IS_NULL = "Person ID is null";
+    public static final String ERROR_DELETE_A_PERSON = "Error to delete a person: ";
 }
