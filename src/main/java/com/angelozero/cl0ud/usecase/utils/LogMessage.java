@@ -17,7 +17,8 @@ public class LogMessage {
     public static final String LOG_INFO_DELETE_PERSON_BY_ID = "\n[DELETE_PERSON_BY_ID] - Deleting a person by id: {}\n";
     public static final String LOG_ERROR_DELETE_PERSON = "\n[ERROR] - Error to delete a person\n";
 
-/**
- * GetAllPersons
- */
+    /**
+     * GetAllPersons
+     */
+    public static final String LOG_INFO_GET_ALL_PERSONS = "[GET_ALL_PERSONS] - Get a list of persons";
 }
