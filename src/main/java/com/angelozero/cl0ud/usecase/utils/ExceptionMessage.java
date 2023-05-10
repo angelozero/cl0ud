@@ -18,6 +18,6 @@ public class ExceptionMessage {
     public static final String ERROR_DELETE_A_PERSON = "Error to delete a person: ";
 
     /**
-     * DeletePersonById
+     * GetAllPersons
      */
 }
