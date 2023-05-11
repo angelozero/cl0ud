@@ -20,4 +20,5 @@ public class ExceptionMessage {
     /**
      * GetAllPersons
      */
+    public static final String ERROR_GET_ALL_PERSONS = "Error to get all persons: ";
 }
