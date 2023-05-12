@@ -4,6 +4,7 @@ import com.angelozero.cl0ud.exception.person.GetAllPersonsException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.usecase.utils.ExceptionMessage;
 import com.angelozero.cl0ud.usecase.utils.LogMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ public class GetAllPersons {
 
         } catch (Exception ex) {
             log.error(LogMessage.LOG_ERROR_GET_ALL_PERSONS);
-            throw new GetAllPersonsException("Error to get all persons: " + ex.getMessage());
+            throw new GetAllPersonsException(ExceptionMessage.ERROR_GET_ALL_PERSONS + ex.getMessage());
         }
     }
 }
