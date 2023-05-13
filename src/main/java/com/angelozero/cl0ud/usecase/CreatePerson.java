@@ -32,7 +32,7 @@ public class CreatePerson {
             return personMapper.toModel(personEntity);
 
         } catch (Exception ex) {
-            log.error(LogMessage.LOG_ERROR_CREATE_PERSON);
+            log.error(LogMessage.ERROR_CREATE_PERSON);
             throw new CreatePersonException(ExceptionMessage.ERROR_CREATE_A_PERSON + ex.getMessage());
         }
     }
