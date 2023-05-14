@@ -20,7 +20,7 @@ public class DeletePersonById {
 
 
     public void execute(Long id) {
-        log.info(LogMessage.LOG_INFO_DELETE_PERSON_BY_ID, id);
+        log.info(LogMessage.INFO_DELETE_PERSON_BY_ID, id);
         Optional.ofNullable(id)
                 .orElseThrow(()
                         -> new DeletePersonException(ExceptionMessage.PERSON_ID_IS_NULL));
