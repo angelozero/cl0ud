@@ -31,7 +31,7 @@ public class DeletePersonById {
             }
 
         } catch (Exception ex) {
-            log.error(LogMessage.LOG_ERROR_DELETE_PERSON);
+            log.error(LogMessage.ERROR_DELETE_PERSON);
             throw new DeletePersonException(ExceptionMessage.ERROR_DELETE_A_PERSON + ex.getMessage());
         }
     }
