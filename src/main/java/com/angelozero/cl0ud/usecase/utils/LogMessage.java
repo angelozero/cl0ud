@@ -22,4 +22,10 @@ public class LogMessage {
      */
     public static final String INFO_GET_ALL_PERSONS = "[GET_ALL_PERSONS] - Get a list of persons";
     public static final String ERROR_GET_ALL_PERSONS = "\n[ERROR] - Error to get all persons\n";
+
+    /**
+     * GetPersonById
+     */
+    public static final String INFO_GET_PERSON_BY_ID = "[GET_PERSON_BY_ID] - Getting a person by id: {}";
+    public static final String ERROR_GET_PERSON_BY_ID = "\n[ERROR] - Error to find a person by ID\n";
 }
