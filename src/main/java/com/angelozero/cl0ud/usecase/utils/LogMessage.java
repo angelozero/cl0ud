@@ -20,7 +20,7 @@ public class LogMessage {
     /**
      * GetAllPersons
      */
-    public static final String INFO_GET_ALL_PERSONS = "[GET_ALL_PERSONS] - Get a list of persons";
+    public static final String INFO_GET_ALL_PERSONS = "\n[GET_ALL_PERSONS] - Get a list of persons\n";
     public static final String ERROR_GET_ALL_PERSONS = "\n[ERROR] - Error to get all persons\n";
 
     /**
