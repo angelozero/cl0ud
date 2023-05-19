@@ -26,7 +26,7 @@ public class CreatePerson {
         log.info("\n[CREATING_PERSON] - Creating a person: {}\n", ToJson.execute(person));
         Optional.ofNullable(person)
                 .orElseThrow(()
-                        -> new CreatePersonException(ExceptionMessage.PERSON_DATA_IS_NULL));
+                        -> new CreatePersonException("Person Data is null"));
 
         try {
             PersonEntity personEntity = dataBaseGateway.savePerson(personMapper.toEntity(person));
