@@ -26,6 +26,6 @@ public class LogMessage {
     /**
      * GetPersonById
      */
-    public static final String INFO_GET_PERSON_BY_ID = "[GET_PERSON_BY_ID] - Getting a person by id: {}";
+    public static final String INFO_GET_PERSON_BY_ID = "\n[GET_PERSON_BY_ID] - Getting a person by id: {}\n";
     public static final String ERROR_GET_PERSON_BY_ID = "\n[ERROR] - Error to find a person by ID\n";
 }
