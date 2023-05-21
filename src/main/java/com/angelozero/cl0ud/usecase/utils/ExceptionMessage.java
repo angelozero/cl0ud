@@ -9,7 +9,7 @@ public class ExceptionMessage {
      * CreatePerson
      */
 
-    public static final String ERROR_CREATE_A_PERSON = "Error to create a person: ";
+    public static final String ERROR_CREATE_A_PERSONs = "Error to create a person: ";
 
     /**
      * DeletePersonById / GetPersonById
