@@ -6,7 +6,7 @@ public class ExceptionMessage {
     }
 
     /**
-     * CreatePerson
+     * CreatePerson / GetPersonById
      */
     public static final String PERSON_DATA_IS_NULL = "Person Data is null";
     public static final String ERROR_CREATE_A_PERSON = "Error to create a person: ";
@@ -21,4 +21,7 @@ public class ExceptionMessage {
      * GetAllPersons
      */
     public static final String ERROR_GET_ALL_PERSONS = "Error to get all persons: ";
+
+
+
 }
