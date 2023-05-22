@@ -23,5 +23,7 @@ public class ExceptionMessage {
     public static final String ERROR_GET_ALL_PERSONS = "Error to get all persons: ";
 
 
+    public static final String ERROR_FIND_A_PERSON_BY_ID = "Error to create a person: ";
+
 
 }
