@@ -6,12 +6,6 @@ public class ExceptionMessage {
     }
 
     /**
-     * CreatePerson
-     */
-
-
-
-    /**
      * DeletePersonById / GetPersonById
      */
     public static final String PERSON_ID_IS_NULL = "Person ID is null";
