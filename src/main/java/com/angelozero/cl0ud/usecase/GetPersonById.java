@@ -4,6 +4,7 @@ import com.angelozero.cl0ud.exception.person.GetPersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
+import com.angelozero.cl0ud.usecase.utils.ExceptionMessage;
 import com.angelozero.cl0ud.usecase.utils.LogMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +24,14 @@ public class GetPersonById {
         log.info(LogMessage.INFO_GET_PERSON_BY_ID, id);
         Optional.ofNullable(id)
                 .orElseThrow(()
-                        -> new GetPersonException(ExceptionMessage.));
+                        -> new GetPersonException(ExceptionMessage.PERSON_ID_IS_NULL));
 
         try {
             return dataBaseGateway.findPersonEntityById(id).map(personMapper::toModel).orElse(null);
 
         } catch (Exception ex) {
             log.error(LogMessage.ERROR_GET_PERSON_BY_ID);
-            throw new GetPersonException("Error to find a person by ID: " + ex.getMessage());
+            throw new GetPersonException(ExceptionMessage.ERROR_FIND_A_PERSON_BY_ID + ex.getMessage());
         }
     }
 }
