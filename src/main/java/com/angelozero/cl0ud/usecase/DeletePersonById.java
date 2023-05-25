@@ -23,7 +23,7 @@ public class DeletePersonById {
         log.info(LogMessage.INFO_DELETE_PERSON_BY_ID, id);
         Optional.ofNullable(id)
                 .orElseThrow(()
-                        -> new DeletePersonException(ExceptionMessage.PERSON_ID_IS_NULL));
+                        -> new DeletePersonException("Person ID is null"));
 
         try {
             if (getPersonById.execute(id) != null) {
