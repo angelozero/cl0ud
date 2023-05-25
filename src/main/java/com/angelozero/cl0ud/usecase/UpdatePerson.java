@@ -38,7 +38,7 @@ public class UpdatePerson {
 
         } catch (Exception ex) {
             log.error(LogMessage.ERROR_UPDATE_PERSON);
-            throw new UpdatePersonException("Error to update a person: " + ex.getMessage());
+            throw new UpdatePersonException(ExceptionMessage.ERROR_UPDATE_PERSON + ex.getMessage());
         }
 
     }
