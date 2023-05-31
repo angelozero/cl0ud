@@ -24,7 +24,7 @@ public class GetPersonById {
         log.info(LogMessage.INFO_GET_PERSON_BY_ID, id);
         Optional.ofNullable(id)
                 .orElseThrow(()
-                        -> new GetPersonException(ExceptionMessage.PERSON_ID_IS_NULL));
+                        -> new GetPersonException("Person ID is null"));
 
         try {
             return dataBaseGateway.findPersonEntityById(id).map(personMapper::toModel).orElse(null);

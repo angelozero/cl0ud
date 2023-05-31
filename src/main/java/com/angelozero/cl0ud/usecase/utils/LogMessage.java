@@ -5,7 +5,6 @@ public class LogMessage {
     private LogMessage() {
     }
 
-
     /**
      * GetAllPersons
      */
