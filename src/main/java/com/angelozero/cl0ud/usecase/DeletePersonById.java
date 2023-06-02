@@ -32,7 +32,7 @@ public class DeletePersonById {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to delete a person\n");
-            throw new DeletePersonException(ExceptionMessage.ERROR_DELETE_A_PERSON + ex.getMessage());
+            throw new DeletePersonException("Error to delete a person: " + ex.getMessage());
         }
     }
 }
