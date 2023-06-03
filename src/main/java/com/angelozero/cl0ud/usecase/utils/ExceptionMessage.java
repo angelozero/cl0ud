@@ -5,11 +5,6 @@ public class ExceptionMessage {
     private ExceptionMessage() {
     }
 
-    /**
-     * DeletePersonById / GetPersonById
-     */
-
-    public static final String ERROR_DELETE_A_PERSON = "Error to delete a person: ";
 
     /**
      * GetAllPersons
