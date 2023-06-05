@@ -21,7 +21,7 @@ public class GetAllPersons {
     private final PersonMapper personMapper;
 
     public List<Person> execute() {
-        log.info(LogMessage.INFO_GET_ALL_PERSONS);
+        log.info("\n[GET_ALL_PERSONS] - Get a list of persons\n");
 
         try {
             return personMapper.toModelList(dataBaseGateway.getAllPersonsEntity());
