@@ -68,7 +68,7 @@ public class DeletePersonByIdTest {
         verify(dataBaseGateway, times(0)).deletePersonEntityById(anyLong());
 
         assertFalse(isNull(exception));
-        assertEquals("[Delete Person Service] - ID is null", exception.getMessage());
+        assertEquals("[Delete Person Service] - Person ID is null", exception.getMessage());
     }
 
     @DisplayName("Should delete a person with success")

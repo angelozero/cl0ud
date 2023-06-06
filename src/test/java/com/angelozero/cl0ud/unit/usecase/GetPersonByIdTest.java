@@ -68,7 +68,7 @@ public class GetPersonByIdTest {
         verify(dataBaseGateway, times(0)).findPersonEntityById(anyLong());
 
         assertFalse(isNull(exception));
-        assertEquals("[Get Person Service] - ID is null", exception.getMessage());
+        assertEquals("[Get Person Service] - Person ID is null", exception.getMessage());
     }
 
     @DisplayName("Should get a person by id with success")
