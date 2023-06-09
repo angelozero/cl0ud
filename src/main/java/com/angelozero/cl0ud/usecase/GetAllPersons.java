@@ -27,7 +27,7 @@ public class GetAllPersons {
             return personMapper.toModelList(dataBaseGateway.getAllPersonsEntity());
 
         } catch (Exception ex) {
-            log.error(LogMessage.ERROR_GET_ALL_PERSONS);
+            log.error("\n[ERROR] - Error to get all persons\n");
             throw new GetAllPersonsException(ExceptionMessage.ERROR_GET_ALL_PERSONS + ex.getMessage());
         }
     }
