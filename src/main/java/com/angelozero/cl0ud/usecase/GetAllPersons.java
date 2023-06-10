@@ -28,7 +28,7 @@ public class GetAllPersons {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to get all persons\n");
-            throw new GetAllPersonsException(ExceptionMessage.ERROR_GET_ALL_PERSONS + ex.getMessage());
+            throw new GetAllPersonsException("Error to get all persons: " + ex.getMessage());
         }
     }
 }
