@@ -21,7 +21,7 @@ public class GetPersonById {
     private final PersonMapper personMapper;
 
     public Person execute(Long id) {
-        log.info(LogMessage.INFO_GET_PERSON_BY_ID, id);
+        log.info("\n[GET_PERSON_BY_ID] - Getting a person by id: {}\n", id);
         Optional.ofNullable(id)
                 .orElseThrow(()
                         -> new GetPersonException("Person ID is null"));
