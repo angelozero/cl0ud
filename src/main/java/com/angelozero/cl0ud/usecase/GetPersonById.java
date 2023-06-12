@@ -30,7 +30,7 @@ public class GetPersonById {
             return dataBaseGateway.findPersonEntityById(id).map(personMapper::toModel).orElse(null);
 
         } catch (Exception ex) {
-            log.error(LogMessage.ERROR_GET_PERSON_BY_ID);
+            log.error("\n[ERROR] - Error to find a person by ID\n");
             throw new GetPersonException(ExceptionMessage.ERROR_FIND_A_PERSON_BY_ID + ex.getMessage());
         }
     }
