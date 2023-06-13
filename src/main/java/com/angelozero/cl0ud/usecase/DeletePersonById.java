@@ -2,8 +2,6 @@ package com.angelozero.cl0ud.usecase;
 
 import com.angelozero.cl0ud.exception.person.DeletePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
-import com.angelozero.cl0ud.usecase.utils.ExceptionMessage;
-import com.angelozero.cl0ud.usecase.utils.LogMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

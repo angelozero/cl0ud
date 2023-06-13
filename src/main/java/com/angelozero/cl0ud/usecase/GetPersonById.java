@@ -4,8 +4,6 @@ import com.angelozero.cl0ud.exception.person.GetPersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
-import com.angelozero.cl0ud.usecase.utils.ExceptionMessage;
-import com.angelozero.cl0ud.usecase.utils.LogMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,7 +29,7 @@ public class GetPersonById {
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to find a person by ID\n");
-            throw new GetPersonException(ExceptionMessage.ERROR_FIND_A_PERSON_BY_ID + ex.getMessage());
+            throw new GetPersonException("Error to find a person by ID: " + ex.getMessage());
         }
     }
 }

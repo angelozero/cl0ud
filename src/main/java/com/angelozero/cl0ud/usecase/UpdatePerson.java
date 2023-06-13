@@ -5,8 +5,6 @@ import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
 import com.angelozero.cl0ud.usecase.model.Person;
-import com.angelozero.cl0ud.usecase.utils.ExceptionMessage;
-import com.angelozero.cl0ud.usecase.utils.LogMessage;
 import com.angelozero.cl0ud.usecase.utils.ToJson;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +22,12 @@ public class UpdatePerson {
     private final PersonMapper personMapper;
 
     public void execute(Person person) {
-        log.info(LogMessage.INFO_UPDATE_PERSON, ToJson.execute(person));
+        log.info("\n[UPDATE_PERSON] - Updating a person: {}\n", ToJson.execute(person));
 
         Optional.ofNullable(person)
                 .map(Person::getId)
                 .orElseThrow(()
-                        -> new UpdatePersonException(ExceptionMessage.ERROR_PERSON_DATA_OR_ID));
+                        -> new UpdatePersonException("Person Data and/or Person ID is null"));
 
         try {
             if (getPersonById.execute(person.getId()) != null) {
@@ -38,8 +36,8 @@ public class UpdatePerson {
             }
 
         } catch (Exception ex) {
-            log.error(LogMessage.ERROR_UPDATE_PERSON);
-            throw new UpdatePersonException(ExceptionMessage.ERROR_UPDATE_PERSON + ex.getMessage());
+            log.error("\n[ERROR] - Error to update a person\n");
+            throw new UpdatePersonException("Error to update a person: " + ex.getMessage());
         }
 
     }
