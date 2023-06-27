@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.server.core.Relation;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Relation(collectionRelation = "data")
 public class PersonResponse {
 
     private Long id;

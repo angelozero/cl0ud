@@ -38,7 +38,7 @@ public class GetAllPersons {
     public Page<Person> execute(Pageable pageable) {
         log.info("\n[GET_ALL_PERSONS_PAGED] - Get a list of paged persons\n");
         try {
-            Page<PersonEntity> pagedEntityPersons = dataBaseGateway.getPagedPersonsEntity(PageRequest.of(0, 1));
+            Page<PersonEntity> pagedEntityPersons = dataBaseGateway.getPagedPersonsEntity(pageable);
             return pagedEntityPersons.map(personMapper::toModel);
 
         } catch (Exception ex) {

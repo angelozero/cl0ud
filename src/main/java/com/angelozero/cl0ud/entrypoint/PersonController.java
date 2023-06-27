@@ -6,8 +6,14 @@ import com.angelozero.cl0ud.entrypoint.rest.response.PersonResponse;
 import com.angelozero.cl0ud.usecase.*;
 import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,17 +36,28 @@ public class PersonController {
     private final GetPersonById getPersonByIdUseCase;
     private final DeletePersonById deletePersonByIdUseCase;
 
+    @Autowired
+    private final PagedResourcesAssembler<PersonResponse> assembler;
+
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PersonResponse>> getPersons() {
         return new ResponseEntity<>(personRestMapper.toResponseList(getAllPersonsUseCase.execute()), HttpStatus.OK);
     }
 
     @GetMapping(value = "/paged", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<PersonResponse>> getPaginatedPersons(
+    public ResponseEntity<PagedModel<EntityModel<PersonResponse>>> getPagedPersons(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "5") Integer size) {
-        Page<Person> pagedPersonResponse = getAllPersonsUseCase.execute(PageRequest.of(page, size));
-        return ResponseEntity.ok(pagedPersonResponse.map(person -> personRestMapper.toResponse(person)));
+        Page<Person> pagedPerson = getAllPersonsUseCase.execute(PageRequest.of(page, size));
+        Page<PersonResponse> pagedPersonsResponse = pagedPerson.map(person -> personRestMapper.toResponse(person));
+
+        Link link = WebMvcLinkBuilder
+                .linkTo(WebMvcLinkBuilder
+                        .methodOn(PersonController.class)
+                        .getPagedPersons(page, size))
+                .withSelfRel();
+
+        return ResponseEntity.ok(assembler.toModel(pagedPersonsResponse, link));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

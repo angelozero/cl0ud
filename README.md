@@ -231,58 +231,45 @@ public class SwaggerOpenAPIConfig {
   - Response:
 ```json
 {
-  "content": [
-    {
-      "id": 1,
-      "name": "Angelo",
-      "age": 1
+  "_embedded": {
+    "data": [
+      {
+        "id": 1,
+        "name": "Angelo",
+        "age": 1
+      },
+      {
+        "id": 2,
+        "name": "Jake",
+        "age": 2
+      },
+      {
+        "id": 3,
+        "name": "Floquinho",
+        "age": 3
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "http://localhost:8080/api/v1/person/paged?page=0&size=3"
     },
-    {
-      "id": 2,
-      "name": "Jake",
-      "age": 2
+    "self": {
+      "href": "http://localhost:8080/api/v1/person/paged?page=0&size=3"
     },
-    {
-      "id": 3,
-      "name": "Floquinho",
-      "age": 3
+    "next": {
+      "href": "http://localhost:8080/api/v1/person/paged?page=1&size=3"
     },
-    {
-      "id": 4,
-      "name": "Lewes",
-      "age": 4
-    },
-    {
-      "id": 5,
-      "name": "Chickie",
-      "age": 5
+    "last": {
+      "href": "http://localhost:8080/api/v1/person/paged?page=333&size=3"
     }
-  ],
-  "pageable": {
-    "sort": {
-      "empty": true,
-      "sorted": false,
-      "unsorted": true
-    },
-    "offset": 0,
-    "pageNumber": 0,
-    "pageSize": 5,
-    "paged": true,
-    "unpaged": false
   },
-  "last": false,
-  "totalPages": 200,
-  "totalElements": 1000,
-  "first": true,
-  "size": 5,
-  "number": 0,
-  "sort": {
-    "empty": true,
-    "sorted": false,
-    "unsorted": true
-  },
-  "numberOfElements": 5,
-  "empty": false
+  "page": {
+    "size": 3,
+    "totalElements": 1000,
+    "totalPages": 334,
+    "number": 0
+  }
 }
 ```
 ---
