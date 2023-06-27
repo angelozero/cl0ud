@@ -4,7 +4,11 @@ import com.angelozero.cl0ud.entrypoint.mapper.PersonRestMapper;
 import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
 import com.angelozero.cl0ud.entrypoint.rest.response.PersonResponse;
 import com.angelozero.cl0ud.usecase.*;
+import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +34,14 @@ public class PersonController {
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PersonResponse>> getPersons() {
         return new ResponseEntity<>(personRestMapper.toResponseList(getAllPersonsUseCase.execute()), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/paged", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<PersonResponse>> getPaginatedPersons(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        Page<Person> pagedPersonResponse = getAllPersonsUseCase.execute(PageRequest.of(page, size));
+        return ResponseEntity.ok(pagedPersonResponse.map(person -> personRestMapper.toResponse(person)));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

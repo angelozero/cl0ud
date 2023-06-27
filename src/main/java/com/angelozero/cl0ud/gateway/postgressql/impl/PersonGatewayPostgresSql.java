@@ -4,6 +4,8 @@ import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.gateway.repository.PersonRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -38,5 +40,10 @@ public class PersonGatewayPostgresSql implements DataBaseGateway {
     @Override
     public List<PersonEntity> getAllPersonsEntity() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<PersonEntity> getPagedPersonsEntity(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

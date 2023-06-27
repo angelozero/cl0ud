@@ -203,14 +203,88 @@ public class SwaggerOpenAPIConfig {
   - 8.1 - [Test Contaiener](https://www.testcontainers.org/)
   - 8.2 - [Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/examples/junit-platform.html)
 
+---
+
 - 9 - JWT
   - [How to convert a SQL file to a PostgreSQL ?](http://www.sqlines.com/online) 
   - [Generating a KEY](https://www.allkeysgenerator.com/)
 
 ---
 
-- XX - Redis, when ?  I dont't know :)
+10 - Mockaroo - Creating a 1000 mock values
+  - [Generating 1000 data values with Mockaroo](https://www.mockaroo.com/)
+  - ![mockaroo_image](https://i.postimg.cc/9f2WQqdP/Screenshot-2023-06-26-at-21-06-04.png)
 
--- Follow the [Trello](https://trello.com/invite/b/wIilDAIF/ATTI2a1001727d2ee9f8bd0f5495d34f05588107B7E7/cl0ud-app) from this projetc.
+---
 
--- changes
+11 - Creating a Paged Persons Info Response 
+  - Using the Interface **Page** *(org.springframework.data.domain)*
+```javascript
+    @GetMapping(value = "/paged", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<PersonResponse>> getPaginatedPersons(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "limit", defaultValue = "5") Integer limit) {
+        Page<Person> pagedPersonResponse = getAllPersonsUseCase.execute(PageRequest.of(page, limit));
+        return ResponseEntity.ok(pagedPersonResponse.map(person -> personRestMapper.toResponse(person)));
+    }
+```
+  - Response:
+```json
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Angelo",
+      "age": 1
+    },
+    {
+      "id": 2,
+      "name": "Jake",
+      "age": 2
+    },
+    {
+      "id": 3,
+      "name": "Floquinho",
+      "age": 3
+    },
+    {
+      "id": 4,
+      "name": "Lewes",
+      "age": 4
+    },
+    {
+      "id": 5,
+      "name": "Chickie",
+      "age": 5
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 5,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": false,
+  "totalPages": 200,
+  "totalElements": 1000,
+  "first": true,
+  "size": 5,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "numberOfElements": 5,
+  "empty": false
+}
+```
+---
+
+- You can see what I'm doing by following the [Trello](https://trello.com/invite/b/wIilDAIF/ATTI2a1001727d2ee9f8bd0f5495d34f05588107B7E7/cl0ud-app) from this projetc.

@@ -11,4 +11,4 @@ VALUES
 INSERT INTO
     person (id, age, "name")
 VALUES
-(52, 3, 'Floquinho');
+(3, 3, 'Floquinho');
