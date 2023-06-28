@@ -18,6 +18,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -25,6 +31,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -53,6 +61,12 @@ public class PersonControllerTest {
     @Mock
     private DeletePersonById deletePersonByIdUseCase;
 
+    @Mock
+    private GetPagedPersons getPagedPersonsUseCase;
+
+    @Mock
+    private PagedResourcesAssembler<PersonResponse> assembler;
+
     @InjectMocks
     private PersonController controller;
 
@@ -77,6 +91,28 @@ public class PersonControllerTest {
         assertFalse(Objects.isNull(response));
         assertFalse(Objects.isNull(response.getBody()));
         assertTrue(response.getBody().size() > 0);
+    }
+
+    @DisplayName("Should get paged persons")
+    @Test
+    void testGetPagedPersons() {
+
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
+        List<PersonResponse> personResponseListFixture = Fixture.from(PersonResponse.class)
+                .gimme(1, PersonResponseTemplate.VALID_PERSON_RESPONSE);
+        PagedModel<EntityModel<PersonResponse>> pagedModelMock = PagedModel.of(
+                Stream.of(PersonResponse.builder().build())
+                        .map(EntityModel::of)
+                        .collect(Collectors.toList()),
+                new PagedModel.PageMetadata(10, 0, 20));
+
+        when(getPagedPersonsUseCase.execute(any())).thenReturn(new PageImpl<>(Collections.singletonList(personFixture)));
+        when(assembler.toModel(any(), any(Link.class))).thenReturn(pagedModelMock);
+
+        ResponseEntity<PagedModel<EntityModel<PersonResponse>>> response = controller.getPagedPersons(0, 1);
+
+        assertFalse(Objects.isNull(response));
+        assertFalse(Objects.isNull(response.getBody()));
     }
 
     @DisplayName("Should get a person by id")
