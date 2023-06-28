@@ -33,6 +33,7 @@ public class PersonController {
     private final CreatePerson createPersonUseCase;
     private final UpdatePerson updatePersonUseCase;
     private final GetAllPersons getAllPersonsUseCase;
+    private final GetPagedPersons getPagedPersonsUseCase;
     private final GetPersonById getPersonByIdUseCase;
     private final DeletePersonById deletePersonByIdUseCase;
 
@@ -48,7 +49,7 @@ public class PersonController {
     public ResponseEntity<PagedModel<EntityModel<PersonResponse>>> getPagedPersons(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "size", defaultValue = "5") Integer size) {
-        Page<Person> pagedPerson = getAllPersonsUseCase.execute(PageRequest.of(page, size));
+        Page<Person> pagedPerson = getPagedPersonsUseCase.execute(PageRequest.of(page, size));
         Page<PersonResponse> pagedPersonsResponse = pagedPerson.map(person -> personRestMapper.toResponse(person));
 
         Link link = WebMvcLinkBuilder
