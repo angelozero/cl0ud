@@ -33,6 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
     private static final String PERSON_URL = "/person/";
+    private static final String PERSON_PAGED_URL = "/person/paged";
     private static final String PERSON_ID_URL = "/person/{id}";
 
     @Autowired
@@ -89,6 +90,23 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
         assertNotNull(result);
         assertEquals(getJsonString(List.of(personSaved)), result.getResponse().getContentAsString());
+
+        clearDataRepository();
+    }
+
+    @Test
+    public void shouldDoARequestToGetPagedPersons() throws Exception {
+
+        savePerson();
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_URL + PERSON_PAGED_URL)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNotNull(result.getResponse().getContentAsString());
 
         clearDataRepository();
     }
