@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.usecase;
 
-import com.angelozero.cl0ud.exception.person.GetAllPagedPersonsException;
+import com.angelozero.cl0ud.exception.person.GetAllPagedPersonsByNameException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class GetPagedPersons {
+public class GetPagedPersonsByName {
 
     private final DataBaseGateway dataBaseGateway;
     private final PersonMapper personMapper;
 
-    public Page<Person> execute(Pageable pageable) {
-        log.info("\n[GET_ALL_PERSONS_PAGED] - Get a list of paged persons\n");
+    public Page<Person> execute(String name, Pageable pageable) {
+        log.info("\n[GET_ALL_PERSONS_PAGED_BY_NAME] - Get a list of paged persons by name: {}\n", name);
         try {
-            Page<PersonEntity> pagedEntityPersons = dataBaseGateway.getPagedPersonsEntity(pageable);
+            Page<PersonEntity> pagedEntityPersons = dataBaseGateway.getPagedPersonsEntityByName(name, pageable);
             return pagedEntityPersons.map(personMapper::toModel);
 
         } catch (Exception ex) {
-            log.error("\n[ERROR] - Error to get all paged persons\n");
-            throw new GetAllPagedPersonsException("Error to get all paged persons: " + ex.getMessage());
+            log.error("\n[ERROR] - Error to get all paged persons by name: {}\n", name);
+            throw new GetAllPagedPersonsByNameException("Error to get all paged persons by name: " + name + " - "+ ex.getMessage());
         }
     }
 }

@@ -20,4 +20,6 @@ public interface DataBaseGateway {
     List<PersonEntity> getAllPersonsEntity();
 
     Page<PersonEntity> getPagedPersonsEntity(Pageable pageable);
+
+    Page<PersonEntity> getPagedPersonsEntityByName(String name, Pageable pageable);
 }

@@ -34,6 +34,7 @@ public class PersonController {
     private final UpdatePerson updatePersonUseCase;
     private final GetAllPersons getAllPersonsUseCase;
     private final GetPagedPersons getPagedPersonsUseCase;
+    private final GetPagedPersonsByName getPagedPersonsByNameUseCase;
     private final GetPersonById getPersonByIdUseCase;
     private final DeletePersonById deletePersonByIdUseCase;
 
@@ -56,6 +57,23 @@ public class PersonController {
                 .linkTo(WebMvcLinkBuilder
                         .methodOn(PersonController.class)
                         .getPagedPersons(page, size))
+                .withSelfRel();
+
+        return ResponseEntity.ok(assembler.toModel(pagedPersonsResponse, link));
+    }
+
+    @GetMapping(value = "/paged-by-name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PagedModel<EntityModel<PersonResponse>>> getPagedPersonsByName(
+            @PathVariable(value = "name") String name,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        Page<Person> pagedPerson = getPagedPersonsByNameUseCase.execute(name, PageRequest.of(page, size));
+        Page<PersonResponse> pagedPersonsResponse = pagedPerson.map(person -> personRestMapper.toResponse(person));
+
+        Link link = WebMvcLinkBuilder
+                .linkTo(WebMvcLinkBuilder
+                        .methodOn(PersonController.class)
+                        .getPagedPersonsByName(name, page, size))
                 .withSelfRel();
 
         return ResponseEntity.ok(assembler.toModel(pagedPersonsResponse, link));

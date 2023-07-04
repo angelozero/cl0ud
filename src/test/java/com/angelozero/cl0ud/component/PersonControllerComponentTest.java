@@ -34,6 +34,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
     private static final String PERSON_URL = "/person/";
     private static final String PERSON_PAGED_URL = "/person/paged";
+    private static final String PERSON_BY_NAME_PAGED_URL = "/person/paged-by-name/";
     private static final String PERSON_ID_URL = "/person/{id}";
 
     @Autowired
@@ -101,6 +102,38 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
         MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
                         .get(API_URL + PERSON_PAGED_URL)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNotNull(result.getResponse().getContentAsString());
+
+        clearDataRepository();
+    }
+
+    @Test
+    public void shouldDoARequestToGetPagedPersonsByName() throws Exception {
+
+        PersonEntity person = savePerson();
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_URL + PERSON_BY_NAME_PAGED_URL + person.getName())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertNotNull(result);
+        assertNotNull(result.getResponse().getContentAsString());
+
+        clearDataRepository();
+    }
+
+    @Test
+    public void shouldDoARequestWithSuccessToGetPagedPersonsByNameWithANonExistentName() throws Exception {
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_URL + PERSON_BY_NAME_PAGED_URL + "Name Test")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andReturn();

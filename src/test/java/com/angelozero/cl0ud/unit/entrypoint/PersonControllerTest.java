@@ -65,6 +65,9 @@ public class PersonControllerTest {
     private GetPagedPersons getPagedPersonsUseCase;
 
     @Mock
+    private GetPagedPersonsByName getPagedPersonsByNameUseCase;
+
+    @Mock
     private PagedResourcesAssembler<PersonResponse> assembler;
 
     @InjectMocks
@@ -98,8 +101,7 @@ public class PersonControllerTest {
     void testGetPagedPersons() {
 
         Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
-        List<PersonResponse> personResponseListFixture = Fixture.from(PersonResponse.class)
-                .gimme(1, PersonResponseTemplate.VALID_PERSON_RESPONSE);
+
         PagedModel<EntityModel<PersonResponse>> pagedModelMock = PagedModel.of(
                 Stream.of(PersonResponse.builder().build())
                         .map(EntityModel::of)
@@ -110,6 +112,27 @@ public class PersonControllerTest {
         when(assembler.toModel(any(), any(Link.class))).thenReturn(pagedModelMock);
 
         ResponseEntity<PagedModel<EntityModel<PersonResponse>>> response = controller.getPagedPersons(0, 1);
+
+        assertFalse(Objects.isNull(response));
+        assertFalse(Objects.isNull(response.getBody()));
+    }
+
+    @DisplayName("Should get paged persons by name")
+    @Test
+    void testGetPagedPersonsByName() {
+
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
+
+        PagedModel<EntityModel<PersonResponse>> pagedModelMock = PagedModel.of(
+                Stream.of(PersonResponse.builder().build())
+                        .map(EntityModel::of)
+                        .collect(Collectors.toList()),
+                new PagedModel.PageMetadata(10, 0, 20));
+
+        when(getPagedPersonsByNameUseCase.execute(any(), any())).thenReturn(new PageImpl<>(Collections.singletonList(personFixture)));
+        when(assembler.toModel(any(), any(Link.class))).thenReturn(pagedModelMock);
+
+        ResponseEntity<PagedModel<EntityModel<PersonResponse>>> response = controller.getPagedPersonsByName("Name Test", 0, 1);
 
         assertFalse(Objects.isNull(response));
         assertFalse(Objects.isNull(response.getBody()));

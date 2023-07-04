@@ -217,7 +217,7 @@ public class SwaggerOpenAPIConfig {
 
 ---
 
-11 - Creating a Paged Persons Info Response 
+11 - Creating a Paged Persons Info Service 
   - Using the Interface **Page** *(org.springframework.data.domain)*
 ```javascript
     @GetMapping(value = "/paged", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -236,7 +236,7 @@ public class SwaggerOpenAPIConfig {
         return ResponseEntity.ok(assembler.toModel(pagedPersonsResponse, link));
     }
 ```
-  - Response:
+ - Response:
 ```json
 {
   "_embedded": {
@@ -280,6 +280,63 @@ public class SwaggerOpenAPIConfig {
   }
 }
 ```
+
+---
+
+12 - Creating a Paged Persons Find By Name Service 
+  - Using the Interface **Page** *(org.springframework.data.domain)*
+  - *Controller*
+```javascript
+    @GetMapping(value = "/paged-by-name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PagedModel<EntityModel<PersonResponse>>> getPagedPersonsByName(
+            @PathVariable(value = "name") String name,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        Page<Person> pagedPerson = getPagedPersonsByNameUseCase.execute(name, PageRequest.of(page, size));
+        Page<PersonResponse> pagedPersonsResponse = pagedPerson.map(person -> personRestMapper.toResponse(person));
+
+        Link link = WebMvcLinkBuilder
+                .linkTo(WebMvcLinkBuilder
+                        .methodOn(PersonController.class)
+                        .getPagedPersonsByName(name, page, size))
+                .withSelfRel();
+
+        return ResponseEntity.ok(assembler.toModel(pagedPersonsResponse, link));
+    }
+```
+
+- *Repository*
+```javascript
+    @Query("SELECT p FROM PersonEntity p WHERE lower(p.name) LIKE lower(concat('%', :name, '%'))")
+    Page<PersonEntity> findPersonsByName(@Param("name") String name, Pageable pageable);
+```
+
+  - Response (*GET: .../paged-by-name/AnGeLo?page=0&size=10*):
+```json
+{
+    "_embedded": {
+        "data": [
+            {
+                "id": 1,
+                "name": "Angelo",
+                "age": 1
+            }
+        ]
+    },
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/v1/person/paged-by-name/AnGeLo?page=0&size=10"
+        }
+    },
+    "page": {
+        "size": 10,
+        "totalElements": 1,
+        "totalPages": 1,
+        "number": 0
+    }
+}
+```
+
 ---
 
 - You can see what I'm doing by following the [Trello](https://trello.com/invite/b/wIilDAIF/ATTI2a1001727d2ee9f8bd0f5495d34f05588107B7E7/cl0ud-app) from this projetc.

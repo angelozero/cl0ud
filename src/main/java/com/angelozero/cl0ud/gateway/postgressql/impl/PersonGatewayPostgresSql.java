@@ -46,4 +46,9 @@ public class PersonGatewayPostgresSql implements DataBaseGateway {
     public Page<PersonEntity> getPagedPersonsEntity(Pageable pageable) {
         return repository.findAll(pageable);
     }
+
+    @Override
+    public Page<PersonEntity> getPagedPersonsEntityByName(String name, Pageable pageable) {
+        return repository.findPersonsByName(name, pageable);
+    }
 }
