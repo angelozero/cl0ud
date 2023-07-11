@@ -23,7 +23,7 @@ public class JwtConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        log.info("\n[JWT_CREATING_USER_DETAILS_SERVICE] - Creating UserDetailsService\n");
+        log.info("\n[JWT_CREATING_USER_DETAILS_SERVICE_BEAN] - Creating UserDetailsService Bean\n");
         return email -> {
             try {
                 return repository.findUserByEmail(email);

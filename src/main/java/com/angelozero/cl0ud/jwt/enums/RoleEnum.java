@@ -1,5 +1,6 @@
 package com.angelozero.cl0ud.jwt.enums;
 
+import com.angelozero.cl0ud.exception.jwt.JwtValidationException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -17,15 +18,20 @@ public enum RoleEnum {
 
     public static boolean contains(String role) {
         return Arrays.stream(RoleEnum.values())
-                .anyMatch(secretUser -> secretUser.getRoleInfo().equals(role.toLowerCase()));
+                .anyMatch(secretUser -> secretUser.getRoleInfo().equalsIgnoreCase(role));
     }
 
-    public static RoleEnum getRoleInfo(String role) {
-        if (role == null) {
-            return ADMIN;
+    public static RoleEnum getRoleValue(String role) {
+        if (contains(role)) {
+            return RoleEnum.valueOf(role.toUpperCase());
         }
-        return Arrays.stream(RoleEnum.values())
-                .map(roleEnum -> RoleEnum.valueOf(role))
-                .findAny().orElse(NO_USER);
+        throw new JwtValidationException("No role value was found with: " + role);
+    }
+
+    public static String getRoleInfo(String role) {
+        if (contains(role)) {
+            return RoleEnum.valueOf(role.toUpperCase()).getRoleInfo();
+        }
+        throw new JwtValidationException("No role info was found with: " + role);
     }
 }

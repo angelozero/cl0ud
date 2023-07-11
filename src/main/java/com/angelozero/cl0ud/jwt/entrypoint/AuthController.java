@@ -6,6 +6,7 @@ import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationResponse;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.RegisterRequest;
 import com.angelozero.cl0ud.jwt.service.UserRegister;
 import com.angelozero.cl0ud.jwt.service.UserAuthenticate;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class AuthController {
     private final UserRequestMapper mapper;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest body) {
+    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest body) {
         return ResponseEntity.ok(userRegister.execute(mapper.toUser(body)));
     }
 

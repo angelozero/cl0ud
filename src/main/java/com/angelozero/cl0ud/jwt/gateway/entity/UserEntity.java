@@ -45,11 +45,11 @@ public class UserEntity implements UserDetails {
     private boolean enable;
 
     @Column(name = "role")
-    private String roleEnum;
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(RoleEnum.getRoleInfo(roleEnum).name()));
+        return List.of(new SimpleGrantedAuthority(RoleEnum.getRoleValue(role).name()));
     }
 
     @Override
