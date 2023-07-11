@@ -10,6 +10,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/cl0ud?currentSchema=cl0ud
     username: master
     password: terra
+
   # JPA properties
   jpa:
     hibernate:
@@ -23,6 +24,7 @@ spring:
     generate-ddl: true
 main:
   banner-mode: off
+
 # Logger configuration
 logging:
   pattern:
@@ -39,7 +41,7 @@ server:
 security:
   jwt:
     token:
-      # // https://www.allkeysgenerator.com/ --> Encryption key --> 256-bit --> Hex ? yes (cheked)
+      # // https://www.allkeysgenerator.com/ --> Encryption key --> 256-bit --> Hex ? yes (checked)
       secret-key: 4D6251655468566D597133743677397A24432646294A404E635266556A586E5A
       milliseconds: 3600000
       hours: 10800000 # 3Hs
