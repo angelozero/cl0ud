@@ -1,14 +1,24 @@
 # cl0ud
 - *Obs: First time running the app ? Don't forget to run first*
+  - `docker run --name cl0ud-db -p 5432:5432 -e POSTGRES_DB=cl0ud -e POSTGRES_USER=master -e POSTGRES_PASSWORD=terra postgres` 
   - `mvn flyway:repair`
   - `mvn flyway:migrate`
 ---
-- 1 - Creating the application
-- 2 - Simple CRUD
-- 3 - DataBase connection
+- ## 1 - Creating the application
+
+---
+
+- ## 2 - Simple CRUD
+
+---
+
+- ## 3 - DataBase connection
   - How to resolve this issue *[Spring boot - Not a managed type](https://stackoverflow.com/questions/28664064/spring-boot-not-a-managed-type)* ?
   - Solution: *With Spring Version 6 and JDK 17 I got this problem when I was using javax.persistent.Entity. When I used [jakarta.persistent.Entity](https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api/3.1.0) this problem was resolved*
-- 4 - Using MapStruct with Lombok
+
+---
+
+- ## 4 - Using MapStruct with Lombok
   - [Mapstruc Documentation](https://mapstruct.org/documentation/installation/)
   - [Baeldung - Quick Guide to MapStruct](https://www.baeldung.com/mapstruct)
   - [Stackoverflow - MapStruct and Lombok not working together](https://stackoverflow.com/questions/47676369/mapstruct-and-lombok-not-working-together)
@@ -65,26 +75,37 @@
 </pom.xml>
 ```
 
-- 5 - Unity Tests
+
+---
+
+- ## 5 - Unit Tests
   - [Fixture Factory](https://github.com/six2six/fixture-factory)
 
-- 6 - FlyWay
-  - Are you running for the first time the app ? -> Command to create and populate the tables `mvn flyway:migrate`
-  - Things that I have to do 
-  - Update my postegsql version to 14
-    - [Pt.01 - Removing all the posgres using brew](https://stackoverflow.com/questions/51992362/completely-remove-postgres-after-brew-uninstall-osx)
-    - [Pt.02 - Go to -> /Library/PostgreSQL/POSTGRES_VERSION/uninstall-postgresql.app](https://nektony.com/how-to/uninstall-postgresql-on-mac)
-    - [Installing PostgreSQL 14 0 using brew](https://formulae.brew.sh/formula/postgresql@14)
-    - [Download PgAdmin 4 - pgAdmin 4 v6.15 (released Oct. 20, 2022)](https://www.pgadmin.org/download/pgadmin-4-macos/)
-  - [Configure the brew Postgresql](https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/)
-    - on terminal type to enter into posgres terminal
-      ```shell
-      psql postgres
-      ```
-    - [create a database](https://pgdocptbr.sourceforge.io/pg80/sql-createdatabase.html) with the command
-      ```shell
-      CREATE DATABASE your_data_base_name;
-      ```
+
+---
+
+- ## 6 - FlyWay + PostgreSQL + Docker
+  
+   - ### Using Postgres with Docker
+   - ```shell
+      docker run --name cl0ud-db -p 5432:5432 -e POSTGRES_DB=cl0ud -e POSTGRES_USER=master -e POSTGRES_PASSWORD=terra postgres
+     ```
+
+  - ### Using Postgres locally
+    - Update my postegsql version to 14
+      - [Pt.01 - Removing all the posgres using brew](https://stackoverflow.com/questions/51992362/completely-remove-postgres-after-brew-uninstall-osx)
+      - [Pt.02 - Go to -> /Library/PostgreSQL/POSTGRES_VERSION/uninstall-postgresql.app](https://nektony.com/how-to/uninstall-postgresql-on-mac)
+      - [Installing PostgreSQL 14 0 using brew](https://formulae.brew.sh/formula/postgresql@14)
+      - [Download PgAdmin 4 - pgAdmin 4 v6.15 (released Oct. 20, 2022)](https://www.pgadmin.org/download/pgadmin-4-macos/)
+    - [Configure the brew Postgresql](https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/)
+      - on terminal type to enter into posgres terminal
+        ```shell
+        psql postgres
+        ```
+      - [create a database](https://pgdocptbr.sourceforge.io/pg80/sql-createdatabase.html) with the command
+        ```shell
+        CREATE DATABASE your_data_base_name;
+        ```
   - [Configuring Flyway using flyway.conf file](https://www.baeldung.com/database-migrations-with-flyway)
     - Create in the $PROJECT_ROOT the flyway.conf file
     ```yml
@@ -121,7 +142,7 @@
 
 ---
 
-- 7 - Swagger
+- ## 7 - Swagger
   - To access: `http://localhost:8080/swagger-ui/index.html`
 
   - ![swagger_image](https://i.postimg.cc/fWVX1RSY/Screen-Shot-2023-03-20-at-21-41-17.png)
@@ -199,25 +220,25 @@ public class SwaggerOpenAPIConfig {
 
 ---
 
-- 8 - Integration tests with
+- ## 8 - Integration tests with
   - 8.1 - [Test Contaiener](https://www.testcontainers.org/)
   - 8.2 - [Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/examples/junit-platform.html)
 
 ---
 
-- 9 - JWT
+- ## 9 - JWT
   - [How to convert a SQL file to a PostgreSQL ?](http://www.sqlines.com/online) 
   - [Generating a KEY](https://www.allkeysgenerator.com/)
 
 ---
 
-10 - Mockaroo - Creating a 1000 mock values
+- ## 10 - Mockaroo - Creating a 1000 mock values
   - [Generating 1000 data values with Mockaroo](https://www.mockaroo.com/)
   - ![mockaroo_image](https://i.postimg.cc/9f2WQqdP/Screenshot-2023-06-26-at-21-06-04.png)
 
 ---
 
-11 - Creating a Paged Persons Info Service 
+- ## 11 - Creating a Paged Persons Info Service 
   - Using the Interface **Page** *(org.springframework.data.domain)*
 ```javascript
     @GetMapping(value = "/paged", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -283,7 +304,7 @@ public class SwaggerOpenAPIConfig {
 
 ---
 
-12 - Creating a Paged Persons Find By Name Service 
+- ## 12 - Creating a Paged Persons Find By Name Service 
   - Using the Interface **Page** *(org.springframework.data.domain)*
   - *Controller*
 ```javascript
