@@ -1,5 +1,6 @@
 package com.angelozero.cl0ud.jwt;
 
+import com.angelozero.cl0ud.exception.jwt.JwtValidationException;
 import com.angelozero.cl0ud.jwt.service.validation.ExtractUserNameByToken;
 import com.angelozero.cl0ud.jwt.service.validation.CheckValidToken;
 import jakarta.servlet.FilterChain;
@@ -42,24 +43,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
 
         } else {
-            jwtToken = authHeader.substring(7);
-            email = extractUserNameByToken.execute(jwtToken);
+            try {
+                jwtToken = authHeader.substring(7);
+                email = extractUserNameByToken.execute(jwtToken);
 
-            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+                if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                    UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
-                if (checkValidToken.execute(jwtToken, userDetails) && userDetails.isEnabled()) {
-                    UsernamePasswordAuthenticationToken authToken =
-                            new UsernamePasswordAuthenticationToken(
-                                    userDetails,
-                                    null,
-                                    userDetails.getAuthorities());
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    if (checkValidToken.execute(jwtToken, userDetails) && userDetails.isEnabled()) {
+                        UsernamePasswordAuthenticationToken authToken =
+                                new UsernamePasswordAuthenticationToken(
+                                        userDetails,
+                                        null,
+                                        userDetails.getAuthorities());
+                        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                        SecurityContextHolder.getContext().setAuthentication(authToken);
+                    }
                 }
+                filterChain.doFilter(request, response);
+
+            } catch (RuntimeException ex) {
+                throw new JwtValidationException("Error with validation: " + ex.getMessage());
             }
-            filterChain.doFilter(request, response);
         }
     }
 }

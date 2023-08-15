@@ -1,11 +1,15 @@
 package com.angelozero.cl0ud.jwt.entrypoint;
 
-import com.angelozero.cl0ud.jwt.entrypoint.mapper.UserRequestMapper;
+import com.angelozero.cl0ud.jwt.entrypoint.mapper.UserRestMapper;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationRequest;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationResponse;
+import com.angelozero.cl0ud.jwt.entrypoint.rest.RefreshTokenRequest;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.RegisterRequest;
+import com.angelozero.cl0ud.jwt.service.GenerateRefreshToken;
+import com.angelozero.cl0ud.jwt.service.UserAccessByRefreshToken;
 import com.angelozero.cl0ud.jwt.service.UserRegister;
 import com.angelozero.cl0ud.jwt.service.UserAuthenticate;
+import com.angelozero.cl0ud.jwt.service.dao.TokenRefreshed;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +25,26 @@ public class AuthController {
 
     private final UserAuthenticate userAuthenticate;
     private final UserRegister userRegister;
-    private final UserRequestMapper mapper;
+    private final GenerateRefreshToken generateRefreshToken;
+    private final UserAccessByRefreshToken userAccessByRefreshToken;
+    private final UserRestMapper mapper;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest body) {
-        return ResponseEntity.ok(userRegister.execute(mapper.toUser(body)));
+    public ResponseEntity<Void> register(@Valid @RequestBody RegisterRequest body) {
+        userRegister.execute(mapper.toUser(body));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest body) {
-        return ResponseEntity.ok(userAuthenticate.execute(body.getEmail(), body.getPassword()));
+        String tokenRefreshed = generateRefreshToken.execute(body.getEmail()).getToken();
+        AuthenticationResponse authResponse = mapper.toAuthenticateResponse(userAuthenticate.execute(body.getEmail(), body.getPassword()));
+        authResponse.setRefreshToken(tokenRefreshed);
+        return ResponseEntity.ok(authResponse);
+    }
+
+    @PostMapping("/refresh-token")
+    public ResponseEntity<AuthenticationResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest body) {
+        return ResponseEntity.ok(mapper.toAuthenticateResponse(userAccessByRefreshToken.execute(body.getToken())));
     }
 }

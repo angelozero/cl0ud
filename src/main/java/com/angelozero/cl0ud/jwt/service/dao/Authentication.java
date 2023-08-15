@@ -1,4 +1,5 @@
-package com.angelozero.cl0ud.jwt.entrypoint.rest;
+package com.angelozero.cl0ud.jwt.service.dao;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
+public class Authentication {
 
     private String token;
     private String refreshToken;
-
 }

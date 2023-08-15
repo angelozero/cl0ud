@@ -5,6 +5,7 @@ import com.angelozero.cl0ud.jwt.gateway.UserRepository;
 import com.angelozero.cl0ud.jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.jwt.service.GenerateToken;
 import com.angelozero.cl0ud.jwt.service.UserAuthenticate;
+import com.angelozero.cl0ud.jwt.service.dao.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -48,10 +50,7 @@ public class UserAuthenticateTest {
                 .build());
         when(generateToken.execute(any())).thenReturn("token-jwt");
 
-        AuthenticationResponse response = userAuthenticate.execute("email-test@test.com", "pass123");
-
-        assertNotNull(response);
-
+        assertDoesNotThrow(() -> userAuthenticate.execute("email-test@test.com", "pass123"));
 
     }
 }

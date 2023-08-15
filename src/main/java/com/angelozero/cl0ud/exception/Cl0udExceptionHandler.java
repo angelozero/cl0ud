@@ -1,9 +1,11 @@
 package com.angelozero.cl0ud.exception;
 
 
+import com.angelozero.cl0ud.exception.jwt.JwtValidationException;
 import com.angelozero.cl0ud.exception.jwt.ZJwtException;
 import com.angelozero.cl0ud.exception.model.ExceptionModelResponse;
 import com.angelozero.cl0ud.exception.person.ZPersonException;
+import jakarta.servlet.ServletException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -67,7 +69,6 @@ public class Cl0udExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(exceptionModelResponse, HttpStatus.UNAUTHORIZED);
     }
-
 
     private ExceptionModelResponse generateExceptionModelResponse(Exception ex, String description) {
         return ExceptionModelResponse.builder()

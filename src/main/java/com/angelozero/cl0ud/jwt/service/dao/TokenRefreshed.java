@@ -1,17 +1,24 @@
-package com.angelozero.cl0ud.jwt.entrypoint.rest;
+package com.angelozero.cl0ud.jwt.service.dao;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
+public class TokenRefreshed {
+
+    private int id;
 
     private String token;
-    private String refreshToken;
 
+    private Instant expiryDate;
+
+    private User user;
 }

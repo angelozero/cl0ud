@@ -3,17 +3,17 @@ package com.angelozero.cl0ud.unit.jwt.entrypoint;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.angelozero.cl0ud.jwt.entrypoint.AuthController;
-import com.angelozero.cl0ud.jwt.entrypoint.mapper.UserRequestMapper;
+import com.angelozero.cl0ud.jwt.entrypoint.mapper.UserRestMapper;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationRequest;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationResponse;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.RegisterRequest;
+import com.angelozero.cl0ud.jwt.service.GenerateRefreshToken;
 import com.angelozero.cl0ud.jwt.service.UserAuthenticate;
 import com.angelozero.cl0ud.jwt.service.UserRegister;
+import com.angelozero.cl0ud.jwt.service.dao.Authentication;
+import com.angelozero.cl0ud.jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.jwt.service.dao.User;
-import com.angelozero.cl0ud.ztemplate.jwt.AuthenticationRequestTemplate;
-import com.angelozero.cl0ud.ztemplate.jwt.AuthenticationResponseTemplate;
-import com.angelozero.cl0ud.ztemplate.jwt.RegisterRequestTemplate;
-import com.angelozero.cl0ud.ztemplate.jwt.UserTemplate;
+import com.angelozero.cl0ud.ztemplate.jwt.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,10 +25,10 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,7 +41,10 @@ public class AuthControllerTest {
     private UserRegister userRegister;
 
     @Mock
-    private UserRequestMapper mapper;
+    private GenerateRefreshToken generateRefreshToken;
+
+    @Mock
+    private UserRestMapper mapper;
 
     @InjectMocks
     private AuthController controller;
@@ -59,27 +62,27 @@ public class AuthControllerTest {
         User userFixture = Fixture.from(User.class).gimme(UserTemplate.VALID_USER);
 
         when(mapper.toUser(any(RegisterRequest.class))).thenReturn(userFixture);
-        when(userRegister.execute(any(User.class))).thenReturn(authenticationResponseFixture);
+        doNothing().when(userRegister).execute(any(User.class));
 
-        ResponseEntity<AuthenticationResponse> response = controller.register(registerRequestFixture);
+        assertDoesNotThrow(() -> controller.register(registerRequestFixture));
 
-        assertFalse(Objects.isNull(response));
-        assertFalse(Objects.isNull(response.getBody()));
-        assertNotNull(response.getBody().getToken());
     }
 
     @DisplayName("Should authenticate with success")
     @Test
     void shouldAuthenticateWithSuccess() {
         AuthenticationRequest authenticationRequestFixture = Fixture.from(AuthenticationRequest.class).gimme(AuthenticationRequestTemplate.VALID_AUTHENTICATION_REQUEST);
-        AuthenticationResponse authenticationResponseFixture = Fixture.from(AuthenticationResponse.class).gimme(AuthenticationResponseTemplate.VALID_AUTHENTICATION_RESPONSE);
+        Authentication authenticationFixture = Fixture.from(Authentication.class).gimme(AuthenticationTemplate.VALID_AUTHENTICATION);
 
-        when(userAuthenticate.execute(anyString(), anyString())).thenReturn(authenticationResponseFixture);
+        when(generateRefreshToken.execute(anyString())).thenReturn(TokenRefreshed.builder().token("refresh-token-test").build());
+        when(userAuthenticate.execute(anyString(), anyString())).thenReturn(authenticationFixture);
+        when(mapper.toAuthenticateResponse(any())).thenReturn(AuthenticationResponse.builder().token("token-test").build());
 
         ResponseEntity<AuthenticationResponse> response = controller.authenticate(authenticationRequestFixture);
 
         assertFalse(Objects.isNull(response));
         assertFalse(Objects.isNull(response.getBody()));
         assertNotNull(response.getBody().getToken());
+        assertNotNull(response.getBody().getRefreshToken());
     }
 }

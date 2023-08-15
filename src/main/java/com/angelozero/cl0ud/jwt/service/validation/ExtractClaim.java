@@ -16,8 +16,8 @@ public class ExtractClaim {
     private final JwtPropertiesConfiguration jwtPropsConfig;
 
     public <T> T execute(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
+            final Claims claims = extractAllClaims(token);
+            return claimsResolver.apply(claims);
     }
 
     private Claims extractAllClaims(String token) {

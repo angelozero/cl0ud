@@ -15,23 +15,16 @@ import org.springframework.stereotype.Service;
 public class UserRegister {
 
     private final UserRepository repository;
-    private final GenerateToken generateToken;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper mapper;
 
-    public AuthenticationResponse execute(User user) {
+    public void execute(User user) {
 
         if (repository.findUserByEmail(user.getEmail()) != null) {
             throw new JwtValidationException("User already exists!");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        UserEntity userEntity = repository.save(mapper.toEntity(user));
-
-        String jwtToken = generateToken.execute(userEntity);
-
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+        repository.save(mapper.toEntity(user));
     }
 }

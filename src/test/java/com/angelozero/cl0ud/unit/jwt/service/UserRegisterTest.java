@@ -47,12 +47,9 @@ public class UserRegisterTest {
                 .id(1L)
                 .fullname("user-name-test")
                 .build());
-        when(generateToken.execute(any())).thenReturn("jwt-token");
-        when(mapper.toEntity(any())).thenReturn(UserEntity.builder().build());
 
-        AuthenticationResponse response = userRegister.execute(User.builder().build());
+        assertDoesNotThrow(() -> userRegister.execute(User.builder().build()));
 
-        assertNotNull(response);
     }
 
     @DisplayName("Should failed the register if user already exists")
