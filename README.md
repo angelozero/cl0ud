@@ -359,5 +359,15 @@ public class SwaggerOpenAPIConfig {
 ```
 
 ---
+- ## 13 - Token and Refresh Token 
+  *... in construction*
+---
+
+- ## 14 - Jacoco ( Springboot 3.0.1 + Java 20)
+  - https://www.geeksforgeeks.org/how-to-generate-code-coverage-report-with-jacoco-in-java-application/
+  - https://mkyong.com/java/java-unsupported-class-file-major-version-61/
+  - https://mmarcosab.medium.com/completude-de-testes-com-jacoco-em-aplica%C3%A7%C3%B5es-spring-boot-74055773cc37
+
+---
 
 - You can see what I'm doing by following the [Trello](https://trello.com/invite/b/wIilDAIF/ATTI2a1001727d2ee9f8bd0f5495d34f05588107B7E7/cl0ud-app) from this projetc.
