@@ -107,7 +107,6 @@
             <version>2.1.0</version>
         </dependency>
 
-
         <!-- TESTS -->
         <!-- Testcontainers -->
         <dependency>
@@ -163,6 +162,15 @@
             <version>0.11.2</version>
         </dependency>
 
+        <!-- Jacoco -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <classifier>runtime</classifier>
+            <version>0.8.4</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
     <version>0.0.1-SNAPSHOT</version>
     <name>cl0ud</name>
@@ -177,6 +185,28 @@
 
     <build>
         <plugins>
+
+            <!-- Jacoco -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -227,6 +257,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M8</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
                     <!-- Skip the default running of this plug-in to not run everything twice -->
                     <skip>true</skip>
                 </configuration>
