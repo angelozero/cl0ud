@@ -191,6 +191,28 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.10</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/angelozero/cl0ud/entrypoint/rest/**</exclude>
+                        <exclude>com/angelozero/cl0ud/entrypoint/mapper/*</exclude>
+                        <exclude>com/angelozero/cl0ud/exception/**</exclude>
+                        <exclude>com/angelozero/cl0ud/gateway/**</exclude>
+                        <exclude>com/angelozero/cl0ud/usecase/mapper/*</exclude>
+                        <exclude>com/angelozero/cl0ud/usecase/model/*</exclude>
+                        <exclude>com/angelozero/cl0ud/usecase/utils/*</exclude>
+                        <exclude>com/angelozero/cl0ud/Cl0udApplication.*</exclude>
+
+                        <exclude>com/angelozero/cl0ud/jwt/config/*</exclude>
+                        <exclude>com/angelozero/cl0ud/jwt/entrypoint/mapper/*</exclude>
+                        <exclude>com/angelozero/cl0ud/jwt/entrypoint/rest/*</exclude>
+                        <exclude>com/angelozero/cl0ud/jwt/enums/*</exclude>
+                        <exclude>com/angelozero/cl0ud/jwt/gateway/**</exclude>
+                        <exclude>com/angelozero/cl0ud/jwt/service/dao/*</exclude>
+                        <exclude>com/angelozero/cl0ud/jwt/service/mapper/*</exclude>
+                        <exclude>com/angelozero/cl0ud/jwt/JwtAuthenticationFilter.*</exclude>
+
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -200,7 +222,7 @@
                     </execution>
                     <execution>
                         <id>report</id>
-                        <phase>test</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
