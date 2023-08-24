@@ -38,6 +38,5 @@ public class GenerateTokenTest {
         String response = generateToken.execute(userDetails);
 
         assertNotNull(response);
-
     }
 }

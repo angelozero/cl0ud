@@ -6,8 +6,10 @@ import com.angelozero.cl0ud.jwt.entrypoint.AuthController;
 import com.angelozero.cl0ud.jwt.entrypoint.mapper.UserRestMapper;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationRequest;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationResponse;
+import com.angelozero.cl0ud.jwt.entrypoint.rest.RefreshTokenRequest;
 import com.angelozero.cl0ud.jwt.entrypoint.rest.RegisterRequest;
 import com.angelozero.cl0ud.jwt.service.GenerateRefreshToken;
+import com.angelozero.cl0ud.jwt.service.UserAccessByRefreshToken;
 import com.angelozero.cl0ud.jwt.service.UserAuthenticate;
 import com.angelozero.cl0ud.jwt.service.UserRegister;
 import com.angelozero.cl0ud.jwt.service.dao.Authentication;
@@ -42,6 +44,9 @@ public class AuthControllerTest {
 
     @Mock
     private GenerateRefreshToken generateRefreshToken;
+
+    @Mock
+    private UserAccessByRefreshToken userAccessByRefreshToken;
 
     @Mock
     private UserRestMapper mapper;
@@ -84,5 +89,23 @@ public class AuthControllerTest {
         assertFalse(Objects.isNull(response.getBody()));
         assertNotNull(response.getBody().getToken());
         assertNotNull(response.getBody().getRefreshToken());
+    }
+
+    @DisplayName("Should get refresh token with success")
+    @Test
+    void shouldRefreshTokenWithSuccess() {
+        RefreshTokenRequest refreshTokenRequestFixture = Fixture.from(RefreshTokenRequest.class).gimme(RefreshTokenRequestTemplate.VALID_REFRESH_TOKEN_REQUEST);
+        Authentication authenticationFixture = Fixture.from(Authentication.class).gimme(AuthenticationTemplate.VALID_AUTHENTICATION);
+
+
+        when(userAccessByRefreshToken.execute(anyString())).thenReturn(authenticationFixture);
+        when(mapper.toAuthenticateResponse(any())).thenReturn(AuthenticationResponse.builder().token("token-test").build());
+
+        ResponseEntity<AuthenticationResponse> response = controller.refreshToken(refreshTokenRequestFixture);
+
+        assertFalse(Objects.isNull(response));
+        assertFalse(Objects.isNull(response.getBody()));
+        assertNotNull(response.getBody().getToken());
+        assertNull(response.getBody().getRefreshToken());
     }
 }
