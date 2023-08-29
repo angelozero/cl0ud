@@ -26,11 +26,19 @@ public class DeletePersonById {
         try {
             if (getPersonById.execute(id) != null) {
                 dataBaseGateway.deletePersonEntityById(id);
+            } else {
+                log.error("\n[FAIL] - Fail to delete a person\n");
+                throw new DeletePersonException("Fail to delete a person - No person was found to be deleted: person-id: " + id);
             }
 
         } catch (Exception ex) {
-            log.error("\n[ERROR] - Error to delete a person\n");
-            throw new DeletePersonException("Error to delete a person: " + ex.getMessage());
+            if (ex instanceof DeletePersonException) {
+                throw ex;
+
+            } else {
+                log.error("\n[ERROR] - Error to delete a person\n");
+                throw new DeletePersonException("Error to delete a person: " + ex.getMessage());
+            }
         }
     }
 }

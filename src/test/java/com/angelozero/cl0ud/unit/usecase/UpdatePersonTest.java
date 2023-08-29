@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UpdatePersonByIdTest {
+public class UpdatePersonTest {
 
 
     @Mock
@@ -46,7 +46,7 @@ public class UpdatePersonByIdTest {
 
     @DisplayName("Should fail to update a person - sending a null person")
     @Test
-    void testDeletePersonWithANullPersonException() {
+    void testUpdatePersonWithANullPerson() {
 
         UpdatePersonException exception = assertThrows(UpdatePersonException.class, () -> updatePerson.execute(null));
 
@@ -58,27 +58,29 @@ public class UpdatePersonByIdTest {
         assertEquals("[Update Person Service] - Person Data and/or Person ID is null", exception.getMessage());
     }
 
-    @DisplayName("Should fail to update a person - sending a null person id")
+    @DisplayName("Should fail to update a person - returning a null person from the search by id")
     @Test
-    void testDeletePersonWithANullPersonIdException() {
+    void testUpdatePersonWithANullPersonReturnedFromTheIdSearch() {
 
-        UpdatePersonException exception = assertThrows(UpdatePersonException.class, () -> updatePerson.execute(null));
+        when(getPersonById.execute(anyLong())).thenReturn(null);
 
-        verify(getPersonById, times(0)).execute(anyLong());
+        UpdatePersonException exception = assertThrows(UpdatePersonException.class, () -> updatePerson.execute(Person.builder().id(10L).build()));
+
+        verify(getPersonById, times(1)).execute(anyLong());
         verify(dataBaseGateway, times(0)).updatePerson(any(PersonEntity.class));
         verify(personMapper, times(0)).toModel(any(PersonEntity.class));
 
         assertFalse(isNull(exception));
-        assertEquals("[Update Person Service] - Person Data and/or Person ID is null", exception.getMessage());
+        assertEquals("[Update Person Service] - Fail to update a person - No person was found to be updated: person-id: 10", exception.getMessage());
     }
 
     @DisplayName("Should fail to update a person")
     @Test
-    void testDeletePersonWithException() {
+    void testUpdatePersonWithException() {
 
         Person personFixture = Fixture
                 .from(Person.class)
-                .gimme("valid Person without id");
+                .gimme(PersonTemplate.VALID_PERSON_WITHOUT_ID);
 
         UpdatePersonException exception = assertThrows(UpdatePersonException.class, () -> updatePerson.execute(personFixture));
 
@@ -89,6 +91,27 @@ public class UpdatePersonByIdTest {
 
         assertFalse(isNull(exception));
         assertEquals("[Update Person Service] - Person Data and/or Person ID is null", exception.getMessage());
+    }
+
+    @DisplayName("Should fail to update a person when calling get person by id use case")
+    @Test
+    void testUpdatePersonWithAnErrorReturnedWhenCallingGetPersonByIdUseCase() {
+
+        Person personFixture = Fixture
+                .from(Person.class)
+                .gimme(PersonTemplate.VALID_PERSON);
+
+        when(getPersonById.execute(anyLong())).thenThrow(new RuntimeException("get person by id use case fail"));
+
+        UpdatePersonException exception = assertThrows(UpdatePersonException.class, () -> updatePerson.execute(personFixture));
+
+        verify(getPersonById, times(1)).execute(anyLong());
+        verify(dataBaseGateway, times(0)).updatePerson(any(PersonEntity.class));
+        verify(personMapper, times(0)).toEntity(any(Person.class));
+        verify(personMapper, times(0)).toModel(any(PersonEntity.class));
+
+        assertFalse(isNull(exception));
+        assertEquals("[Update Person Service] - Error to update a person: get person by id use case fail", exception.getMessage());
     }
 
     @DisplayName("Should update a person with success")

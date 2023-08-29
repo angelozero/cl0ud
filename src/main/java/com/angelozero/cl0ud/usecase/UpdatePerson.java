@@ -33,12 +33,20 @@ public class UpdatePerson {
             if (getPersonById.execute(person.getId()) != null) {
                 PersonEntity personEntity = dataBaseGateway.updatePerson(personMapper.toEntity(person));
                 personMapper.toModel(personEntity);
+
+            } else {
+                log.error("\n[FAIL] - Fail to update a person\n");
+                throw new UpdatePersonException("Fail to update a person - No person was found to be updated: person-id: " + person.getId());
             }
 
         } catch (Exception ex) {
-            log.error("\n[ERROR] - Error to update a person\n");
-            throw new UpdatePersonException("Error to update a person: " + ex.getMessage());
-        }
+            if (ex instanceof UpdatePersonException) {
+                throw ex;
 
+            } else {
+                log.error("\n[ERROR] - Error to update a person\n");
+                throw new UpdatePersonException("Error to update a person: " + ex.getMessage());
+            }
+        }
     }
 }

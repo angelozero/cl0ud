@@ -42,7 +42,7 @@ public class DeletePersonByIdTest {
 
     @DisplayName("Should fail to delete a person")
     @Test
-    void testDeletePersonWithException() {
+    void testShouldFailDeletePerson() {
 
         Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
 
@@ -60,7 +60,7 @@ public class DeletePersonByIdTest {
 
     @DisplayName("Should fail to delete a person - null Id")
     @Test
-    void testDeletePersonWithNullIdException() {
+    void testShouldFailDeletePersonWithNullId() {
 
         DeletePersonException exception = assertThrows(DeletePersonException.class, () -> deletePersonById.execute(null));
 
@@ -69,6 +69,24 @@ public class DeletePersonByIdTest {
 
         assertFalse(isNull(exception));
         assertEquals("[Delete Person Service] - Person ID is null", exception.getMessage());
+    }
+
+    @DisplayName("Should fail to delete a person when calling get person by id use case")
+    @Test
+    void testDeletePersonWithAnErrorReturnedWhenCallingGetPersonByIdUseCase() {
+
+        Person personFixture = Fixture.from(Person.class).gimme(PersonTemplate.VALID_PERSON);
+        personFixture.setId(10L);
+
+        when(getPersonById.execute(anyLong())).thenReturn(null);
+
+        DeletePersonException exception = assertThrows(DeletePersonException.class, () -> deletePersonById.execute(personFixture.getId()));
+
+        verify(getPersonById, times(1)).execute(anyLong());
+        verify(dataBaseGateway, times(0)).deletePersonEntityById(anyLong());
+
+        assertFalse(isNull(exception));
+        assertEquals("[Delete Person Service] - Fail to delete a person - No person was found to be deleted: person-id: 10", exception.getMessage());
     }
 
     @DisplayName("Should delete a person with success")

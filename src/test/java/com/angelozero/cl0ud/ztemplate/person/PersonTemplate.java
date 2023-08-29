@@ -8,6 +8,7 @@ import com.angelozero.cl0ud.usecase.model.Person;
 public class PersonTemplate implements TemplateLoader {
 
     public static final String VALID_PERSON = "valid Person";
+    public static final String VALID_PERSON_WITHOUT_ID = "valid Person without id";
 
     @Override
     public void load() {
