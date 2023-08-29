@@ -64,7 +64,7 @@ public class IntegrationTestConfiguration {
         clearDataRepository();
         PersonEntity personEntityFixture = PersonEntity.builder()
                 .age(30)
-                .name("Person Test Name")
+                .name("Jake Angelo Xerocs")
                 .build();
         return repository.save(personEntityFixture);
     }

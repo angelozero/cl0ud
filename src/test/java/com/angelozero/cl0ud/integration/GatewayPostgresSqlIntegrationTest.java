@@ -8,8 +8,11 @@ import com.angelozero.cl0ud.gateway.postgressql.impl.PersonGatewayPostgresSql;
 import com.angelozero.cl0ud.ztemplate.person.PersonEntityTemplate;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -30,7 +33,7 @@ public class GatewayPostgresSqlIntegrationTest extends IntegrationTestConfigurat
         FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
     }
 
-
+    @DisplayName("Should save a person with success")
     @Test
     public void shouldSaveAPerson() {
 
@@ -48,7 +51,56 @@ public class GatewayPostgresSqlIntegrationTest extends IntegrationTestConfigurat
         clearDataRepository();
     }
 
+    @DisplayName("Should update a person with success")
+    @Test
+    public void shouldUpdateAPerson() {
 
+        PersonEntity personSaved = savePerson();
+
+        String uuid = UUID.randomUUID().toString();
+        String newPersonName = personSaved.getName() + "-" + uuid;
+        personSaved.setName(newPersonName);
+
+        PersonEntity result = gateway.updatePerson(personSaved);
+
+        assertNotNull(result);
+        assertEquals(personSaved.getId(), result.getId());
+        assertEquals(newPersonName, result.getName());
+        assertEquals(personSaved.getAge(), result.getAge());
+
+        clearDataRepository();
+    }
+
+    @DisplayName("Should delete a person by id with success")
+    @Test
+    public void shouldDeleteAPersonById() {
+
+        PersonEntity personSaved = savePerson();
+
+        gateway.deletePersonEntityById(personSaved.getId());
+        PersonEntity result = gateway.findPersonEntityById(personSaved.getId()).orElse(null);
+
+        assertNull(result);
+
+        clearDataRepository();
+    }
+
+    @DisplayName("Should find a person by id with success")
+    @Test
+    public void shouldFindAPersonById() {
+
+        PersonEntity personSaved = savePerson();
+        PersonEntity result = gateway.findPersonEntityById(personSaved.getId()).orElse(null);
+
+        assertNotNull(result);
+        assertEquals(personSaved.getId(), result.getId());
+        assertEquals(personSaved.getName(), result.getName());
+        assertEquals(personSaved.getAge(), result.getAge());
+
+        clearDataRepository();
+    }
+
+    @DisplayName("Should find all persons with success")
     @Test
     public void shouldFindAllPersons() {
 
@@ -65,54 +117,39 @@ public class GatewayPostgresSqlIntegrationTest extends IntegrationTestConfigurat
         clearDataRepository();
     }
 
-
+    @DisplayName("Should find all persons paginated with success")
     @Test
-    public void shouldFindAPersonById() {
+    public void shouldFindAllPersonsPaginated() {
 
         PersonEntity personSaved = savePerson();
-
-        Optional<PersonEntity> result = gateway.findPersonEntityById(personSaved.getId());
+        Page<PersonEntity> result = gateway.getPagedPersonsEntity(PageRequest.of(0, 1));
 
         assertNotNull(result);
-        assertTrue(result.isPresent());
-        assertNotNull(result.get());
-        assertEquals(personSaved.getId(), result.get().getId());
-        assertEquals(personSaved.getName(), result.get().getName());
-        assertEquals(personSaved.getAge(), result.get().getAge());
+        assertEquals(1, result.getContent().size());
+        assertNotNull(result.getContent().get(0));
+        assertNotNull(result.getContent().get(0).getId());
+        assertEquals(personSaved.getName(), result.getContent().get(0).getName());
+        assertEquals(personSaved.getAge(), result.getContent().get(0).getAge());
 
         clearDataRepository();
     }
 
-
+    @DisplayName("Should find all persons paginated by name with success")
     @Test
-    public void shouldUpdateAPerson() {
+    public void shouldFindAllPersonsPaginatedByName() {
 
         PersonEntity personSaved = savePerson();
-
-        String uuid = UUID.randomUUID().toString();
-        String newName = personSaved.getName() + "-" + uuid;
-        personSaved.setName(newName);
-
-        PersonEntity result = gateway.updatePerson(personSaved);
+        Page<PersonEntity> result = gateway.getPagedPersonsEntityByName(personSaved.getName(), PageRequest.of(0, 1));
 
         assertNotNull(result);
-        assertEquals(personSaved.getId(), result.getId());
-        assertEquals(newName, result.getName());
-        assertEquals(personSaved.getAge(), result.getAge());
+        assertEquals(1, result.getContent().size());
+        assertNotNull(result.getContent().get(0));
+        assertNotNull(result.getContent().get(0).getId());
+        assertEquals(personSaved.getName(), result.getContent().get(0).getName());
+        assertEquals(personSaved.getAge(), result.getContent().get(0).getAge());
 
         clearDataRepository();
     }
 
 
-    @Test
-    public void shouldDeleteAPerson() {
-
-        PersonEntity personSaved = savePerson();
-
-        assertFalse(findAllPersons().isEmpty());
-        assertDoesNotThrow(() -> repository.deleteById(personSaved.getId()));
-        assertTrue(findAllPersons().isEmpty());
-
-        clearDataRepository();
-    }
 }
