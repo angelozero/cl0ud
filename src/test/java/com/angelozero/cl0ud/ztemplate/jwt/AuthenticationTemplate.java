@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.ztemplate.jwt;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
-import com.angelozero.cl0ud.jwt.service.dao.Authentication;
+import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
 
 import java.util.UUID;
 

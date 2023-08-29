@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.unit.jwt.config;
 
-import com.angelozero.cl0ud.jwt.config.JwtSecurityConfiguration;
+import com.angelozero.cl0ud.auth_jwt.config.JwtSecurityConfiguration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

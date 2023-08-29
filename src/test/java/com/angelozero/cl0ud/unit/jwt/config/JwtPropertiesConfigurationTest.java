@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.unit.jwt.config;
 
-import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfiguration;
+import com.angelozero.cl0ud.auth_jwt.config.JwtPropertiesConfiguration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

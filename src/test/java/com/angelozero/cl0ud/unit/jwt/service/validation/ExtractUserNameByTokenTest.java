@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.unit.jwt.service.validation;
 
-import com.angelozero.cl0ud.jwt.service.validation.ExtractClaim;
-import com.angelozero.cl0ud.jwt.service.validation.ExtractUserNameByToken;
+import com.angelozero.cl0ud.auth_jwt.service.validation.ExtractClaim;
+import com.angelozero.cl0ud.auth_jwt.service.validation.ExtractUserNameByToken;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

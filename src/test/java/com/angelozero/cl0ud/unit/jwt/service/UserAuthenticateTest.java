@@ -1,11 +1,9 @@
 package com.angelozero.cl0ud.unit.jwt.service;
 
-import com.angelozero.cl0ud.jwt.entrypoint.rest.AuthenticationResponse;
-import com.angelozero.cl0ud.jwt.gateway.UserRepository;
-import com.angelozero.cl0ud.jwt.gateway.entity.UserEntity;
-import com.angelozero.cl0ud.jwt.service.GenerateToken;
-import com.angelozero.cl0ud.jwt.service.UserAuthenticate;
-import com.angelozero.cl0ud.jwt.service.dao.User;
+import com.angelozero.cl0ud.auth_jwt.gateway.UserRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
+import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
+import com.angelozero.cl0ud.auth_jwt.service.UserAuthenticate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

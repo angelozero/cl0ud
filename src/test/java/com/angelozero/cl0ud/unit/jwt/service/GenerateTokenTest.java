@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.unit.jwt.service;
 
-import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfiguration;
-import com.angelozero.cl0ud.jwt.service.GenerateToken;
+import com.angelozero.cl0ud.auth_jwt.config.JwtPropertiesConfiguration;
+import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.DisplayName;

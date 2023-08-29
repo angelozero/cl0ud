@@ -1,8 +1,8 @@
 package com.angelozero.cl0ud.unit.jwt.service.validation;
 
-import com.angelozero.cl0ud.jwt.config.JwtPropertiesConfiguration;
-import com.angelozero.cl0ud.jwt.service.GenerateToken;
-import com.angelozero.cl0ud.jwt.service.validation.ExtractClaim;
+import com.angelozero.cl0ud.auth_jwt.config.JwtPropertiesConfiguration;
+import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
+import com.angelozero.cl0ud.auth_jwt.service.validation.ExtractClaim;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

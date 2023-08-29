@@ -150,6 +150,4 @@ public class GatewayPostgresSqlIntegrationTest extends IntegrationTestConfigurat
 
         clearDataRepository();
     }
-
-
 }

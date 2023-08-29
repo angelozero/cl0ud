@@ -1,15 +1,14 @@
 package com.angelozero.cl0ud.unit.jwt.service;
 
 import com.angelozero.cl0ud.exception.jwt.JwtValidationException;
-import com.angelozero.cl0ud.jwt.gateway.RefreshTokenRepository;
-import com.angelozero.cl0ud.jwt.gateway.entity.RefreshTokenEntity;
-import com.angelozero.cl0ud.jwt.gateway.entity.UserEntity;
-import com.angelozero.cl0ud.jwt.service.GenerateToken;
-import com.angelozero.cl0ud.jwt.service.UserAccessByRefreshToken;
-import com.angelozero.cl0ud.jwt.service.dao.Authentication;
-import com.angelozero.cl0ud.jwt.service.dao.TokenRefreshed;
-import com.angelozero.cl0ud.jwt.service.dao.User;
-import com.angelozero.cl0ud.jwt.service.mapper.RefreshTokenMapper;
+import com.angelozero.cl0ud.auth_jwt.gateway.RefreshTokenRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
+import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
+import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
+import com.angelozero.cl0ud.auth_jwt.service.UserAccessByRefreshToken;
+import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
+import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
+import com.angelozero.cl0ud.auth_jwt.service.mapper.RefreshTokenMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -202,14 +202,14 @@
                         <exclude>com/angelozero/cl0ud/usecase/utils/*</exclude>
                         <exclude>com/angelozero/cl0ud/Cl0udApplication.*</exclude>
 
-                        <exclude>com/angelozero/cl0ud/jwt/config/*</exclude>
-                        <exclude>com/angelozero/cl0ud/jwt/entrypoint/mapper/*</exclude>
-                        <exclude>com/angelozero/cl0ud/jwt/entrypoint/rest/*</exclude>
-                        <exclude>com/angelozero/cl0ud/jwt/enums/*</exclude>
-                        <exclude>com/angelozero/cl0ud/jwt/gateway/**</exclude>
-                        <exclude>com/angelozero/cl0ud/jwt/service/dao/*</exclude>
-                        <exclude>com/angelozero/cl0ud/jwt/service/mapper/*</exclude>
-                        <exclude>com/angelozero/cl0ud/jwt/JwtAuthenticationFilter.*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/config/*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/entrypoint/mapper/*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/entrypoint/rest/*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/enums/*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/gateway/**</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/service/dao/*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/service/mapper/*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/JwtAuthenticationFilter.*</exclude>
 
                     </excludes>
                 </configuration>
