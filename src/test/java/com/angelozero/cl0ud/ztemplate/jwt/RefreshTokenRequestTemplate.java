@@ -16,7 +16,7 @@ public class RefreshTokenRequestTemplate implements TemplateLoader {
         Fixture.of(RefreshTokenRequest.class)
                 .addTemplate(VALID_REFRESH_TOKEN_REQUEST, new Rule() {
                     {
-                        add("token", UUID.randomUUID().toString());
+                        add("refreshToken", UUID.randomUUID().toString());
                     }
                 });
     }

@@ -4,6 +4,7 @@ import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.UserMapper;
 import com.angelozero.cl0ud.exception.jwt.JwtException;
+import com.angelozero.cl0ud.exception.jwt.JwtUserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,15 +28,19 @@ public class UserRegister {
                     .orElse(false);
 
             if (isUserFound) {
-                throw new JwtException("UserRegister: User already exists!");
+                throw new JwtUserNotFoundException("UserRegister: User already exists!");
             }
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             tokenGateway.save(mapper.toEntity(user));
 
         } catch (Exception ex) {
-            throw new JwtException("UserRegister: Was not possible register the user - " + ex.getMessage());
-        }
+            if (ex instanceof JwtUserNotFoundException) {
+                throw ex;
 
+            } else {
+                throw new JwtException("UserRegister: Was not possible register the user - " + ex.getMessage());
+            }
+        }
     }
 }

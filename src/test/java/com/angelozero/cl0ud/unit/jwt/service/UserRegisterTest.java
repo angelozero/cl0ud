@@ -7,6 +7,7 @@ import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
 import com.angelozero.cl0ud.auth_jwt.service.UserRegister;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.UserMapper;
+import com.angelozero.cl0ud.exception.jwt.JwtUserNotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -67,7 +68,7 @@ public class UserRegisterTest {
 
         when(tokenGateway.findUserByEmail(any())).thenReturn(UserEntity.builder().email("email-test-1").build());
 
-        JwtException exception = assertThrows(JwtException.class,
+        JwtUserNotFoundException exception = assertThrows(JwtUserNotFoundException.class,
                 () -> userRegister.execute(user));
 
         verify(passwordEncoder, times(0)).encode(any());
@@ -75,7 +76,7 @@ public class UserRegisterTest {
         verify(mapper, times(0)).toEntity(any());
 
         assertNotNull(exception);
-        assertEquals("[AUTH_JWT - ERROR] - UserRegister: User already exists!", exception.getMessage());
+        assertEquals("[AUTH_JWT_USER_NOT_FOUND - ERROR] - UserRegister: User already exists!", exception.getMessage());
     }
 
     @DisplayName("Should failed the register if there is an error in the password encoder call")
