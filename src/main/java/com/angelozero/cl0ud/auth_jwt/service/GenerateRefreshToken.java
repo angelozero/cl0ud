@@ -1,7 +1,6 @@
 package com.angelozero.cl0ud.auth_jwt.service;
 
-import com.angelozero.cl0ud.auth_jwt.gateway.RefreshTokenRepository;
-import com.angelozero.cl0ud.auth_jwt.gateway.UserRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
@@ -17,8 +16,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GenerateRefreshToken {
 
-    private final RefreshTokenRepository refreshTokenRepository;
-    private final UserRepository userRepository;
+
+    private final TokenGateway tokenGateway;
     private final UserMapper userMapper;
     private final RefreshTokenMapper refreshTokenMapper;
 
@@ -26,7 +25,7 @@ public class GenerateRefreshToken {
 
     public TokenRefreshed execute(String email) {
 
-        User user = userMapper.toModel(userRepository.findUserByEmail(email));
+        User user = userMapper.toModel(tokenGateway.findUserByEmail(email));
 
         TokenRefreshed tokenRefreshed = TokenRefreshed.builder()
                 .token(UUID.randomUUID().toString())
@@ -34,7 +33,7 @@ public class GenerateRefreshToken {
                 .user(user)
                 .build();
 
-        RefreshTokenEntity refreshTokenEntity = refreshTokenRepository.save(refreshTokenMapper.toEntity(tokenRefreshed));
+        RefreshTokenEntity refreshTokenEntity = tokenGateway.save(refreshTokenMapper.toEntity(tokenRefreshed));
 
         return refreshTokenMapper.toModel(refreshTokenEntity);
     }

@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.auth_jwt.config;
 
+import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.exception.jwt.JwtConfigurationException;
-import com.angelozero.cl0ud.auth_jwt.gateway.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -19,14 +19,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class JwtConfiguration {
 
-    private final UserRepository repository;
+    private final TokenGateway tokenGateway;
 
     @Bean
     public UserDetailsService userDetailsService() {
         log.info("\n[JWT_CREATING_USER_DETAILS_SERVICE_BEAN] - Creating UserDetailsService Bean\n");
         return email -> {
             try {
-                return repository.findUserByEmail(email);
+                return tokenGateway.findUserByEmail(email);
 
             } catch (Exception ex) {
                 log.error("\n[ERROR] - Error to create Jwt UserDetailsService\n");

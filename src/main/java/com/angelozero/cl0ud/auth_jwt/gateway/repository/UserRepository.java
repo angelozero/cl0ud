@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.auth_jwt.gateway;
+package com.angelozero.cl0ud.auth_jwt.gateway.repository;
 
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

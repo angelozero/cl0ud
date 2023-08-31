@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.auth_jwt.service;
 
-import com.angelozero.cl0ud.auth_jwt.gateway.UserRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserAuthenticate {
 
-    private final UserRepository repository;
+    private final TokenGateway tokenGateway;
     private final GenerateToken generateToken;
     private final AuthenticationManager authenticationManager;
 
@@ -21,7 +21,7 @@ public class UserAuthenticate {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password));
 
-        UserEntity userEntity = repository.findUserByEmail(email);
+        UserEntity userEntity = tokenGateway.findUserByEmail(email);
 
         String jwtToken = generateToken.execute(userEntity);
 

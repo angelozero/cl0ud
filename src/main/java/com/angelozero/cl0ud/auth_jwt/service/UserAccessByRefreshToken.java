@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.auth_jwt.service;
 
-import com.angelozero.cl0ud.exception.jwt.JwtValidationException;
-import com.angelozero.cl0ud.auth_jwt.gateway.RefreshTokenRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
+import com.angelozero.cl0ud.exception.jwt.JwtException;
 import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.RefreshTokenMapper;
@@ -14,13 +14,13 @@ import java.time.Instant;
 @RequiredArgsConstructor
 public class UserAccessByRefreshToken {
 
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final TokenGateway tokenGateway;
     private final GenerateToken generateToken;
     private final RefreshTokenMapper mapper;
 
     public Authentication execute(String token) {
 
-        TokenRefreshed tokenRefreshed = mapper.toModel(refreshTokenRepository.findByToken(token));
+        TokenRefreshed tokenRefreshed = mapper.toModel(tokenGateway.findByToken(token));
         verifyExpirationDate(tokenRefreshed);
         String jwtToken = generateToken.execute(mapper.toEntity(tokenRefreshed).getUser());
 
@@ -32,8 +32,8 @@ public class UserAccessByRefreshToken {
 
     private void verifyExpirationDate(TokenRefreshed tokenRefreshed) {
         if (tokenRefreshed.getExpiryDate().compareTo(Instant.now()) < 0) {
-            refreshTokenRepository.delete(mapper.toEntity(tokenRefreshed));
-            throw new JwtValidationException("Refresh Token is expired");
+            tokenGateway.delete(mapper.toEntity(tokenRefreshed));
+            throw new JwtException("Refresh Token is expired");
         }
     }
 }

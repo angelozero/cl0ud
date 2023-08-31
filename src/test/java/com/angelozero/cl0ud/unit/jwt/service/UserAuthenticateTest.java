@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.unit.jwt.service;
 
-import com.angelozero.cl0ud.auth_jwt.gateway.UserRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
 import com.angelozero.cl0ud.auth_jwt.service.UserAuthenticate;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 public class UserAuthenticateTest {
 
     @Mock
-    private UserRepository repository;
+    private TokenGateway tokenGateway;
 
     @Mock
     private GenerateToken generateToken;
@@ -42,7 +42,7 @@ public class UserAuthenticateTest {
     void testShouldAuthenticateUserWithSuccess() {
 
         when(authenticationManager.authenticate(any())).thenReturn(authentication);
-        when(repository.findUserByEmail(anyString())).thenReturn(UserEntity.builder()
+        when(tokenGateway.findUserByEmail(anyString())).thenReturn(UserEntity.builder()
                 .id(1L)
                 .fullname("user-test")
                 .build());

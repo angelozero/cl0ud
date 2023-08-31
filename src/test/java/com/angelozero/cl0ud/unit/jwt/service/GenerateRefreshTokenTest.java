@@ -1,7 +1,8 @@
 package com.angelozero.cl0ud.unit.jwt.service;
 
-import com.angelozero.cl0ud.auth_jwt.gateway.RefreshTokenRepository;
-import com.angelozero.cl0ud.auth_jwt.gateway.UserRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
+import com.angelozero.cl0ud.auth_jwt.gateway.repository.RefreshTokenRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.repository.UserRepository;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateRefreshToken;
@@ -30,10 +31,7 @@ public class GenerateRefreshTokenTest {
     private GenerateRefreshToken generateRefreshToken;
 
     @Mock
-    private RefreshTokenRepository refreshTokenRepository;
-
-    @Mock
-    private UserRepository userRepository;
+    private TokenGateway tokenGateway;
 
     @Mock
     private UserMapper userMapper;
@@ -46,11 +44,11 @@ public class GenerateRefreshTokenTest {
     @Test
     void testShouldGenerateRefreshTokenWithSuccess() {
 
-        when(userRepository.findUserByEmail(anyString()))
+        when(tokenGateway.findUserByEmail(anyString()))
                 .thenReturn(UserEntity.builder().fullname("user test").build());
         when(userMapper.toModel(any(UserEntity.class))).thenReturn(User.builder().fullname("user test").build());
         when(refreshTokenMapper.toEntity(any(TokenRefreshed.class))).thenReturn(RefreshTokenEntity.builder().token(UUID.randomUUID().toString()).build());
-        when(refreshTokenRepository.save(any(RefreshTokenEntity.class))).thenReturn(RefreshTokenEntity.builder().build());
+        when(tokenGateway.save(any(RefreshTokenEntity.class))).thenReturn(RefreshTokenEntity.builder().build());
         when(refreshTokenMapper.toModel(any(RefreshTokenEntity.class))).thenReturn(TokenRefreshed.builder().token("token test").build());
 
         TokenRefreshed response = generateRefreshToken.execute("email");

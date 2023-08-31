@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.auth_jwt;
 
-import com.angelozero.cl0ud.exception.jwt.JwtValidationException;
+import com.angelozero.cl0ud.exception.jwt.JwtException;
 import com.angelozero.cl0ud.auth_jwt.service.validation.ExtractUserNameByToken;
 import com.angelozero.cl0ud.auth_jwt.service.validation.CheckValidToken;
 import jakarta.servlet.FilterChain;
@@ -64,7 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 filterChain.doFilter(request, response);
 
             } catch (RuntimeException ex) {
-                throw new JwtValidationException("Error with validation: " + ex.getMessage());
+                throw new JwtException("Error with validation: " + ex.getMessage());
             }
         }
     }

@@ -1,9 +1,9 @@
 package com.angelozero.cl0ud.unit.jwt.config;
 
-import com.angelozero.cl0ud.exception.jwt.JwtConfigurationException;
 import com.angelozero.cl0ud.auth_jwt.config.JwtConfiguration;
-import com.angelozero.cl0ud.auth_jwt.gateway.UserRepository;
+import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
+import com.angelozero.cl0ud.exception.jwt.JwtConfigurationException;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class JwtConfigurationTest {
 
 
     @Mock
-    private UserRepository repository;
+    private TokenGateway tokenGateway;
 
     @Mock
     private AuthenticationConfiguration authenticationConfiguration;
@@ -37,7 +37,7 @@ public class JwtConfigurationTest {
     @Test
     public void shouldCreateUserDetailsServiceBean() {
 
-        lenient().when(repository.findUserByEmail(anyString()))
+        lenient().when(tokenGateway.findUserByEmail(anyString()))
                 .thenReturn(UserEntity.builder().fullname("Full Name Test").build());
 
         UserDetailsService response = jwtConfiguration.userDetailsService();
@@ -49,7 +49,7 @@ public class JwtConfigurationTest {
     @Test
     public void shouldGenerateExceptionJwtConfigurationException() {
 
-        doThrow(new RuntimeException("Error Test")).when(repository).findUserByEmail(anyString());
+        doThrow(new RuntimeException("Error Test")).when(tokenGateway).findUserByEmail(anyString());
 
         JwtConfigurationException exception = assertThrows(JwtConfigurationException.class,
                 () -> jwtConfiguration.userDetailsService().loadUserByUsername(StringUtils.EMPTY));
@@ -63,7 +63,7 @@ public class JwtConfigurationTest {
     @Test
     public void shouldCreateAuthenticationProviderBeanWithSuccess() {
 
-        lenient().when(repository.findUserByEmail(anyString()))
+        lenient().when(tokenGateway.findUserByEmail(anyString()))
                 .thenReturn(UserEntity.builder().fullname("Full Name Test").build());
 
         AuthenticationProvider response = jwtConfiguration.authenticationProvider();

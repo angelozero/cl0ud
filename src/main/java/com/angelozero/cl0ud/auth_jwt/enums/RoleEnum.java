@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.auth_jwt.enums;
 
-import com.angelozero.cl0ud.exception.jwt.JwtValidationException;
+import com.angelozero.cl0ud.exception.jwt.JwtException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -25,13 +25,13 @@ public enum RoleEnum {
         if (contains(role)) {
             return RoleEnum.valueOf(role.toUpperCase());
         }
-        throw new JwtValidationException("No role value was found with: " + role);
+        throw new JwtException("No role value was found with: " + role);
     }
 
     public static String getRoleInfo(String role) {
         if (contains(role)) {
             return RoleEnum.valueOf(role.toUpperCase()).getRoleInfo();
         }
-        throw new JwtValidationException("No role info was found with: " + role);
+        throw new JwtException("No role info was found with: " + role);
     }
 }

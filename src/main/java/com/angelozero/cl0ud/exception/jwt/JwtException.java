@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
-public class JwtValidationException extends ZJwtException {
-    public JwtValidationException(String message) {
-        super("[Jwt Validation] - ".concat(message));
+public class JwtException extends ZJwtException {
+    public JwtException(String message) {
+        super("[AUTH_JWT - ERROR] - ".concat(message));
     }
 }
