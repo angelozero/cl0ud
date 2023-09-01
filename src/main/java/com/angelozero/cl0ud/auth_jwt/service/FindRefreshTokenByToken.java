@@ -19,16 +19,18 @@ public class FindRefreshTokenByToken {
 
     public TokenRefreshed execute(String token) {
 
+        TokenRefreshed tokenRefreshed;
+
         try {
             log.info("\n[FIND_REFRESH_TOKEN_BY_TOKEN] - Find refresh token by token: {}\n", token);
-            TokenRefreshed tokenRefreshed = mapper.toModel(tokenGateway.findByToken(token));
-            verifyExpiryRefreshTokenDate.execute(tokenRefreshed);
-
-            return tokenRefreshed;
+            tokenRefreshed = mapper.toModel(tokenGateway.findByToken(token));
 
         } catch (Exception ex) {
             log.error("\n[ERROR] - Error to find refresh token by token -  {}\n", ex.getMessage());
             throw new JwtException("TokenRefreshed: Error to find token by token - " + ex.getMessage());
         }
+
+        verifyExpiryRefreshTokenDate.execute(tokenRefreshed);
+        return tokenRefreshed;
     }
 }

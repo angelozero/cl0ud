@@ -1,6 +1,7 @@
 package com.angelozero.cl0ud.unit.auth_jwt.service;
 
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
+import com.angelozero.cl0ud.auth_jwt.service.FindRefreshTokenByToken;
 import com.angelozero.cl0ud.exception.jwt.JwtException;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
@@ -31,7 +32,7 @@ public class UserAccessByRefreshTokenTest {
     private UserAccessByRefreshToken userAccessByRefreshToken;
 
     @Mock
-    private TokenGateway tokenGateway;
+    private FindRefreshTokenByToken findRefreshTokenByToken;
 
     @Mock
     private GenerateToken generateToken;
@@ -43,9 +44,8 @@ public class UserAccessByRefreshTokenTest {
     @Test
     void testShouldGiveAccessToAnUserByRefreshTokenWithTimeWithSuccess() {
 
-        when(tokenGateway.findByToken(anyString()))
-                .thenReturn(RefreshTokenEntity.builder().build());
-        when(mapper.toModel(any(RefreshTokenEntity.class))).thenReturn(TokenRefreshed.builder().expiryDate(Instant.now().plusSeconds(60)).build());
+        when(findRefreshTokenByToken.execute(anyString()))
+                .thenReturn(TokenRefreshed.builder().build());
         when(mapper.toEntity(any(TokenRefreshed.class)))
                 .thenReturn(RefreshTokenEntity.builder()
                         .user(UserEntity.builder().build())
@@ -53,34 +53,12 @@ public class UserAccessByRefreshTokenTest {
                         .build());
         when(generateToken.execute(any(UserEntity.class))).thenReturn(UUID.randomUUID().toString());
 
-
         Authentication response = userAccessByRefreshToken.execute("token");
 
         assertNotNull(response);
 
-        verify(tokenGateway, times(0)).delete(any(RefreshTokenEntity.class));
-    }
-
-    @DisplayName("Should give access to an user by refresh token without time")
-    @Test
-    void testShouldGiveAccessToAnUserByRefreshTokenWithoutTimeWitSuccess() {
-
-        when(tokenGateway.findByToken(anyString()))
-                .thenReturn(RefreshTokenEntity.builder().build());
-        when(mapper.toModel(any(RefreshTokenEntity.class)))
-                .thenReturn(TokenRefreshed.builder().expiryDate(Instant.now().minusSeconds(60)).build());
-        when(mapper.toEntity(any(TokenRefreshed.class)))
-                .thenReturn(RefreshTokenEntity.builder()
-                        .user(UserEntity.builder().build())
-                        .token(UUID.randomUUID().toString())
-                        .build());
-
-        JwtException exception = assertThrows(JwtException.class, () -> userAccessByRefreshToken.execute("token"));
-
-        verify(tokenGateway, times(1)).delete(any(RefreshTokenEntity.class));
-
-        assertNotNull(exception);
-        assertEquals("[AUTH_JWT - ERROR] - Refresh Token is expired", exception.getMessage());
-
+        verify(findRefreshTokenByToken, times(1)).execute(anyString());
+        verify(mapper, times(1)).toEntity(any(TokenRefreshed.class));
+        verify(generateToken, times(1)).execute(any(UserEntity.class));
     }
 }
