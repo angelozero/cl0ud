@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.auth_jwt.service;
 
 import com.angelozero.cl0ud.auth_jwt.config.JwtPropertiesConfiguration;
-import com.angelozero.cl0ud.auth_jwt.utils.JwtJsonUtils;
+import com.angelozero.cl0ud.auth_jwt.service.utils.JwtJsonUtils;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;

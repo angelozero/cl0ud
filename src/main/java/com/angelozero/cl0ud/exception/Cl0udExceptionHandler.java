@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.exception;
 
 
-import com.angelozero.cl0ud.exception.jwt.ZJwtException;
+import com.angelozero.cl0ud.auth_jwt.exception.ZJwtException;
 import com.angelozero.cl0ud.exception.model.ExceptionModelResponse;
 import com.angelozero.cl0ud.exception.person.ZPersonException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;

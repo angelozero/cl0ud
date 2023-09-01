@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.unit.auth_jwt.config;
 import com.angelozero.cl0ud.auth_jwt.config.JwtConfiguration;
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
-import com.angelozero.cl0ud.exception.jwt.JwtConfigurationException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtConfigurationException;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

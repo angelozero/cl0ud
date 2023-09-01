@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.auth_jwt.enums;
 
-import com.angelozero.cl0ud.exception.jwt.JwtException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

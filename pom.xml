@@ -208,6 +208,7 @@
                         <exclude>com/angelozero/cl0ud/auth_jwt/enums/*</exclude>
                         <exclude>com/angelozero/cl0ud/auth_jwt/gateway/**</exclude>
                         <exclude>com/angelozero/cl0ud/auth_jwt/service/dao/*</exclude>
+                        <exclude>com/angelozero/cl0ud/auth_jwt/service/utils/*</exclude>
                         <exclude>com/angelozero/cl0ud/auth_jwt/service/mapper/*</exclude>
                         <exclude>com/angelozero/cl0ud/auth_jwt/JwtAuthenticationFilter.*</exclude>
 

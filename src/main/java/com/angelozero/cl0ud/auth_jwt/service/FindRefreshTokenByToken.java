@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.auth_jwt.service;
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.RefreshTokenMapper;
-import com.angelozero.cl0ud.exception.jwt.JwtException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

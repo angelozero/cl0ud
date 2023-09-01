@@ -1,11 +1,10 @@
-package com.angelozero.cl0ud.utils;
+package com.angelozero.cl0ud.auth_jwt.service.utils;
 
-import com.angelozero.cl0ud.exception.utils.JsonUtilsException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class JsonUtils {
+public class JwtJsonUtils {
 
     public static String generateJson(Object obj) {
 

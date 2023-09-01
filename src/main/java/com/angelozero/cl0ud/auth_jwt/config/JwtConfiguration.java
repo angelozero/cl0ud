@@ -1,7 +1,7 @@
 package com.angelozero.cl0ud.auth_jwt.config;
 
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
-import com.angelozero.cl0ud.exception.jwt.JwtConfigurationException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtConfigurationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

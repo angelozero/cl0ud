@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.unit.auth_jwt.service;
 import com.angelozero.cl0ud.auth_jwt.service.DeleteToken;
 import com.angelozero.cl0ud.auth_jwt.service.VerifyExpiryRefreshTokenDate;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
-import com.angelozero.cl0ud.exception.jwt.JwtDeleteTokenException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtDeleteTokenException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

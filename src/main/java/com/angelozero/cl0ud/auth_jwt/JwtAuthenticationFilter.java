@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.auth_jwt;
 
-import com.angelozero.cl0ud.exception.jwt.JwtException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtException;
 import com.angelozero.cl0ud.auth_jwt.service.validation.ExtractUserNameByToken;
 import com.angelozero.cl0ud.auth_jwt.service.validation.CheckValidToken;
 import jakarta.servlet.FilterChain;

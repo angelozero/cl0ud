@@ -1,8 +1,6 @@
 package com.angelozero.cl0ud.unit.auth_jwt.service;
 
-import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.service.FindRefreshTokenByToken;
-import com.angelozero.cl0ud.exception.jwt.JwtException;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
@@ -17,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Instant;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.exception.utils;
+package com.angelozero.cl0ud.auth_jwt.service.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

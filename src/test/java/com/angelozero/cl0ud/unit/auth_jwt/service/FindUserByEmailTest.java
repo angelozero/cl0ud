@@ -1,23 +1,17 @@
 package com.angelozero.cl0ud.unit.auth_jwt.service;
 
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
-import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.service.FindUserByEmail;
-import com.angelozero.cl0ud.auth_jwt.service.GenerateRefreshToken;
-import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
-import com.angelozero.cl0ud.auth_jwt.service.mapper.RefreshTokenMapper;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.UserMapper;
-import com.angelozero.cl0ud.exception.jwt.JwtException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;

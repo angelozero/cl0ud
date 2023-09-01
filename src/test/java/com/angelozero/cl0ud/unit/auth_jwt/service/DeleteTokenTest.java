@@ -5,7 +5,7 @@ import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.service.DeleteToken;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.RefreshTokenMapper;
-import com.angelozero.cl0ud.exception.jwt.JwtException;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

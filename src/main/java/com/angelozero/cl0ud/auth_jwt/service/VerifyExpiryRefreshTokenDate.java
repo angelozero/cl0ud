@@ -1,9 +1,8 @@
 package com.angelozero.cl0ud.auth_jwt.service;
 
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
-import com.angelozero.cl0ud.auth_jwt.utils.JwtJsonUtils;
-import com.angelozero.cl0ud.exception.jwt.JwtDeleteTokenException;
-import com.angelozero.cl0ud.exception.jwt.JwtException;
+import com.angelozero.cl0ud.auth_jwt.service.utils.JwtJsonUtils;
+import com.angelozero.cl0ud.auth_jwt.exception.JwtDeleteTokenException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
