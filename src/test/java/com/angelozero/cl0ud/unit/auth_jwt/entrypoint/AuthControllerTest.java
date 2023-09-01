@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.unit.jwt.entrypoint;
+package com.angelozero.cl0ud.unit.auth_jwt.entrypoint;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;

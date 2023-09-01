@@ -20,12 +20,12 @@ public class UserAccessByRefreshToken {
 
     public Authentication execute(String token) {
 
-        TokenRefreshed tokenRefreshed = mapper.toModel(tokenGateway.findByToken(token));
-        verifyExpirationDate(tokenRefreshed);
-        String jwtToken = generateToken.execute(mapper.toEntity(tokenRefreshed).getUser());
+//        TokenRefreshed tokenRefreshed = mapper.toModel(tokenGateway.findByToken(token));
+//        verifyExpirationDate(tokenRefreshed);
+//        String jwtToken = generateToken.execute(mapper.toEntity(tokenRefreshed).getUser());
 
         return Authentication.builder()
-                .token(jwtToken)
+                .token("")
                 .build();
     }
 

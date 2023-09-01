@@ -1,9 +1,8 @@
-package com.angelozero.cl0ud.unit.jwt.service;
+package com.angelozero.cl0ud.unit.auth_jwt.service;
 
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.exception.jwt.JwtException;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
-import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
 import com.angelozero.cl0ud.auth_jwt.service.UserRegister;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.UserMapper;

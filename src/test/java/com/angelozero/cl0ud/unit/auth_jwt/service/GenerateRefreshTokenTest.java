@@ -1,8 +1,6 @@
-package com.angelozero.cl0ud.unit.jwt.service;
+package com.angelozero.cl0ud.unit.auth_jwt.service;
 
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
-import com.angelozero.cl0ud.auth_jwt.gateway.repository.RefreshTokenRepository;
-import com.angelozero.cl0ud.auth_jwt.gateway.repository.UserRepository;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateRefreshToken;

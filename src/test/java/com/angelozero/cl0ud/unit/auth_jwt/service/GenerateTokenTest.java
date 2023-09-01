@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.unit.jwt.service;
+package com.angelozero.cl0ud.unit.auth_jwt.service;
 
 import com.angelozero.cl0ud.auth_jwt.config.JwtPropertiesConfiguration;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
@@ -33,7 +33,8 @@ public class GenerateTokenTest {
 
         when(userDetails.getUsername()).thenReturn("Test Name");
         when(jwtPropsConfig.getHours()).thenReturn(10);
-        when(jwtPropsConfig.getSignKey()).thenReturn(Keys.hmacShaKeyFor(Decoders.BASE64URL.decode("4D6251655468566D597133743677397A24432646294A404E635266556A586E5A")));
+        when(jwtPropsConfig.getSignKey())
+                .thenReturn(Keys.hmacShaKeyFor(Decoders.BASE64URL.decode("4D6251655468566D597133743677397A24432646294A404E635266556A586E5A")));
 
         String response = generateToken.execute(userDetails);
 

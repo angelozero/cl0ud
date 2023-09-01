@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.unit.jwt.config;
+package com.angelozero.cl0ud.unit.auth_jwt.config;
 
 import com.angelozero.cl0ud.auth_jwt.config.JwtConfiguration;
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;

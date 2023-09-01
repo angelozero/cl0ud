@@ -1,4 +1,4 @@
-package com.angelozero.cl0ud.unit.jwt.service.validation;
+package com.angelozero.cl0ud.unit.auth_jwt.service.validation;
 
 import com.angelozero.cl0ud.auth_jwt.service.validation.ExtractClaim;
 import com.angelozero.cl0ud.auth_jwt.service.validation.ExtractUserNameByToken;
