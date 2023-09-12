@@ -5,7 +5,7 @@ import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateToken;
 import com.angelozero.cl0ud.auth_jwt.service.UserAccessByRefreshToken;
-import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
+import com.angelozero.cl0ud.auth_jwt.service.dao.TokenData;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.RefreshTokenMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -50,7 +50,7 @@ public class UserAccessByRefreshTokenTest {
                         .build());
         when(generateToken.execute(any(UserEntity.class))).thenReturn(UUID.randomUUID().toString());
 
-        Authentication response = userAccessByRefreshToken.execute("token");
+        TokenData response = userAccessByRefreshToken.execute("token");
 
         assertNotNull(response);
 

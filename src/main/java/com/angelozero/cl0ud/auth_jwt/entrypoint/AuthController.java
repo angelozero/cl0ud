@@ -7,8 +7,8 @@ import com.angelozero.cl0ud.auth_jwt.entrypoint.rest.RefreshTokenRequest;
 import com.angelozero.cl0ud.auth_jwt.entrypoint.rest.RegisterRequest;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateRefreshToken;
 import com.angelozero.cl0ud.auth_jwt.service.UserAccessByRefreshToken;
-import com.angelozero.cl0ud.auth_jwt.service.UserRegister;
-import com.angelozero.cl0ud.auth_jwt.service.UserAuthenticate;
+import com.angelozero.cl0ud.auth_jwt.service.RegisterUser;
+import com.angelozero.cl0ud.auth_jwt.service.AuthenticateUser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,22 +22,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final UserAuthenticate userAuthenticate;
-    private final UserRegister userRegister;
+    private final AuthenticateUser authenticateUser;
+    private final RegisterUser registerUser;
     private final GenerateRefreshToken generateRefreshToken;
     private final UserAccessByRefreshToken userAccessByRefreshToken;
     private final UserRestMapper mapper;
 
     @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody RegisterRequest body) {
-        userRegister.execute(mapper.toUser(body));
+        registerUser.execute(mapper.toUser(body));
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest body) {
         String tokenRefreshed = generateRefreshToken.execute(body.getEmail()).getToken();
-        AuthenticationResponse authResponse = mapper.toAuthenticateResponse(userAuthenticate.execute(body.getEmail(), body.getPassword()));
+        AuthenticationResponse authResponse = mapper.toAuthenticateResponse(authenticateUser.execute(body.getEmail(), body.getPassword()));
         authResponse.setRefreshToken(tokenRefreshed);
         return ResponseEntity.ok(authResponse);
     }

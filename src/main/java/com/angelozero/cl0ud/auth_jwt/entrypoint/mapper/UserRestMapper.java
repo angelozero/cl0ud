@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.auth_jwt.entrypoint.mapper;
 import com.angelozero.cl0ud.auth_jwt.entrypoint.rest.AuthenticationResponse;
 import com.angelozero.cl0ud.auth_jwt.entrypoint.rest.RegisterRequest;
 import com.angelozero.cl0ud.auth_jwt.enums.RoleEnum;
-import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
+import com.angelozero.cl0ud.auth_jwt.service.dao.TokenData;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,7 +19,7 @@ public interface UserRestMapper {
     @Mapping(target = "role", defaultValue = "ADMIN", qualifiedByName = "role")
     User toUser(RegisterRequest request);
 
-    AuthenticationResponse toAuthenticateResponse(Authentication authentication);
+    AuthenticationResponse toAuthenticateResponse(TokenData tokenData);
 
     @Named("role")
     default String setRole(String role) {

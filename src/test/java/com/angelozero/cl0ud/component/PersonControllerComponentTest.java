@@ -44,7 +44,7 @@ public class PersonControllerComponentTest extends ComponentTestConfiguration {
 
     @BeforeClass
     public static void setup() {
-        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
+        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate.person");
     }
 
     @Before

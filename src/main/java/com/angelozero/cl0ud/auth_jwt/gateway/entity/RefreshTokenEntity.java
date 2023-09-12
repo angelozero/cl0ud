@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "refresh_token", schema = "cl0ud")
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "refresh_token")
 public class RefreshTokenEntity {
 
     @Id

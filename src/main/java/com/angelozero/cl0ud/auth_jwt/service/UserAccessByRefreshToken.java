@@ -1,6 +1,6 @@
 package com.angelozero.cl0ud.auth_jwt.service;
 
-import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
+import com.angelozero.cl0ud.auth_jwt.service.dao.TokenData;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.RefreshTokenMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,12 +14,12 @@ public class UserAccessByRefreshToken {
     private final GenerateToken generateToken;
     private final RefreshTokenMapper mapper;
 
-    public Authentication execute(String token) {
+    public TokenData execute(String token) {
 
         TokenRefreshed tokenRefreshed = findRefreshTokenByToken.execute(token);
         String jwtToken = generateToken.execute(mapper.toEntity(tokenRefreshed).getUser());
 
-        return Authentication.builder()
+        return TokenData.builder()
                 .token(jwtToken)
                 .build();
     }

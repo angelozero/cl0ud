@@ -10,9 +10,9 @@ import com.angelozero.cl0ud.auth_jwt.entrypoint.rest.RefreshTokenRequest;
 import com.angelozero.cl0ud.auth_jwt.entrypoint.rest.RegisterRequest;
 import com.angelozero.cl0ud.auth_jwt.service.GenerateRefreshToken;
 import com.angelozero.cl0ud.auth_jwt.service.UserAccessByRefreshToken;
-import com.angelozero.cl0ud.auth_jwt.service.UserAuthenticate;
-import com.angelozero.cl0ud.auth_jwt.service.UserRegister;
-import com.angelozero.cl0ud.auth_jwt.service.dao.Authentication;
+import com.angelozero.cl0ud.auth_jwt.service.AuthenticateUser;
+import com.angelozero.cl0ud.auth_jwt.service.RegisterUser;
+import com.angelozero.cl0ud.auth_jwt.service.dao.TokenData;
 import com.angelozero.cl0ud.auth_jwt.service.dao.TokenRefreshed;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
 import com.angelozero.cl0ud.ztemplate.jwt.*;
@@ -37,10 +37,10 @@ import static org.mockito.Mockito.when;
 public class AuthControllerTest {
 
     @Mock
-    private UserAuthenticate userAuthenticate;
+    private AuthenticateUser authenticateUser;
 
     @Mock
-    private UserRegister userRegister;
+    private RegisterUser registerUser;
 
     @Mock
     private GenerateRefreshToken generateRefreshToken;
@@ -56,7 +56,7 @@ public class AuthControllerTest {
 
     @BeforeAll
     public static void setup() {
-        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
+        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate.jwt");
     }
 
     @DisplayName("Should register with success")
@@ -67,7 +67,7 @@ public class AuthControllerTest {
         User userFixture = Fixture.from(User.class).gimme(UserTemplate.VALID_USER);
 
         when(mapper.toUser(any(RegisterRequest.class))).thenReturn(userFixture);
-        doNothing().when(userRegister).execute(any(User.class));
+        doNothing().when(registerUser).execute(any(User.class));
 
         assertDoesNotThrow(() -> controller.register(registerRequestFixture));
 
@@ -77,10 +77,10 @@ public class AuthControllerTest {
     @Test
     void shouldAuthenticateWithSuccess() {
         AuthenticationRequest authenticationRequestFixture = Fixture.from(AuthenticationRequest.class).gimme(AuthenticationRequestTemplate.VALID_AUTHENTICATION_REQUEST);
-        Authentication authenticationFixture = Fixture.from(Authentication.class).gimme(AuthenticationTemplate.VALID_AUTHENTICATION);
+        TokenData tokenDataFixture = Fixture.from(TokenData.class).gimme(TokenDataTemplate.VALID_AUTHENTICATION);
 
         when(generateRefreshToken.execute(anyString())).thenReturn(TokenRefreshed.builder().token("refresh-token-test").build());
-        when(userAuthenticate.execute(anyString(), anyString())).thenReturn(authenticationFixture);
+        when(authenticateUser.execute(anyString(), anyString())).thenReturn(tokenDataFixture);
         when(mapper.toAuthenticateResponse(any())).thenReturn(AuthenticationResponse.builder().token("token-test").build());
 
         ResponseEntity<AuthenticationResponse> response = controller.authenticate(authenticationRequestFixture);
@@ -95,10 +95,10 @@ public class AuthControllerTest {
     @Test
     void shouldRefreshTokenWithSuccess() {
         RefreshTokenRequest refreshTokenRequestFixture = Fixture.from(RefreshTokenRequest.class).gimme(RefreshTokenRequestTemplate.VALID_REFRESH_TOKEN_REQUEST);
-        Authentication authenticationFixture = Fixture.from(Authentication.class).gimme(AuthenticationTemplate.VALID_AUTHENTICATION);
+        TokenData tokenDataFixture = Fixture.from(TokenData.class).gimme(TokenDataTemplate.VALID_AUTHENTICATION);
 
 
-        when(userAccessByRefreshToken.execute(anyString())).thenReturn(authenticationFixture);
+        when(userAccessByRefreshToken.execute(anyString())).thenReturn(tokenDataFixture);
         when(mapper.toAuthenticateResponse(any())).thenReturn(AuthenticationResponse.builder().token("token-test").build());
 
         ResponseEntity<AuthenticationResponse> response = controller.refreshToken(refreshTokenRequestFixture);

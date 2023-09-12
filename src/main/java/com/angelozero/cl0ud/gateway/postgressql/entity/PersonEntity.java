@@ -6,9 +6,7 @@ import lombok.*;
 @Entity
 @Table(name = "person")
 @Builder
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonEntity {

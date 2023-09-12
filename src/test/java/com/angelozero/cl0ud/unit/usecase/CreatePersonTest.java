@@ -37,7 +37,7 @@ public class CreatePersonTest {
 
     @BeforeAll
     public static void setup() {
-        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
+        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate.person");
     }
 
     @DisplayName("Should fail to create a person - send null person")

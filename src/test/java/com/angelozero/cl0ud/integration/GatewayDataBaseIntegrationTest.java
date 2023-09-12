@@ -16,13 +16,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
-public class GatewayPostgresSqlIntegrationTest extends IntegrationTestConfiguration {
+public class GatewayDataBaseIntegrationTest extends IntegrationTestConfiguration {
 
 
     @Autowired
@@ -30,7 +29,7 @@ public class GatewayPostgresSqlIntegrationTest extends IntegrationTestConfigurat
 
     @BeforeClass
     public static void setup() {
-        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
+        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate.person");
     }
 
     @DisplayName("Should save a person with success")

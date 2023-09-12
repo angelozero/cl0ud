@@ -39,7 +39,7 @@ public class GetAllPersonsTest {
 
     @BeforeAll
     public static void setup() {
-        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate");
+        FixtureFactoryLoader.loadTemplates("com.angelozero.cl0ud.ztemplate.person");
     }
 
     @DisplayName("Should fail to get all persons")

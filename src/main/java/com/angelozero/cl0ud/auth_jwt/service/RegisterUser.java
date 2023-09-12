@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserRegister {
+public class RegisterUser {
 
     private final TokenGateway tokenGateway;
     private final PasswordEncoder passwordEncoder;

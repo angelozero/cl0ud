@@ -3,7 +3,7 @@ package com.angelozero.cl0ud.unit.auth_jwt.service;
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.exception.JwtException;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
-import com.angelozero.cl0ud.auth_jwt.service.UserRegister;
+import com.angelozero.cl0ud.auth_jwt.service.RegisterUser;
 import com.angelozero.cl0ud.auth_jwt.service.dao.User;
 import com.angelozero.cl0ud.auth_jwt.service.mapper.UserMapper;
 import com.angelozero.cl0ud.auth_jwt.exception.JwtUserNotFoundException;
@@ -20,7 +20,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UserRegisterTest {
+public class RegisterUserTest {
 
     @Mock
     private TokenGateway tokenGateway;
@@ -32,7 +32,7 @@ public class UserRegisterTest {
     private UserMapper mapper;
 
     @InjectMocks
-    private UserRegister userRegister;
+    private RegisterUser registerUser;
 
     @DisplayName("Should register user with success")
     @Test
@@ -48,7 +48,7 @@ public class UserRegisterTest {
         when(mapper.toEntity(any(User.class))).thenReturn(UserEntity.builder().build());
         doNothing().when(tokenGateway).save(any(UserEntity.class));
 
-        assertDoesNotThrow(() -> userRegister.execute(user));
+        assertDoesNotThrow(() -> registerUser.execute(user));
 
         verify(tokenGateway, times(1)).findUserByEmail(anyString());
         verify(tokenGateway, times(1)).save(any(UserEntity.class));
@@ -68,7 +68,7 @@ public class UserRegisterTest {
         when(tokenGateway.findUserByEmail(any())).thenReturn(UserEntity.builder().email("email-test-1").build());
 
         JwtUserNotFoundException exception = assertThrows(JwtUserNotFoundException.class,
-                () -> userRegister.execute(user));
+                () -> registerUser.execute(user));
 
         verify(passwordEncoder, times(0)).encode(any());
         verify(tokenGateway, times(0)).save(any(UserEntity.class));
@@ -91,7 +91,7 @@ public class UserRegisterTest {
         when(passwordEncoder.encode(any())).thenThrow(new RuntimeException("fail password encoder"));
 
         JwtException exception = assertThrows(JwtException.class,
-                () -> userRegister.execute(user));
+                () -> registerUser.execute(user));
 
         verify(tokenGateway, times(1)).findUserByEmail(anyString());
         verify(passwordEncoder, times(1)).encode(any());
@@ -117,7 +117,7 @@ public class UserRegisterTest {
         doThrow(new RuntimeException("fail save user")).when(tokenGateway).save(any(UserEntity.class));
 
         JwtException exception = assertThrows(JwtException.class,
-                () -> userRegister.execute(user));
+                () -> registerUser.execute(user));
 
         verify(tokenGateway, times(1)).findUserByEmail(anyString());
         verify(passwordEncoder, times(1)).encode(any());
@@ -140,7 +140,7 @@ public class UserRegisterTest {
         when(tokenGateway.findUserByEmail(any())).thenThrow(new RuntimeException("fail find user by email"));
 
         JwtException exception = assertThrows(JwtException.class,
-                () -> userRegister.execute(user));
+                () -> registerUser.execute(user));
 
         verify(tokenGateway, times(1)).findUserByEmail(anyString());
         verify(passwordEncoder, times(0)).encode(any());
