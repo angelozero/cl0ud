@@ -1,11 +1,10 @@
-package com.angelozero.cl0ud.config;
+package com.angelozero.cl0ud.config.integration;
 
 
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.repository.RefreshTokenRepository;
 import com.angelozero.cl0ud.auth_jwt.gateway.repository.UserRepository;
-import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
-
-import java.util.List;
 
 
 @AutoConfigureMockMvc

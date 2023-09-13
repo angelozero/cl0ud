@@ -2,7 +2,7 @@ package com.angelozero.cl0ud.integration;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.config.IntegrationTestConfiguration;
+import com.angelozero.cl0ud.config.integration.IntegrationTestConfiguration;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.gateway.postgressql.impl.PersonGatewayPostgresSql;
 import com.angelozero.cl0ud.ztemplate.person.PersonEntityTemplate;

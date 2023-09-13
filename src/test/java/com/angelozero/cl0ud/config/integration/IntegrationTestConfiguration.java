@@ -1,10 +1,8 @@
-package com.angelozero.cl0ud.config;
+package com.angelozero.cl0ud.config.integration;
 
 
+import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.gateway.repository.PersonRepository;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,33 +14,21 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.List;
 
 
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableConfigurationProperties
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(initializers = ComponentTestConfiguration.Initializer.class)
-public class ComponentTestConfiguration {
+@ContextConfiguration(initializers = IntegrationTestConfiguration.Initializer.class)
+public class IntegrationTestConfiguration {
 
-    protected static final String API_URL = "/api/v1";
 
     @Autowired
     protected PersonRepository repository;
-
-
-    /**
-     * Testcontainer - REDIS
-     */
-    @ClassRule
-    public static GenericContainer redisContainer = new GenericContainer("redis:latest")
-            .withExposedPorts(6379);
-
 
     /**
      * Testcontainer - PostgreSQL
@@ -64,32 +50,26 @@ public class ComponentTestConfiguration {
             TestPropertyValues.of(
                     "spring.datasource.url=" + container.getJdbcUrl(),
                     "spring.datasource.password=" + container.getPassword(),
-                    "spring.datasource.username=" + container.getUsername(),
-                    "spring.redis.port=" + redisContainer.getFirstMappedPort()
+                    "spring.datasource.username=" + container.getUsername()
             ).applyTo(configurableApplicationContext.getEnvironment());
-
-            //Setting Redis config values in runtime
-            System.setProperty("redis.port.value", redisContainer.getFirstMappedPort().toString());
         }
     }
 
-    /**
-     * Get json files
-     */
-    protected String getJsonFileValue(String file) {
-        try {
-            JSONParser parser = new JSONParser();
-            JSONObject data = (JSONObject) parser.parse(
-                    new FileReader("src/test/resources/json/responses/" + file));
-
-            return data.toJSONString();
-        } catch (IOException | ParseException e) {
-            throw new RuntimeException("[ERROR] - [INTEGRATION TESTS]: " + e.getMessage());
-        }
-    }
-
-    public void clearDataRepository() {
+    protected void clearDataRepository() {
         this.repository.deleteAll();
+    }
+
+    protected PersonEntity savePerson() {
+        clearDataRepository();
+        PersonEntity personEntityFixture = PersonEntity.builder()
+                .age(30)
+                .name("Jake Angelo Xerocs")
+                .build();
+        return repository.save(personEntityFixture);
+    }
+
+    protected List<PersonEntity> findAllPersons() {
+        return repository.findAll();
     }
 
 }

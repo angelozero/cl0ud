@@ -2,7 +2,7 @@ package com.angelozero.cl0ud.component;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import com.angelozero.cl0ud.config.ComponentTestConfiguration;
+import com.angelozero.cl0ud.config.component.ComponentTestConfiguration;
 import com.angelozero.cl0ud.entrypoint.PersonController;
 import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;

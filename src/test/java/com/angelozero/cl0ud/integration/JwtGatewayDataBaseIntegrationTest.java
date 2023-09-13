@@ -5,23 +5,14 @@ import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.angelozero.cl0ud.auth_jwt.gateway.TokenGateway;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.RefreshTokenEntity;
 import com.angelozero.cl0ud.auth_jwt.gateway.entity.UserEntity;
-import com.angelozero.cl0ud.config.IntegrationTestConfiguration;
-import com.angelozero.cl0ud.config.JwtIntegrationTestConfiguration;
-import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
-import com.angelozero.cl0ud.gateway.postgressql.impl.PersonGatewayPostgresSql;
+import com.angelozero.cl0ud.config.integration.JwtIntegrationTestConfiguration;
 import com.angelozero.cl0ud.ztemplate.jwt.UserEntityTemplate;
-import com.angelozero.cl0ud.ztemplate.person.PersonEntityTemplate;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +34,7 @@ public class JwtGatewayDataBaseIntegrationTest extends JwtIntegrationTestConfigu
 
         clearDataRepository();
 
-        UserEntity userEntityFixture = Fixture.from(UserEntity.class).gimme(UserEntityTemplate.VALID_PERSON_ENTITY);
+        UserEntity userEntityFixture = Fixture.from(UserEntity.class).gimme(UserEntityTemplate.VALID_USER_ENTITY);
 
         gateway.save(userEntityFixture);
 
@@ -63,7 +54,7 @@ public class JwtGatewayDataBaseIntegrationTest extends JwtIntegrationTestConfigu
 
         clearDataRepository();
 
-        UserEntity userEntityFixture = Fixture.from(UserEntity.class).gimme(UserEntityTemplate.VALID_PERSON_ENTITY);
+        UserEntity userEntityFixture = Fixture.from(UserEntity.class).gimme(UserEntityTemplate.VALID_USER_ENTITY);
 
         gateway.save(userEntityFixture);
         gateway.save(RefreshTokenEntity.builder().token("token-integration-test").user(userEntityFixture).build());

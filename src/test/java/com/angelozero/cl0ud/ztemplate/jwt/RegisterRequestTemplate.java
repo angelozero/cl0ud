@@ -7,6 +7,8 @@ import com.angelozero.cl0ud.auth_jwt.entrypoint.rest.RegisterRequest;
 
 import java.util.UUID;
 
+import static br.com.six2six.bfgex.RandomGen.email;
+
 public class RegisterRequestTemplate implements TemplateLoader {
 
     public static final String VALID_REGISTER_REQUEST = "valid RegisterRequest";
@@ -16,10 +18,10 @@ public class RegisterRequestTemplate implements TemplateLoader {
         Fixture.of(RegisterRequest.class)
                 .addTemplate(VALID_REGISTER_REQUEST, new Rule() {
                     {
-                        add("email", UUID.randomUUID().toString());
+                        add("email", email());
                         add("fullname", firstName());
                         add("password", UUID.randomUUID().toString());
-                        add("role", UUID.randomUUID().toString());
+                        add("role", "ADMIN");
                     }
                 });
     }
