@@ -1,8 +1,7 @@
 # cl0ud
-- *Obs: First time running the app ? Don't forget to run first*
+- *Obs: First time running locally the app ? Don't forget to run first*
   - `docker run --name cl0ud-db -p 5432:5432 -e POSTGRES_DB=cl0ud -e POSTGRES_USER=master -e POSTGRES_PASSWORD=terra postgres` 
-  - `mvn flyway:repair`
-  - `mvn flyway:migrate`
+
 ---
 - ## 1 - Creating the application
 
@@ -84,7 +83,7 @@
 
 ---
 
-- ## 6 - FlyWay + PostgreSQL + Docker
+- ## 6 - PostgreSQL + Docker
   
    - ### Using Postgres with Docker
    - ```shell
@@ -106,15 +105,6 @@
         ```shell
         CREATE DATABASE your_data_base_name;
         ```
-  - [Configuring Flyway using flyway.conf file](https://www.baeldung.com/database-migrations-with-flyway)
-    - Create in the $PROJECT_ROOT the flyway.conf file
-    ```yml
-    flyway.user=databaseUser
-    flyway.password=databasePassword
-    flyway.schemas=app-db
-    flyway.url=jdbc:h2:mem:DATABASE
-    flyway.locations=filesystem:db/migration
-    ```
     - Don't forget it to add this configs into your application.yml
     ```yml
     jpa:
@@ -137,9 +127,6 @@
     open-in-view: false
     generate-ddl: true
     ```
-  - *IMPORTANT! Here are the supported versions from Flyway to PostgresSQL ( [this project use version 14](https://flywaydb.org/documentation/database/postgresql) )*
-    ![versions](https://i.postimg.cc/m2cFk21b/Screen-Shot-2023-02-04-at-20-54-37.png)
-
 ---
 
 - ## 7 - Swagger
