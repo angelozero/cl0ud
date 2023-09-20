@@ -7,7 +7,7 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/cl0ud?currentSchema=cl0ud
+    url: jdbc:postgresql://localhost:5432/cl0ud
     username: master
     password: terra
 
@@ -15,13 +15,14 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
-      dialect: org.hibernate.dialect.PostgreSQLDialect
+      dialect: org.hibernate.dialect.PostgreSQL94Dialect
       globally_quoted_identifiers: true
     show-sql: true
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     open-in-view: false
     generate-ddl: true
+    store-type: none
 main:
   banner-mode: off
 
@@ -43,5 +44,5 @@ security:
     token:
       # // https://www.allkeysgenerator.com/ --> Encryption key --> 256-bit --> Hex ? yes (checked)
       secret-key: 4D6251655468566D597133743677397A24432646294A404E635266556A586E5A
-      milliseconds: 3600000
-      hours: 15000 # 15 secs
+      milliseconds: 3600000 # 1 hour
+      hours: 3600000

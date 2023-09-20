@@ -1,20 +1,38 @@
 version: '3.3'
 services:
-  run:
-    hostname: a608596e36c9
+  postgres:
+    image: postgres:latest
+    restart: always
     environment:
       - POSTGRES_DB=cl0ud
       - POSTGRES_USER=master
       - POSTGRES_PASSWORD=terra
-      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin'
-      - GOSU_VERSION=1.16
-      - LANG=en_US.utf8
-      - PG_MAJOR=15
-      - PG_VERSION=15.3-1.pgdg120+1
-      - PGDATA=/var/lib/postgresql/data
     volumes:
       - /var/lib/postgresql/data
     ports:
       - '5432:5432'
-    restart: no
-    image: run
+    expose:
+      - '5432'
+    networks:
+      - angelo-zero-network
+  cl0ud:
+    image: angelozero/cl0ud
+    restart: always
+    build: ./
+    working_dir: /
+    environment:
+      SPRING.DATASOURCE.DRIVER-CLASS-NAME: org.postgresql.Driver
+      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres:5432/cl0ud
+      SPRING.DATASOURCE.USERNAME: master
+      SPRING.DATASOURCE.PASSWORD: terra
+    ports:
+      - '8080:8080'
+    command:
+      - 'mvn spring-boot: run'
+    depends_on:
+      - postgres
+    networks:
+      - angelo-zero-network
+networks:
+  angelo-zero-network:
+    driver: bridge

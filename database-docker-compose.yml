@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  run:
+    hostname: a608596e36c9
+    environment:
+      - POSTGRES_DB=cl0ud
+      - POSTGRES_USER=master
+      - POSTGRES_PASSWORD=terra
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/15/bin'
+      - GOSU_VERSION=1.16
+      - LANG=en_US.utf8
+      - PG_MAJOR=15
+      - PG_VERSION=15.3-1.pgdg120+1
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - /var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    restart: no
+    image: run
