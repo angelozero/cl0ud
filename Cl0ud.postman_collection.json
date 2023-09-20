@@ -120,7 +120,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"refreshToken\": \"cecf7681-dcd3-4cfd-884d-07b0c87dee2f\"\n}",
+							"raw": "{\n    \"refreshToken\": \"c6f5d86f-0327-4d54-872a-1f35df1c6299\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -368,7 +368,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/person",
+							"raw": "http://localhost:8080/api/v1/person/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -377,7 +377,8 @@
 							"path": [
 								"api",
 								"v1",
-								"person"
+								"person",
+								""
 							]
 						}
 					},
