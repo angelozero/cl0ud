@@ -176,9 +176,9 @@
     <name>cl0ud</name>
     <description>Demo project for Cl0ud</description>
     <properties>
-        <java.version>19</java.version>
+        <java.version>21</java.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
-        <org.projectlombok.version>1.18.22</org.projectlombok.version>
+        <org.projectlombok.version>1.18.30</org.projectlombok.version>
         <skipUnitTests>false</skipUnitTests>
         <skipIntegrationTests>false</skipIntegrationTests>
     </properties>
