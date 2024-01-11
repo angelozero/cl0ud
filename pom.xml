@@ -107,6 +107,13 @@
             <version>2.1.0</version>
         </dependency>
 
+        <!-- WhatsApp -->
+        <dependency>
+            <groupId>com.mashape.unirest</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>1.4.9</version>
+        </dependency>
+
         <!-- TESTS -->
         <!-- Testcontainers -->
         <dependency>

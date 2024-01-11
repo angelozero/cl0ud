@@ -46,3 +46,9 @@ security:
       secret-key: 4D6251655468566D597133743677397A24432646294A404E635266556A586E5A
       milliseconds: 3600000 # 1 hour
       hours: 3600000
+
+whatsapp:
+  token: token
+  url: https://api.ultramsg.com/
+  instance_id: instance
+  path: /messages/chat

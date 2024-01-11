@@ -4,6 +4,7 @@ import com.angelozero.cl0ud.exception.person.CreatePersonException;
 import com.angelozero.cl0ud.gateway.DataBaseGateway;
 import com.angelozero.cl0ud.gateway.postgressql.entity.PersonEntity;
 import com.angelozero.cl0ud.usecase.mapper.PersonMapper;
+import com.angelozero.cl0ud.usecase.model.AsyncPerson;
 import com.angelozero.cl0ud.usecase.model.Person;
 import com.angelozero.cl0ud.usecase.utils.ToJson;
 import lombok.AllArgsConstructor;

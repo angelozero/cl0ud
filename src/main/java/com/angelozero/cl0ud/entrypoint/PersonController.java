@@ -1,9 +1,12 @@
 package com.angelozero.cl0ud.entrypoint;
 
 import com.angelozero.cl0ud.entrypoint.mapper.PersonRestMapper;
+import com.angelozero.cl0ud.entrypoint.rest.request.AsyncPersonRequest;
 import com.angelozero.cl0ud.entrypoint.rest.request.PersonRequest;
 import com.angelozero.cl0ud.entrypoint.rest.response.PersonResponse;
 import com.angelozero.cl0ud.usecase.*;
+import com.angelozero.cl0ud.usecase.model.AsyncMessage;
+import com.angelozero.cl0ud.usecase.model.AsyncPerson;
 import com.angelozero.cl0ud.usecase.model.Person;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @RestController
@@ -30,6 +35,7 @@ public class PersonController {
 
     private PersonRestMapper personRestMapper;
 
+    private final AsyncCreatePerson asyncCreatePerson;
     private final CreatePerson createPersonUseCase;
     private final UpdatePerson updatePersonUseCase;
     private final GetAllPersons getAllPersonsUseCase;
@@ -105,5 +111,17 @@ public class PersonController {
     public ResponseEntity<Void> deletePersonById(@PathVariable("id") Long id) {
         deletePersonByIdUseCase.execute(id);
         return ResponseEntity.accepted().build();
+    }
+
+    @PostMapping(value = "/async", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> createAsyncPerson(@RequestBody AsyncPersonRequest asyncPersonRequest) throws InterruptedException {
+        Instant start = Instant.now();
+        AsyncPerson person = personRestMapper.toAsyncModel(asyncPersonRequest);
+        asyncCreatePerson.createPersonService(Person.builder().name(person.getName()).age(person.getAge()).build());
+        asyncCreatePerson.sendWhatsAppMessage(person.getMessage());
+        asyncCreatePerson.sendWhatsAppMessage(AsyncMessage.builder().to("xxxx").body("xxxx").build());
+        asyncCreatePerson.sendWhatsAppMessage(AsyncMessage.builder().to("xxxx").body("xxxx").build());
+        Instant end = Instant.now();
+        return ResponseEntity.ok(String.format("Finished with %d seconds", ChronoUnit.SECONDS.between(start, end)));
     }
 }
