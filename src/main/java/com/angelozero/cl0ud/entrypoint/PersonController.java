@@ -8,7 +8,6 @@ import com.angelozero.cl0ud.usecase.*;
 import com.angelozero.cl0ud.usecase.model.AsyncMessage;
 import com.angelozero.cl0ud.usecase.model.AsyncPerson;
 import com.angelozero.cl0ud.usecase.model.Person;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/person")
